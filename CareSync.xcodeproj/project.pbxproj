@@ -7,18 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043367B02C171DC400B12C7A /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043367AF2C171DC400B12C7A /* InformationView.swift */; };
+		043367B82C176E1E00B12C7A /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043367B72C176E1E00B12C7A /* Task.swift */; };
+		043367BB2C17DA7500B12C7A /* SwiftUICalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 043367BA2C17DA7500B12C7A /* SwiftUICalendar */; };
+		043367C02C18134F00B12C7A /* InformationHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043367BF2C18134F00B12C7A /* InformationHeader.swift */; };
 		04DDC51C2C12FBBE00A97BAA /* CareSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DDC51B2C12FBBE00A97BAA /* CareSyncApp.swift */; };
 		04DDC51E2C12FBBE00A97BAA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DDC51D2C12FBBE00A97BAA /* ContentView.swift */; };
 		04DDC5202C12FBC200A97BAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DDC51F2C12FBC200A97BAA /* Assets.xcassets */; };
 		04DDC5232C12FBC200A97BAA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DDC5222C12FBC200A97BAA /* Preview Assets.xcassets */; };
+		04DDC52A2C15F1AD00A97BAA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DDC5292C15F1AD00A97BAA /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		043367AF2C171DC400B12C7A /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
+		043367B72C176E1E00B12C7A /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		043367BF2C18134F00B12C7A /* InformationHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationHeader.swift; sourceTree = "<group>"; };
 		04DDC5182C12FBBE00A97BAA /* CareSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CareSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DDC51B2C12FBBE00A97BAA /* CareSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareSyncApp.swift; sourceTree = "<group>"; };
 		04DDC51D2C12FBBE00A97BAA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		04DDC51F2C12FBC200A97BAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04DDC5222C12FBC200A97BAA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		04DDC5292C15F1AD00A97BAA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,12 +35,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				043367BB2C17DA7500B12C7A /* SwiftUICalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		043367BC2C1812FD00B12C7A /* Information */ = {
+			isa = PBXGroup;
+			children = (
+				043367BE2C18132800B12C7A /* Model */,
+				043367BD2C18132200B12C7A /* View */,
+			);
+			path = Information;
+			sourceTree = "<group>";
+		};
+		043367BD2C18132200B12C7A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				043367AF2C171DC400B12C7A /* InformationView.swift */,
+				043367BF2C18134F00B12C7A /* InformationHeader.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		043367BE2C18132800B12C7A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		04DDC50F2C12FBBE00A97BAA = {
 			isa = PBXGroup;
 			children = (
@@ -51,6 +86,9 @@
 		04DDC51A2C12FBBE00A97BAA /* CareSync */ = {
 			isa = PBXGroup;
 			children = (
+				043367BC2C1812FD00B12C7A /* Information */,
+				04DDC52C2C16D79B00A97BAA /* Model */,
+				04DDC5292C15F1AD00A97BAA /* HomeView.swift */,
 				04DDC51B2C12FBBE00A97BAA /* CareSyncApp.swift */,
 				04DDC51D2C12FBBE00A97BAA /* ContentView.swift */,
 				04DDC51F2C12FBC200A97BAA /* Assets.xcassets */,
@@ -65,6 +103,14 @@
 				04DDC5222C12FBC200A97BAA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		04DDC52C2C16D79B00A97BAA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				043367B72C176E1E00B12C7A /* Task.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +129,9 @@
 			dependencies = (
 			);
 			name = CareSync;
+			packageProductDependencies = (
+				043367BA2C17DA7500B12C7A /* SwiftUICalendar */,
+			);
 			productName = CareSync;
 			productReference = 04DDC5182C12FBBE00A97BAA /* CareSync.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +160,9 @@
 				Base,
 			);
 			mainGroup = 04DDC50F2C12FBBE00A97BAA;
+			packageReferences = (
+				043367B92C17DA7400B12C7A /* XCRemoteSwiftPackageReference "SwiftUICalendar" */,
+			);
 			productRefGroup = 04DDC5192C12FBBE00A97BAA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,7 +189,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				043367B82C176E1E00B12C7A /* Task.swift in Sources */,
+				043367C02C18134F00B12C7A /* InformationHeader.swift in Sources */,
+				04DDC52A2C15F1AD00A97BAA /* HomeView.swift in Sources */,
 				04DDC51E2C12FBBE00A97BAA /* ContentView.swift in Sources */,
+				043367B02C171DC400B12C7A /* InformationView.swift in Sources */,
 				04DDC51C2C12FBBE00A97BAA /* CareSyncApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +336,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -309,6 +366,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -344,6 +402,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		043367B92C17DA7400B12C7A /* XCRemoteSwiftPackageReference "SwiftUICalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/GGJJack/SwiftUICalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.14;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		043367BA2C17DA7500B12C7A /* SwiftUICalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 043367B92C17DA7400B12C7A /* XCRemoteSwiftPackageReference "SwiftUICalendar" */;
+			productName = SwiftUICalendar;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 04DDC5102C12FBBE00A97BAA /* Project object */;
 }
