@@ -8,46 +8,36 @@
 import SwiftUI
 
 struct CalendarInfoView: View {
-    @State var informations = getInformation()
-    
+    @ObservedObject var viewModel: CalendarInfoViewModel
     @ObservedObject var calendarControll: CalendarController = CalendarController()
     @State var focusDate: YearMonthDay? = YearMonthDay.current
-    @State var focusInfo: [CalendarInfo]? = nil
     @State var infoDetailSheet: Bool = false
+    @Binding var persons: [Person]
     
     var body: some View {
         GeometryReader { reader in
             VStack {
-                InformationHeader(calendarControll: calendarControll)
+                CalendarInfoHeader(calendarControll: calendarControll,
+                                   pickerSelect: $viewModel.pickerSelect,
+                                   persons: persons, 
+                                   onSelectChange: viewModel.updatePickerSelection)
                 
                 CalendarView(calendarControll, header: { week in
                     GeometryReader { geometry in
                         Text(week.shortString)
                             .font(.subheadline)
-                            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                            .frame(width: geometry.size.width, 
+                                   height: geometry.size.height,
+                                   alignment: .center)
                     }
                 }, component: { date in
                     GeometryReader { geometry in
                         VStack(alignment: .leading, spacing: 2) {
-                            if date.isToday {
-                                Text("\(date.day)")
-                                    .font(.system(size: 10, weight: .bold, design: .default))
-                                    .padding(4)
-                                    .foregroundColor(.white)
-                                    .background(Color.red.opacity(0.95))
-                                    .cornerRadius(14)
-                            } else {
-                                Text("\(date.day)")
-                                    .font(.system(size: 10, weight: .light, design: .default))
-                                    .opacity(date.isFocusYearMonth == true ? 1 : 0.4)
-                                    .foregroundColor(getColor(date))
-                                    .padding(4)
-                                    .contentShape(Rectangle())
-                                
-                            }
                             
-                            if let infos = informations[date] {
-                                ForEach(infos.indices) { index in
+                            dayText(date)
+                            
+                            if let infos = viewModel.filteredInformation[date]{
+                                ForEach(infos.indices, id: \.self) { index in
                                     let info = infos[index]
                                     Text(info.taskTitle)
                                         .lineLimit(1)
@@ -61,15 +51,21 @@ struct CalendarInfoView: View {
                                 }
                             }
                         }
-                        .frame(width: geometry.size.width, height: geometry.size.height, alignment: .topLeading)
-                        .border(.green.opacity(0.8), width: (focusDate == date ? 1 : 0))
+                        .frame(width: geometry.size.width, 
+                               height: geometry.size.height,
+                               alignment: .topLeading)
+                        .border(.green.opacity(0.8), 
+                                width: (focusDate == date ? 1 : 0))
                         .cornerRadius(2)
                         .contentShape(Rectangle())
                         .sheet(isPresented: $infoDetailSheet, content: {
-                            InformationDetailView(
-                                infoDetailSheet: $infoDetailSheet,
-                                information: $informations,
-                                focusDate: focusDate!)
+                            if let focusDate = focusDate {
+                                
+                                CalendarInfoDetail(
+                                    infoDetailSheet: $infoDetailSheet,
+                                    viewModel: viewModel,
+                                    focusDate: focusDate)
+                            }
                         })
                         .onTapGesture {
                             withAnimation {
@@ -77,7 +73,6 @@ struct CalendarInfoView: View {
                                     infoDetailSheet.toggle()
                                 } else {
                                     focusDate = date
-                                    focusInfo = informations[date]
                                 }
                             }
                         }
@@ -85,6 +80,27 @@ struct CalendarInfoView: View {
                 })
             }
         }
+    }
+    
+    private func dayText(_ date: YearMonthDay) -> some View {
+        let text = Text("\(date.day)")
+                .padding(4)
+
+            if date.isToday {
+                return text
+                    .font(.system(size: 10, weight: .bold, design: .default))
+                    .foregroundColor(.white)
+                    .background(Color.red.opacity(0.95))
+                    .cornerRadius(14)
+                    .eraseToAnyView()
+            } else {
+                return text
+                    .font(.system(size: 10, weight: .light, design: .default))
+                    .opacity(date.isFocusYearMonth! ? 1 : 0.4)
+                    .foregroundColor(getColor(date))
+                    .contentShape(Rectangle())
+                    .eraseToAnyView()
+            }
     }
     
     private func getColor(_ date: YearMonthDay) -> Color {
@@ -98,7 +114,14 @@ struct CalendarInfoView: View {
     }
 }
 
+extension View {
+    func eraseToAnyView() -> AnyView {
+        AnyView(self)
+    }
+}
+
 #Preview {
-    CalendarInfoView()
+    CalendarInfoView(viewModel: CalendarInfoViewModel(persons: getPersons()),
+                     persons: .constant(getPersons()))
 }
 

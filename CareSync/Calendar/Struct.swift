@@ -28,6 +28,12 @@ public enum Week: Int, CaseIterable {
         formatter.locale = locale
         return formatter.shortWeekdaySymbols[self.rawValue]
     }
+    
+    public func longString(locale: Locale) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        return formatter.weekdaySymbols[self.rawValue]
+    }
 }
 
 public enum Orientation {
@@ -69,7 +75,7 @@ public struct YearMonth: Equatable, Hashable {
             components.minute = 0
             components.second = 0
             let formatter = DateFormatter()
-            formatter.dateFormat = "MMM"
+            formatter.dateFormat = "MMMM"
             return formatter.string(from: Calendar.current.date(from: components)!)
         }
     }

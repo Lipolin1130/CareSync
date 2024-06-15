@@ -7,12 +7,18 @@
 
 import SwiftUI
 
-struct Person: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+class Person: ObservableObject, Identifiable {
+    var id = UUID().uuidString
+    var name: String
+    @Published var color: Color
+    
+    init(name: String, color: Color) {
+        self.name = name
+        self.color = color
     }
-}
-
-#Preview {
-    Person()
+    
+    init(name: String) {
+        self.name = name
+        self.color = Color.primary
+    }
 }

@@ -14,7 +14,7 @@ struct CalendarInfoDetail: View {
     
     var body: some View {
         VStack {
-            InfoDetailHeader(focusDate: focusDate)
+            InfoDetailHeader(viewModel: viewModel, focusDate: focusDate)
             
             if let items = viewModel.information[focusDate] {
                 ForEach(items.indices, id: \.self) { index in
@@ -32,8 +32,8 @@ struct CalendarInfoDetail: View {
                         Spacer()
                         
                         Button {
-                            //TODO: Action for the button
                             viewModel.toggleAlert(for: focusDate, at: index)
+                            
                         } label: {
                             VStack(alignment: .center) {
                                 Image(systemName: item.alert ? "bell.and.waves.left.and.right.fill": "bell.slash.fill")
@@ -52,9 +52,13 @@ struct CalendarInfoDetail: View {
 }
 
 struct InfoDetailHeader: View {
+    
+    @ObservedObject var viewModel: CalendarInfoViewModel
     var focusDate: YearMonthDay
+    
     var body: some View {
         HStack {
+            
             Text("\(focusDate.month) 月 \(focusDate.day) 日 \(focusDate.dayOfWeek.longString(locale: Locale(identifier: "zh_CN")))")
                 .font(.title2)
                 .fontWeight(.bold)
@@ -62,7 +66,7 @@ struct InfoDetailHeader: View {
             Spacer()
             
             Button {
-                //TODO: Add the tasks in the
+                //TODO: Add the tasks in the calendarInfo
             } label: {
                 Image(systemName: "plus.circle.fill")
                     .resizable()
@@ -76,6 +80,6 @@ struct InfoDetailHeader: View {
 #Preview {
     CalendarInfoDetail(
         infoDetailSheet: .constant(false),
-        viewModel: CalendarInfoViewModel() ,
+        viewModel: CalendarInfoViewModel(persons: getPersons()),
         focusDate: YearMonthDay(year: 2024, month: 6, day: 14))
 }

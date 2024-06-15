@@ -6,22 +6,26 @@
 //
 import SwiftUI
 
-struct CalendarInfo: Identifiable {
+class CalendarInfo: ObservableObject ,Identifiable {
     var id = UUID().uuidString
     var taskTitle: String
-    var taskColor: Color
+    @ObservedObject var person: Person
     var alert: Bool
     
-    init(taskTitle: String, taskColor: Color, alert: Bool) {
+    init(taskTitle: String, person: Person, alert: Bool) {
         self.taskTitle = taskTitle
-        self.taskColor = taskColor
+        self.person = person
         self.alert = alert
     }
     
-    init(taskTitle: String, taskColor: Color) {
+    init(taskTitle: String, person: Person) {
         self.taskTitle = taskTitle
-        self.taskColor = taskColor
+        self.person = person
         self.alert = true
+    }
+    
+    var taskColor: Color {
+        return person.color
     }
 }
 
