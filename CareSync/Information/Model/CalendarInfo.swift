@@ -5,6 +5,26 @@
 //  Created by Mac on 2024/6/11.
 //
 import SwiftUI
+
+struct CalendarInfo: Identifiable {
+    var id = UUID().uuidString
+    var taskTitle: String
+    var taskColor: Color
+    var alert: Bool
+    
+    init(taskTitle: String, taskColor: Color, alert: Bool) {
+        self.taskTitle = taskTitle
+        self.taskColor = taskColor
+        self.alert = alert
+    }
+    
+    init(taskTitle: String, taskColor: Color) {
+        self.taskTitle = taskTitle
+        self.taskColor = taskColor
+        self.alert = true
+    }
+}
+
 //
 //struct Task: Identifiable, Equatable {
 //    var id = UUID().uuidString
