@@ -13,7 +13,7 @@ struct CustomTabBar: View {
     
     private let tabItems: [(imageName: String, tabIndex: Int)] = [
         ("calendar.badge.checkmark", 0),
-        ("plus", 1),
+        ("person.and.person", 1),
         ("plus", 2),
         ("plus", 3),
         ("plus", 4)
@@ -31,12 +31,11 @@ struct CustomTabBar: View {
                 } label: {
                     VStack {
                         Image(systemName: item.imageName)
-                            .resizable()
-                            .frame(width: 20, height: 20)
                     }
-                    .padding()
                     .foregroundColor(selectedTab == item.tabIndex ? 
                         .blue : .gray)
+                    .frame(width: 30, height: 30)
+                    .padding()
                 }
                 
                 if item.tabIndex != tabItems.last?.tabIndex {

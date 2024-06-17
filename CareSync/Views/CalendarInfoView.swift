@@ -37,7 +37,7 @@ struct CalendarInfoView: View {
                             dayText(date)
                             
                             if let infos = viewModel.filteredInformation[date]{
-                                ForEach(infos.indices, id: \.self) { index in
+                                ForEach(infos.prefix(4).indices, id: \.self) { index in
                                     let info = infos[index]
                                     Text(info.taskTitle)
                                         .lineLimit(1)

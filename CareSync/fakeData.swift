@@ -14,21 +14,26 @@ func getInformation() -> [YearMonthDay: [CalendarInfo]] {
     
     informations[date] = []
     informations[date]?.append(CalendarInfo(taskTitle: "Meeting with Client", person: persons[0], alert: false))
-    informations[date]?.append(CalendarInfo(taskTitle: "Doctor Appointment", person: persons[1]))
+    informations[date]?.append(CalendarInfo(taskTitle: "Doctor Appointment", person: persons[0], alert: false))
     
     date = date.addDay(value: 1)
     informations[date] = []
     informations[date]?.append(CalendarInfo(taskTitle: "Team Standup", person: persons[2], alert: false))
+    informations[date]?.append(CalendarInfo(taskTitle: "Team Standup", person: persons[1], alert: false))
+    informations[date]?.append(CalendarInfo(taskTitle: "Code Refactoring", person: persons[3]))
+    informations[date]?.append(CalendarInfo(taskTitle: "Code", person: persons[0]))
+    informations[date]?.append(CalendarInfo(taskTitle: "Review", person: persons[1]))
     
     date = date.addDay(value: 2)
     informations[date] = []
     informations[date]?.append(CalendarInfo(taskTitle: "Project Review", person: persons[0]))
+    informations[date]?.append(CalendarInfo(taskTitle: "Project", person: persons[3]))
     
     date = date.addDay(value: 4)
     informations[date] = []
     informations[date]?.append(CalendarInfo(taskTitle: "Code Refactoring", person: persons[1]))
     
-    date = date.addDay(value: -5)
+    date = date.addDay(value: -10)
     informations[date] = []
     informations[date]?.append(CalendarInfo(taskTitle: "Performance Review", person: persons[2], alert: false))
     

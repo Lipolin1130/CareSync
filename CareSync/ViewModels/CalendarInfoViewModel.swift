@@ -23,14 +23,19 @@ class CalendarInfoViewModel: ObservableObject {
         if personName == "All" {
             filteredInformation = information
         } else {
-            filteredInformation = information.mapValues { infos in
-                infos.filter { $0.person.name == personName }
+            filteredInformation = information.reduce(into: [YearMonthDay: [CalendarInfo]]()) { result, entry in
+                let (date, infos) = entry
+                result[date] = infos.filter { $0.person.name == personName }
             }
         }
     }
     
     func toggleAlert(for date: YearMonthDay, at index: Int) {
-        information[date]?[index].alert.toggle()
+        guard let infos = information[date] else { return }
+        infos[index].alert.toggle()
+        information[date] = infos
+        print("Alert toggled for item at index \(index) on date \(date)")
+        filterInformation(for: persons[pickerSelect].name)
     }
     
     func updatePickerSelection(to newIndex: Int) {
