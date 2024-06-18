@@ -232,5 +232,9 @@ public struct YearMonthDay: Equatable, Hashable {
         hasher.combine(self.month)
         hasher.combine(self.day)
     }
+    
+    public func toDate() -> Date {
+        return Calendar.current.date(from: self.toDateComponents())!
+    }
 }
 

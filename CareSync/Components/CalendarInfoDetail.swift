@@ -17,34 +17,48 @@ struct CalendarInfoDetail: View {
             InfoDetailHeader(viewModel: viewModel, focusDate: focusDate)
             
             if let items = viewModel.information[focusDate] {
-                ForEach(items.indices, id: \.self) { index in
-                    let item = items[index]
-                    
-                    HStack {
-                        Rectangle()
-                            .frame(width: 3, height: 25)
-                            .foregroundColor(item.taskColor)
-                            .padding(.trailing, 10)
+                List {
+                    ForEach(items.indices, id: \.self) { index in
+                        let item = items[index]
                         
-                        Text(item.taskTitle)
-                            .font(.title2)
-                        
-                        Spacer()
-                        
-                        Button {
-                            viewModel.toggleAlert(for: focusDate, at: index)
+                        HStack(alignment: .center) {
                             
-                        } label: {
+                            Text(item.getHourMinute())
+                                .font(.caption2)
+                            
+                            RoundedRectangle(cornerRadius: 5)
+                                .frame(width: 3, height: 25)
+                                .foregroundColor(item.taskColor)
+                            
+                            Text(item.taskTitle)
+                                .font(.title3)
+                            
+                            Spacer()
+                            
+                            
                             VStack(alignment: .center) {
                                 Image(systemName: item.alert ? "bell.and.waves.left.and.right.fill": "bell.slash.fill")
                                     .foregroundColor(item.alert ? .red: .gray)
                             }
                             .frame(width: 50)
+                            .onTapGesture {
+                                withAnimation(.smooth) {
+                                    viewModel.toggleAlert(for: focusDate, at: index)
+                                }
+                            }
+                        }
+                        .padding(.vertical, 6)
+                        .cornerRadius(10)
+                        
+                    }
+                    .onDelete { indexSet in
+                        if let index = indexSet.first {
+                            let item = items[index]
+                            viewModel.deleteInfo(yearMonthDay: focusDate, id: item.id)
                         }
                     }
-                    .padding()
-                    .cornerRadius(10)
                 }
+                .listStyle(.plain)
             }
             Spacer()
         }
@@ -81,5 +95,5 @@ struct InfoDetailHeader: View {
     CalendarInfoDetail(
         infoDetailSheet: .constant(false),
         viewModel: CalendarInfoViewModel(persons: getPersons()),
-        focusDate: YearMonthDay(year: 2024, month: 6, day: 14))
+        focusDate: YearMonthDay(year: 2024, month: 6, day: 18))
 }

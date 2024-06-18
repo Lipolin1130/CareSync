@@ -42,4 +42,17 @@ class CalendarInfoViewModel: ObservableObject {
         pickerSelect = newIndex
         filterInformation(for: persons[newIndex].name)
     }
+    
+    func deleteInfo(yearMonthDay: YearMonthDay, id: String) {
+        if var info = information[yearMonthDay] {
+            info.removeAll { $0.id == id }
+            
+            if info.isEmpty {
+                information.removeValue(forKey: yearMonthDay)
+            } else {
+                information[yearMonthDay] = info
+            }
+        }
+        filterInformation(for: persons[pickerSelect].name)
+    }
 }

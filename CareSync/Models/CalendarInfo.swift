@@ -11,21 +11,62 @@ class CalendarInfo: ObservableObject ,Identifiable {
     var taskTitle: String
     @ObservedObject var person: Person
     var alert: Bool
+    var time: Date
     
-    init(taskTitle: String, person: Person, alert: Bool) {
+    init(taskTitle: String, person: Person, alert: Bool, time: Date) {
         self.taskTitle = taskTitle
         self.person = person
         self.alert = alert
+        self.time = time
+    }
+    
+    init(taskTitle: String, person: Person, alert: Bool, yearMonthDay: YearMonthDay) {
+        self.taskTitle = taskTitle
+        self.person = person
+        self.alert = alert
+        self.time = CalendarInfo.settingTime(yearMonthDay: yearMonthDay, hour: Int.random(in: 0...23), minute: Int.random(in: 0...59))
+    }
+    
+    init(taskTitle: String, person: Person, yearMonthDay: YearMonthDay) {
+        self.taskTitle = taskTitle
+        self.person = person
+        self.alert = Bool.random()
+        self.time = CalendarInfo.settingTime(yearMonthDay: yearMonthDay, hour: Int.random(in: 0...23), minute: Int.random(in: 0...59))
     }
     
     init(taskTitle: String, person: Person) {
         self.taskTitle = taskTitle
         self.person = person
         self.alert = true
+        self.time = Date()
     }
     
     var taskColor: Color {
         return person.color
+    }
+    
+    func getHourMinute() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "a hh:mm"
+        dateFormatter.locale = Locale(identifier: "zh")
+        return dateFormatter.string(from: time)
+    }
+    
+    static func settingTime(yearMonthDay: YearMonthDay, hour: Int, minute: Int) -> Date {
+        var component = DateComponents()
+        component.year = yearMonthDay.year
+        component.month = yearMonthDay.month
+        component.day = yearMonthDay.day
+        component.hour = hour
+        component.minute = minute
+        return Calendar.current.date(from: component)!
+    }
+    
+    func getYearMonthDay() -> YearMonthDay {
+        return YearMonthDay(
+            year: Calendar.current.component(.year, from: time),
+            month: Calendar.current.component(.month, from: time),
+            day: Calendar.current.component(.day, from: time))
     }
 }
 

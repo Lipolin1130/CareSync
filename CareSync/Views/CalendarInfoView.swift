@@ -26,7 +26,7 @@ struct CalendarInfoView: View {
                     GeometryReader { geometry in
                         Text(week.shortString)
                             .font(.subheadline)
-                            .frame(width: geometry.size.width, 
+                            .frame(width: geometry.size.width,
                                    height: geometry.size.height,
                                    alignment: .center)
                     }

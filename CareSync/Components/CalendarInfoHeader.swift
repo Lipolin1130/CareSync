@@ -40,7 +40,7 @@ struct CalendarInfoHeader: View {
                     .stroke(lineWidth: 1)
                     .foregroundColor(persons[pickerSelect].color)
             }
-            .onChange(of: pickerSelect) { newValue in
+            .onChange(of: pickerSelect) { _, newValue in
                 onSelectChange(newValue)
             }
         }
