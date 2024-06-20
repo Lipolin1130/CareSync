@@ -32,9 +32,7 @@ struct AddCalendarInfoView: View {
                     calendarInfoViewModel.addInfo(yearMonthDay: calendarInfo.getYearMonthDay(),
                                                   information: calendarInfo)
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        addCalendarInfoSheet.toggle()
-                    }
+                    addCalendarInfoSheet.toggle()
                 } label: {
                     Text("Done")
                         .foregroundStyle(.blue)

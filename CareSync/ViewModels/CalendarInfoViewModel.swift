@@ -61,12 +61,12 @@ class CalendarInfoViewModel: ObservableObject {
     }
     
     func addInfo(yearMonthDay: YearMonthDay, information: CalendarInfo) {
-        if var info = informations[yearMonthDay] {
-            info.append(information)
-        } else {
-            informations[yearMonthDay] = []
+        if informations[yearMonthDay] != nil {
             informations[yearMonthDay]?.append(information)
+        } else {
+            informations[yearMonthDay] = [information]
         }
+        
         filterInformation(for: selectedPerson.name)
     }
 }
