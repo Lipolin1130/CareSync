@@ -64,8 +64,8 @@ struct CalendarInfoDetail: View {
             Spacer()
         }
         .sheet(isPresented: $addCalendarInfoSheet) {
-//            AddCalendarInfoView(calendarInfoViewModel: calendarInfoViewModel,                                           addCalendarInfoSheet: $addCalendarInfoSheet,
-//                                focusDate: focusDate)
+            AddCalendarInfoView(calendarInfoViewModel: calendarInfoViewModel,
+                                addCalendarInfoSheet: $addCalendarInfoSheet)
         }
     }
 }
@@ -73,7 +73,6 @@ struct CalendarInfoDetail: View {
 struct InfoDetailHeader: View {
     @Binding var addCalendarInfoSheet: Bool
     @ObservedObject var viewModel: CalendarInfoViewModel
-//    var focusDate: YearMonthDay
     
     var body: some View {
         HStack {
@@ -85,7 +84,7 @@ struct InfoDetailHeader: View {
             Spacer()
             
             Button {
-//                addCalendarInfoSheet.toggle()
+                addCalendarInfoSheet.toggle()
             } label: {
                 Image(systemName: "plus.circle.fill")
                     .resizable()

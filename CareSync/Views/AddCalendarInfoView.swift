@@ -12,7 +12,6 @@ struct AddCalendarInfoView: View {
     @Binding var addCalendarInfoSheet: Bool
     @State var calendarInfo: CalendarInfo = CalendarInfo()
     @State var personSelect: Int = 0
-    let focusDate: YearMonthDay?
     
     var body: some View {
         
@@ -22,20 +21,25 @@ struct AddCalendarInfoView: View {
                 Button {
                     addCalendarInfoSheet.toggle()
                 } label: {
-                    Text("Cancel")
-                        .foregroundStyle(.blue)
+                    Image(systemName: "xmark")
                 }
+                .padding()
                 
                 Spacer()
                 
                 Button {
-                    calendarInfoViewModel.addInfo(yearMonthDay: focusDate!, 
+                    
+                    calendarInfoViewModel.addInfo(yearMonthDay: calendarInfo.getYearMonthDay(),
                                                   information: calendarInfo)
-                    addCalendarInfoSheet.toggle()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        addCalendarInfoSheet.toggle()
+                    }
                 } label: {
                     Text("Done")
                         .foregroundStyle(.blue)
                 }
+                .buttonStyle(.bordered)
             }
             
             TextField("Task Title", text: $calendarInfo.taskTitle)
@@ -69,12 +73,13 @@ struct AddCalendarInfoView: View {
             Spacer()
         }
         .padding()
+        .onAppear {
+            calendarInfo.time = calendarInfoViewModel.focusDate.toDate()
+        }
     }
 }
 
 #Preview {
-    
     AddCalendarInfoView(calendarInfoViewModel: CalendarInfoViewModel(persons: getPersons()),
-                        addCalendarInfoSheet: .constant(false),
-                        focusDate: YearMonthDay(year: 2024, month: 6, day: 20))
+                        addCalendarInfoSheet: .constant(false))
 }

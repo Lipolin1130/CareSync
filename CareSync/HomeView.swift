@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @State var selectedTab: Int = 0
-    @State var isSheetPresented: Bool = false
+    @State var addCalendarInfoSheet: Bool = false
     @State var persons: [Person] = getPersons()
     @StateObject var calendarInfoViewModel: CalendarInfoViewModel
     
@@ -39,17 +39,19 @@ struct HomeView: View {
             .onChange(of: selectedTab) { oldValue, newValue in
                 if newValue == 2 {
                     selectedTab = oldValue
+                    calendarInfoViewModel.focusDate = YearMonthDay.current
                 }
             }
             
             VStack {
                 Spacer()
-                CustomTabBar(selectedTab: $selectedTab, isSheetPresented: $isSheetPresented)
+                CustomTabBar(selectedTab: $selectedTab, isSheetPresented: $addCalendarInfoSheet)
             }
         }
         .ignoresSafeArea(.all)
-        .sheet(isPresented: $isSheetPresented) {
-            Text("Test View")
+        .sheet(isPresented: $addCalendarInfoSheet) {
+            AddCalendarInfoView(calendarInfoViewModel: calendarInfoViewModel,
+                                addCalendarInfoSheet: $addCalendarInfoSheet)
         }
     }
 }
