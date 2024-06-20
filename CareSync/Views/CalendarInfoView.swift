@@ -8,19 +8,18 @@
 import SwiftUI
 
 struct CalendarInfoView: View {
-    @ObservedObject var viewModel: CalendarInfoViewModel
+    @ObservedObject var calendarInfoViewModel: CalendarInfoViewModel
     @ObservedObject var calendarControll: CalendarController = CalendarController()
-    @State var focusDate: YearMonthDay? = YearMonthDay.current
-    @State var infoDetailSheet: Bool = false
     @Binding var persons: [Person]
     
     var body: some View {
         GeometryReader { reader in
             VStack {
-                CalendarInfoHeader(calendarControll: calendarControll,
-                                   pickerSelect: $viewModel.pickerSelect,
-                                   persons: persons, 
-                                   onSelectChange: viewModel.updatePickerSelection)
+                CalendarInfoHeader(calendarInfoViewModel: calendarInfoViewModel,
+                                   calendarControll: calendarControll,
+                                   pickerSelect: $calendarInfoViewModel.pickerSelect,
+                                   persons: persons,
+                                   onSelectChange: calendarInfoViewModel.updatePickerSelection)
                 
                 CalendarView(calendarControll, header: { week in
                     GeometryReader { geometry in
@@ -36,7 +35,7 @@ struct CalendarInfoView: View {
                             
                             dayText(date)
                             
-                            if let infos = viewModel.filteredInformation[date]{
+                            if let infos = calendarInfoViewModel.filteredInformation[date]{
                                 ForEach(infos.prefix(4).indices, id: \.self) { index in
                                     let info = infos[index]
                                     Text(info.taskTitle)
@@ -55,24 +54,24 @@ struct CalendarInfoView: View {
                                height: geometry.size.height,
                                alignment: .topLeading)
                         .border(.green.opacity(0.8), 
-                                width: (focusDate == date ? 1 : 0))
+                                width: (calendarInfoViewModel.focusDate == date ? 1 : 0))
                         .cornerRadius(2)
                         .contentShape(Rectangle())
-                        .sheet(isPresented: $infoDetailSheet, content: {
-                            if let focusDate = focusDate {
+                        .sheet(isPresented: $calendarInfoViewModel.infoDetailSheet, content: {
+                            if let focusDate = calendarInfoViewModel.focusDate {
                                 
                                 CalendarInfoDetail(
-                                    infoDetailSheet: $infoDetailSheet,
-                                    viewModel: viewModel,
+                                    infoDetailSheet: $calendarInfoViewModel.infoDetailSheet,
+                                    calendarInfoViewModel: calendarInfoViewModel,
                                     focusDate: focusDate)
                             }
                         })
                         .onTapGesture {
                             withAnimation {
-                                if focusDate == date {
-                                    infoDetailSheet.toggle()
+                                if calendarInfoViewModel.focusDate == date {
+                                    calendarInfoViewModel.infoDetailSheet.toggle()
                                 } else {
-                                    focusDate = date
+                                    calendarInfoViewModel.focusDate = date
                                 }
                             }
                         }
@@ -121,7 +120,7 @@ extension View {
 }
 
 #Preview {
-    CalendarInfoView(viewModel: CalendarInfoViewModel(persons: getPersons()),
+    CalendarInfoView(calendarInfoViewModel: CalendarInfoViewModel(persons: getPersons()),
                      persons: .constant(getPersons()))
 }
 

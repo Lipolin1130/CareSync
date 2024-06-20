@@ -13,13 +13,13 @@ func getInformation() -> [YearMonthDay: [CalendarInfo]] {
     let persons = [MockPersonData.mother.person, MockPersonData.grandFather.person, MockPersonData.grandMother.person, MockPersonData.testName.person]
     
     informations[date] = []
-    informations[date]?.append(CalendarInfo(taskTitle: "Meeting with Client", person: persons[0], alert: false, time: Date()))
-    informations[date]?.append(CalendarInfo(taskTitle: "Doctor Appointment", person: persons[0], alert: false, time: Date()))
+    informations[date]?.append(CalendarInfo(taskTitle: "Meeting with Client", person: persons[0], notify: false, time: Date()))
+    informations[date]?.append(CalendarInfo(taskTitle: "Doctor Appointment", person: persons[0], notify: false, time: Date()))
     
     date = date.addDay(value: 1)
     informations[date] = []
-    informations[date]?.append(CalendarInfo(taskTitle: "Team Standup", person: persons[2], alert: false, yearMonthDay: date))
-    informations[date]?.append(CalendarInfo(taskTitle: "Team Standup", person: persons[1], alert: false, yearMonthDay: date))
+    informations[date]?.append(CalendarInfo(taskTitle: "Team Standup", person: persons[2], notify: false, yearMonthDay: date))
+    informations[date]?.append(CalendarInfo(taskTitle: "Team Standup", person: persons[1], notify: false, yearMonthDay: date))
     informations[date]?.append(CalendarInfo(taskTitle: "Code Refactoring", person: persons[3], yearMonthDay: date))
     informations[date]?.append(CalendarInfo(taskTitle: "Code", person: persons[0], yearMonthDay: date))
     informations[date]?.append(CalendarInfo(taskTitle: "Review", person: persons[1], yearMonthDay: date))
@@ -35,7 +35,7 @@ func getInformation() -> [YearMonthDay: [CalendarInfo]] {
     
     date = date.addDay(value: -10)
     informations[date] = []
-    informations[date]?.append(CalendarInfo(taskTitle: "Performance Review", person: persons[2], alert: false, yearMonthDay: date))
+    informations[date]?.append(CalendarInfo(taskTitle: "Performance Review", person: persons[2], notify: false, yearMonthDay: date))
     
     date = date.addDay(value: -2)
     informations[date] = []
@@ -54,17 +54,17 @@ func getInformation() -> [YearMonthDay: [CalendarInfo]] {
 
 func getPersons() -> [Person] {
     let persons: [Person] = [
-        Person(name: "All"),
-        Person(name: "testName"),
-        Person(name: "mother", color: Color.pink),
-        Person(name: "grandMother", color: Color.cyan),
-        Person(name: "grandFather", color: Color.indigo),
+            Person(name: "testName"),
+            Person(name: "mother", color: Color.pink),
+            Person(name: "grandMother", color: Color.cyan),
+            Person(name: "grandFather", color: Color.indigo),
     ]
     return persons
 }
 
+let allPerson: Person = Person(name: "All")
+
 enum MockPersonData {
-    case all
     case testName
     case mother
     case grandMother
@@ -72,8 +72,6 @@ enum MockPersonData {
     
     var person: Person {
         switch self {
-        case .all:
-            return Person(name: "All")
         case .testName:
             return Person(name: "testName")
         case .mother:

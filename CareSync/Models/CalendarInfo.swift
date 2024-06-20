@@ -8,47 +8,72 @@ import SwiftUI
 
 class CalendarInfo: ObservableObject ,Identifiable {
     var id = UUID().uuidString
-    var taskTitle: String
-    @ObservedObject var person: Person
-    var alert: Bool
-    var time: Date
+    @Published var taskTitle: String
+    @Published var person: Person?
+    @Published var notify: Bool
+    @Published var time: Date
     
-    init(taskTitle: String, person: Person, alert: Bool, time: Date) {
+    init(taskTitle: String, person: Person, notify: Bool, time: Date) {
         self.taskTitle = taskTitle
         self.person = person
-        self.alert = alert
+        self.notify = notify
         self.time = time
     }
     
-    init(taskTitle: String, person: Person, alert: Bool, yearMonthDay: YearMonthDay) {
+    init(taskTitle: String, person: Person, notify: Bool, yearMonthDay: YearMonthDay) {
         self.taskTitle = taskTitle
         self.person = person
-        self.alert = alert
-        self.time = CalendarInfo.settingTime(yearMonthDay: yearMonthDay, hour: Int.random(in: 0...23), minute: Int.random(in: 0...59))
+        self.notify = notify
+        self.time = CalendarInfo.settingTime(yearMonthDay: yearMonthDay, 
+                                             hour: Int.random(in: 0...23),
+                                             minute: Int.random(in: 0...59))
     }
     
     init(taskTitle: String, person: Person, yearMonthDay: YearMonthDay) {
         self.taskTitle = taskTitle
         self.person = person
-        self.alert = Bool.random()
-        self.time = CalendarInfo.settingTime(yearMonthDay: yearMonthDay, hour: Int.random(in: 0...23), minute: Int.random(in: 0...59))
+        self.notify = Bool.random()
+        self.time = CalendarInfo.settingTime(yearMonthDay: yearMonthDay, 
+                                             hour: Int.random(in: 0...23),
+                                             minute: Int.random(in: 0...59))
     }
     
     init(taskTitle: String, person: Person) {
         self.taskTitle = taskTitle
         self.person = person
-        self.alert = true
+        self.notify = true
         self.time = Date()
     }
     
+    init(taskTitle: String) {
+        self.taskTitle = taskTitle
+        self.notify = true
+        self.time = Date()
+    }
+    
+    init(yearMonthDay: YearMonthDay) {
+        self.taskTitle = ""
+        self.notify = Bool.random()
+        self.time = CalendarInfo.settingTime(yearMonthDay: yearMonthDay, 
+                                             hour: Int.random(in: 0...23),
+                                             minute: Int.random(in: 0...59))
+    }
+    
+    init() {
+        self.taskTitle = ""
+        self.notify = true
+        self.time = Date()
+    }
+    
+    
     var taskColor: Color {
-        return person.color
+        return person?.color ?? Color.primary
     }
     
     func getHourMinute() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "a hh:mm"
-        dateFormatter.locale = Locale(identifier: "zh")
+        dateFormatter.locale = Locale(identifier: "zh_TW")
         return dateFormatter.string(from: time)
     }
     

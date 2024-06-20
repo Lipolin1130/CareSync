@@ -9,14 +9,17 @@ import SwiftUI
 
 struct CalendarInfoDetail: View {
     @Binding var infoDetailSheet: Bool
-    @ObservedObject var viewModel: CalendarInfoViewModel
+    @State var addCalendarInfoSheet: Bool = false
+    @ObservedObject var calendarInfoViewModel: CalendarInfoViewModel
     let focusDate: YearMonthDay
     
     var body: some View {
         VStack {
-            InfoDetailHeader(viewModel: viewModel, focusDate: focusDate)
+            InfoDetailHeader(addCalendarInfoSheet: $addCalendarInfoSheet,
+                             viewModel: calendarInfoViewModel,
+                             focusDate: focusDate)
             
-            if let items = viewModel.information[focusDate] {
+            if let items = calendarInfoViewModel.informations[focusDate] {
                 List {
                     ForEach(items.indices, id: \.self) { index in
                         let item = items[index]
@@ -37,13 +40,13 @@ struct CalendarInfoDetail: View {
                             
                             
                             VStack(alignment: .center) {
-                                Image(systemName: item.alert ? "bell.and.waves.left.and.right.fill": "bell.slash.fill")
-                                    .foregroundColor(item.alert ? .red: .gray)
+                                Image(systemName: item.notify ? "bell.and.waves.left.and.right.fill": "bell.slash.fill")
+                                    .foregroundColor(item.notify ? .red: .gray)
                             }
                             .frame(width: 50)
                             .onTapGesture {
                                 withAnimation(.smooth) {
-                                    viewModel.toggleAlert(for: focusDate, at: index)
+                                    calendarInfoViewModel.toggleNotify(for: focusDate, at: index)
                                 }
                             }
                         }
@@ -54,7 +57,7 @@ struct CalendarInfoDetail: View {
                     .onDelete { indexSet in
                         if let index = indexSet.first {
                             let item = items[index]
-                            viewModel.deleteInfo(yearMonthDay: focusDate, id: item.id)
+                            calendarInfoViewModel.deleteInfo(yearMonthDay: focusDate, id: item.id)
                         }
                     }
                 }
@@ -62,11 +65,15 @@ struct CalendarInfoDetail: View {
             }
             Spacer()
         }
+        .sheet(isPresented: $addCalendarInfoSheet) {
+//            AddCalendarInfoView(calendarInfoViewModel: calendarInfoViewModel,                                           addCalendarInfoSheet: $addCalendarInfoSheet,
+//                                focusDate: focusDate)
+        }
     }
 }
 
 struct InfoDetailHeader: View {
-    
+    @Binding var addCalendarInfoSheet: Bool
     @ObservedObject var viewModel: CalendarInfoViewModel
     var focusDate: YearMonthDay
     
@@ -80,7 +87,7 @@ struct InfoDetailHeader: View {
             Spacer()
             
             Button {
-                //TODO: Add the tasks in the calendarInfo
+//                addCalendarInfoSheet.toggle()
             } label: {
                 Image(systemName: "plus.circle.fill")
                     .resizable()
@@ -94,6 +101,6 @@ struct InfoDetailHeader: View {
 #Preview {
     CalendarInfoDetail(
         infoDetailSheet: .constant(false),
-        viewModel: CalendarInfoViewModel(persons: getPersons()),
-        focusDate: YearMonthDay(year: 2024, month: 6, day: 18))
+        calendarInfoViewModel: CalendarInfoViewModel(persons: getPersons()),
+        focusDate: YearMonthDay(year: 2024, month: 6, day: 19))
 }

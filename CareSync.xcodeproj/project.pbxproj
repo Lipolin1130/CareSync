@@ -26,6 +26,7 @@
 		04DDC5202C12FBC200A97BAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DDC51F2C12FBC200A97BAA /* Assets.xcassets */; };
 		04DDC5232C12FBC200A97BAA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DDC5222C12FBC200A97BAA /* Preview Assets.xcassets */; };
 		04DDC52A2C15F1AD00A97BAA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DDC5292C15F1AD00A97BAA /* HomeView.swift */; };
+		04FB21042C2275EA00E6E75A /* AddCalendarInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB21032C2275EA00E6E75A /* AddCalendarInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		04DDC51F2C12FBC200A97BAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04DDC5222C12FBC200A97BAA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		04DDC5292C15F1AD00A97BAA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		04FB21032C2275EA00E6E75A /* AddCalendarInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCalendarInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			children = (
 				04CB62A82C1D7439001981A7 /* PersonDashboardView.swift */,
 				043367AF2C171DC400B12C7A /* CalendarInfoView.swift */,
+				04FB21032C2275EA00E6E75A /* AddCalendarInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				043367CE2C198C6800B12C7A /* InfinitePagerView.swift in Sources */,
 				043367C02C18134F00B12C7A /* CalendarInfoHeader.swift in Sources */,
 				043367D32C198F9D00B12C7A /* CalendarInfoDetail.swift in Sources */,
+				04FB21042C2275EA00E6E75A /* AddCalendarInfoView.swift in Sources */,
 				043367C62C1981C900B12C7A /* CustomTabBar.swift in Sources */,
 				04DDC52A2C15F1AD00A97BAA /* HomeView.swift in Sources */,
 				04CB62A42C1C00D1001981A7 /* CalendarInfoViewModel.swift in Sources */,

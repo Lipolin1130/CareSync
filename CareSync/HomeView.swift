@@ -20,7 +20,7 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             TabView (selection: $selectedTab) {
-                CalendarInfoView(viewModel: calendarInfoViewModel,
+                CalendarInfoView(calendarInfoViewModel: calendarInfoViewModel,
                                  persons: $persons)
                                 .tag(0)
                 
