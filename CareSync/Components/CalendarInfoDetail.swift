@@ -11,15 +11,13 @@ struct CalendarInfoDetail: View {
     @Binding var infoDetailSheet: Bool
     @State var addCalendarInfoSheet: Bool = false
     @ObservedObject var calendarInfoViewModel: CalendarInfoViewModel
-    let focusDate: YearMonthDay
     
     var body: some View {
         VStack {
             InfoDetailHeader(addCalendarInfoSheet: $addCalendarInfoSheet,
-                             viewModel: calendarInfoViewModel,
-                             focusDate: focusDate)
+                             viewModel: calendarInfoViewModel)
             
-            if let items = calendarInfoViewModel.informations[focusDate] {
+            if let items = calendarInfoViewModel.informations[calendarInfoViewModel.focusDate] {
                 List {
                     ForEach(items.indices, id: \.self) { index in
                         let item = items[index]
@@ -46,7 +44,7 @@ struct CalendarInfoDetail: View {
                             .frame(width: 50)
                             .onTapGesture {
                                 withAnimation(.smooth) {
-                                    calendarInfoViewModel.toggleNotify(for: focusDate, at: index)
+                                    calendarInfoViewModel.toggleNotify(for: calendarInfoViewModel.focusDate, at: index)
                                 }
                             }
                         }
@@ -57,7 +55,7 @@ struct CalendarInfoDetail: View {
                     .onDelete { indexSet in
                         if let index = indexSet.first {
                             let item = items[index]
-                            calendarInfoViewModel.deleteInfo(yearMonthDay: focusDate, id: item.id)
+                            calendarInfoViewModel.deleteInfo(yearMonthDay: calendarInfoViewModel.focusDate, id: item.id)
                         }
                     }
                 }
@@ -75,12 +73,12 @@ struct CalendarInfoDetail: View {
 struct InfoDetailHeader: View {
     @Binding var addCalendarInfoSheet: Bool
     @ObservedObject var viewModel: CalendarInfoViewModel
-    var focusDate: YearMonthDay
+//    var focusDate: YearMonthDay
     
     var body: some View {
         HStack {
             
-            Text("\(focusDate.month) 月 \(focusDate.day) 日 \(focusDate.dayOfWeek.longString(locale: Locale(identifier: "zh_CN")))")
+            Text("\(viewModel.focusDate.month) 月 \(viewModel.focusDate.day) 日 \(viewModel.focusDate.dayOfWeek.longString(locale: Locale(identifier: "zh_TW")))")
                 .font(.title2)
                 .fontWeight(.bold)
             
@@ -101,6 +99,5 @@ struct InfoDetailHeader: View {
 #Preview {
     CalendarInfoDetail(
         infoDetailSheet: .constant(false),
-        calendarInfoViewModel: CalendarInfoViewModel(persons: getPersons()),
-        focusDate: YearMonthDay(year: 2024, month: 6, day: 19))
+        calendarInfoViewModel: CalendarInfoViewModel(persons: getPersons()))
 }

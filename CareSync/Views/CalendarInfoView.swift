@@ -58,13 +58,9 @@ struct CalendarInfoView: View {
                         .cornerRadius(2)
                         .contentShape(Rectangle())
                         .sheet(isPresented: $calendarInfoViewModel.infoDetailSheet, content: {
-                            if let focusDate = calendarInfoViewModel.focusDate {
-                                
                                 CalendarInfoDetail(
                                     infoDetailSheet: $calendarInfoViewModel.infoDetailSheet,
-                                    calendarInfoViewModel: calendarInfoViewModel,
-                                    focusDate: focusDate)
-                            }
+                                    calendarInfoViewModel: calendarInfoViewModel)
                         })
                         .onTapGesture {
                             withAnimation {

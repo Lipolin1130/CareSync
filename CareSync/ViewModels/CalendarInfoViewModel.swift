@@ -11,7 +11,7 @@ class CalendarInfoViewModel: ObservableObject {
     @Published var informations: [YearMonthDay: [CalendarInfo]] = getInformation()
     @Published var filteredInformation: [YearMonthDay: [CalendarInfo]] = [:]
     @Published var pickerSelect: Int = 0
-    @Published var focusDate: YearMonthDay? = YearMonthDay.current
+    @Published var focusDate: YearMonthDay = YearMonthDay.current
     @Published var infoDetailSheet: Bool = false
     
     var persons: [Person]
