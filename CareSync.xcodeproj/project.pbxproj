@@ -73,24 +73,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		04CB62AC2C1F2DA3001981A7 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				04CB62A32C1C00D1001981A7 /* CalendarInfoViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		04CB62AD2C1F2DB2001981A7 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				04CB62A82C1D7439001981A7 /* PersonDashboardView.swift */,
-				043367AF2C171DC400B12C7A /* CalendarInfoView.swift */,
-				04FB21032C2275EA00E6E75A /* AddCalendarInfoView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		04CB62AE2C1F2DB9001981A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,16 +83,6 @@
 				04CB62B02C1F3129001981A7 /* Global.swift */,
 			);
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		04CB62AF2C1F2E31001981A7 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				043367BF2C18134F00B12C7A /* CalendarInfoHeader.swift */,
-				043367D22C198F9D00B12C7A /* CalendarInfoDetail.swift */,
-				043367C52C1981C900B12C7A /* CustomTabBar.swift */,
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		04DDC50F2C12FBBE00A97BAA = {
@@ -132,13 +104,13 @@
 		04DDC51A2C12FBBE00A97BAA /* CareSync */ = {
 			isa = PBXGroup;
 			children = (
-				04CB62AF2C1F2E31001981A7 /* Components */,
-				04CB62AD2C1F2DB2001981A7 /* Views */,
-				04CB62AC2C1F2DA3001981A7 /* ViewModels */,
+				04FB21122C2548A800E6E75A /* Person */,
+				04FB21112C25481900E6E75A /* Home */,
+				04FB210C2C2547A700E6E75A /* MedicalRecord */,
+				04FB210B2C25479E00E6E75A /* CalendarInfo */,
 				04CB62AB2C1F2D98001981A7 /* Models */,
 				04CB62AE2C1F2DB9001981A7 /* Supporting Files */,
 				043367D42C199F4600B12C7A /* fakeData.swift */,
-				04DDC5292C15F1AD00A97BAA /* HomeView.swift */,
 				04DDC51D2C12FBBE00A97BAA /* ContentView.swift */,
 				04DDC51B2C12FBBE00A97BAA /* CareSyncApp.swift */,
 				04DDC51F2C12FBC200A97BAA /* Assets.xcassets */,
@@ -153,6 +125,98 @@
 				04DDC5222C12FBC200A97BAA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		04FB210B2C25479E00E6E75A /* CalendarInfo */ = {
+			isa = PBXGroup;
+			children = (
+				04FB210D2C2547BE00E6E75A /* View */,
+				04FB210E2C2547C500E6E75A /* ViewModel */,
+			);
+			path = CalendarInfo;
+			sourceTree = "<group>";
+		};
+		04FB210C2C2547A700E6E75A /* MedicalRecord */ = {
+			isa = PBXGroup;
+			children = (
+				04FB210F2C2547CF00E6E75A /* View */,
+				04FB21102C2547DD00E6E75A /* ViewModel */,
+			);
+			path = MedicalRecord;
+			sourceTree = "<group>";
+		};
+		04FB210D2C2547BE00E6E75A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				043367AF2C171DC400B12C7A /* CalendarInfoView.swift */,
+				04FB21032C2275EA00E6E75A /* AddCalendarInfoView.swift */,
+				043367BF2C18134F00B12C7A /* CalendarInfoHeader.swift */,
+				043367D22C198F9D00B12C7A /* CalendarInfoDetail.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04FB210E2C2547C500E6E75A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				04CB62A32C1C00D1001981A7 /* CalendarInfoViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		04FB210F2C2547CF00E6E75A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04FB21102C2547DD00E6E75A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		04FB21112C25481900E6E75A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				04FB21142C2548F400E6E75A /* View */,
+				04FB21152C2548FA00E6E75A /* ViewModel */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		04FB21122C2548A800E6E75A /* Person */ = {
+			isa = PBXGroup;
+			children = (
+				04FB21132C2548AE00E6E75A /* View */,
+			);
+			path = Person;
+			sourceTree = "<group>";
+		};
+		04FB21132C2548AE00E6E75A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04CB62A82C1D7439001981A7 /* PersonDashboardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04FB21142C2548F400E6E75A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04DDC5292C15F1AD00A97BAA /* HomeView.swift */,
+				043367C52C1981C900B12C7A /* CustomTabBar.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04FB21152C2548FA00E6E75A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
