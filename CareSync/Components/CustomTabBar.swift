@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomTabBar: View {
     @Binding var selectedTab: Int
-    @Binding var isSheetPresented: Bool
+    @Binding var addCalendarInfoSheet: Bool
     
     private let tabItems: [(imageName: String, tabIndex: Int)] = [
         ("calendar.badge.checkmark", 0),
@@ -24,16 +24,14 @@ struct CustomTabBar: View {
             ForEach(tabItems, id: \.tabIndex) { item in
                 Button {
                     if item.tabIndex == 2 {
-                        isSheetPresented = true
-                    } else {
-                        selectedTab = item.tabIndex
-                    }
+                        addCalendarInfoSheet = true
+                    } 
+                    selectedTab = item.tabIndex
                 } label: {
                     VStack {
                         Image(systemName: item.imageName)
                     }
-                    .foregroundColor(selectedTab == item.tabIndex ? 
-                        .blue : .gray)
+                    .foregroundColor(selectedTab == item.tabIndex ? .blue : .gray)
                     .frame(width: 30, height: 30)
                     .padding()
                 }
@@ -49,5 +47,5 @@ struct CustomTabBar: View {
 
 #Preview {
     CustomTabBar(selectedTab: .constant(0),
-                 isSheetPresented: .constant(false))
+                 addCalendarInfoSheet: .constant(false))
 }

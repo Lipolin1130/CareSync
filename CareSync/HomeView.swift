@@ -36,19 +36,18 @@ struct HomeView: View {
                 Text("Fifth Page")
                     .tag(4)
             }
-            .onChange(of: selectedTab) { oldValue, newValue in
-                if newValue == 2 {
-                    selectedTab = oldValue
-                    calendarInfoViewModel.focusDate = YearMonthDay.current
-                }
-            }
-            
             VStack {
                 Spacer()
-                CustomTabBar(selectedTab: $selectedTab, isSheetPresented: $addCalendarInfoSheet)
+                CustomTabBar(selectedTab: $selectedTab, addCalendarInfoSheet: $addCalendarInfoSheet)
             }
         }
         .ignoresSafeArea(.all)
+        .onChange(of: selectedTab) { oldValue, newValue in
+            if newValue == 2 {
+                calendarInfoViewModel.focusDate = YearMonthDay.current
+                selectedTab = oldValue
+            }
+        }
         .sheet(isPresented: $addCalendarInfoSheet) {
             AddCalendarInfoView(calendarInfoViewModel: calendarInfoViewModel,
                                 addCalendarInfoSheet: $addCalendarInfoSheet)
