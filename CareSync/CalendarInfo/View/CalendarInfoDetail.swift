@@ -77,7 +77,7 @@ struct InfoDetailHeader: View {
     var body: some View {
         HStack {
             
-            Text("\(viewModel.focusDate.month) 月 \(viewModel.focusDate.day) 日 \(viewModel.focusDate.dayOfWeek.longString(locale: Locale(identifier: "zh_TW")))")
+            Text(viewModel.focusDate.toWeekString())
                 .font(.title2)
                 .fontWeight(.bold)
             

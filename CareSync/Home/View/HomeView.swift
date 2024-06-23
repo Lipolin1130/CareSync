@@ -12,9 +12,11 @@ struct HomeView: View {
     @State var addCalendarInfoSheet: Bool = false
     @State var persons: [Person] = getPersons()
     @StateObject var calendarInfoViewModel: CalendarInfoViewModel
+    @StateObject var medicalRecordViewModel: MedicalRecordViewModel
     
     init() {
         _calendarInfoViewModel = StateObject(wrappedValue: CalendarInfoViewModel(persons: getPersons()))
+        _medicalRecordViewModel = StateObject(wrappedValue: MedicalRecordViewModel())
     }
     
     var body: some View {
@@ -24,7 +26,7 @@ struct HomeView: View {
                                  persons: $persons)
                                 .tag(0)
                 
-                PersonDashboardView(persons: $persons)
+                MedicalRecordView(medicalRecordViewModel: medicalRecordViewModel)
                     .tag(1)
                 
                 Text("Third Page")
@@ -36,12 +38,13 @@ struct HomeView: View {
                 Text("Fifth Page")
                     .tag(4)
             }
+            
             VStack {
                 Spacer()
                 CustomTabBar(selectedTab: $selectedTab, addCalendarInfoSheet: $addCalendarInfoSheet)
             }
+            .ignoresSafeArea(.all, edges: .bottom)
         }
-        .ignoresSafeArea(.all)
         .onChange(of: selectedTab) { oldValue, newValue in
             if newValue == 2 {
                 calendarInfoViewModel.focusDate = YearMonthDay.current

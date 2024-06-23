@@ -56,6 +56,7 @@ public struct YearMonth: Equatable, Hashable {
         self.month = month
     }
     
+    
     public static var current: YearMonth {
         get {
             let today = Date()
@@ -235,6 +236,11 @@ public struct YearMonthDay: Equatable, Hashable {
     
     public func toDate() -> Date {
         return Calendar.current.date(from: self.toDateComponents())!
+    }
+    
+    public func toWeekString() -> String {
+        
+        return "\(month) 月 \(day) 日 \(dayOfWeek.longString(locale: Locale(identifier: "zh_TW")))"
     }
 }
 

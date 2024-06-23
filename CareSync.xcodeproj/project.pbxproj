@@ -27,6 +27,11 @@
 		04DDC5232C12FBC200A97BAA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DDC5222C12FBC200A97BAA /* Preview Assets.xcassets */; };
 		04DDC52A2C15F1AD00A97BAA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DDC5292C15F1AD00A97BAA /* HomeView.swift */; };
 		04FB21042C2275EA00E6E75A /* AddCalendarInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB21032C2275EA00E6E75A /* AddCalendarInfoView.swift */; };
+		04FB21172C25498C00E6E75A /* MedicalRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB21162C25498C00E6E75A /* MedicalRecordView.swift */; };
+		04FB21192C254B3800E6E75A /* MedicalRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB21182C254B3800E6E75A /* MedicalRecord.swift */; };
+		04FB211B2C25631D00E6E75A /* MedicalRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB211A2C25631D00E6E75A /* MedicalRecordViewModel.swift */; };
+		04FB211D2C256DE600E6E75A /* MedicalRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB211C2C256DE600E6E75A /* MedicalRecordDetailView.swift */; };
+		04FB211F2C256EDC00E6E75A /* MedicalRecordCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB211E2C256EDC00E6E75A /* MedicalRecordCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +56,11 @@
 		04DDC5222C12FBC200A97BAA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		04DDC5292C15F1AD00A97BAA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		04FB21032C2275EA00E6E75A /* AddCalendarInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCalendarInfoView.swift; sourceTree = "<group>"; };
+		04FB21162C25498C00E6E75A /* MedicalRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalRecordView.swift; sourceTree = "<group>"; };
+		04FB21182C254B3800E6E75A /* MedicalRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalRecord.swift; sourceTree = "<group>"; };
+		04FB211A2C25631D00E6E75A /* MedicalRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalRecordViewModel.swift; sourceTree = "<group>"; };
+		04FB211C2C256DE600E6E75A /* MedicalRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalRecordDetailView.swift; sourceTree = "<group>"; };
+		04FB211E2C256EDC00E6E75A /* MedicalRecordCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalRecordCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +79,7 @@
 			children = (
 				04CB62A62C1C12E9001981A7 /* Person.swift */,
 				043367B72C176E1E00B12C7A /* CalendarInfo.swift */,
+				04FB21182C254B3800E6E75A /* MedicalRecord.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -167,6 +178,9 @@
 		04FB210F2C2547CF00E6E75A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04FB21162C25498C00E6E75A /* MedicalRecordView.swift */,
+				04FB211C2C256DE600E6E75A /* MedicalRecordDetailView.swift */,
+				04FB211E2C256EDC00E6E75A /* MedicalRecordCard.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -174,6 +188,7 @@
 		04FB21102C2547DD00E6E75A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				04FB211A2C25631D00E6E75A /* MedicalRecordViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -295,22 +310,27 @@
 			files = (
 				04CB62A92C1D7439001981A7 /* PersonDashboardView.swift in Sources */,
 				043367D52C199F4600B12C7A /* fakeData.swift in Sources */,
+				04FB211F2C256EDC00E6E75A /* MedicalRecordCard.swift in Sources */,
 				043367CF2C198C6800B12C7A /* CalendarView.swift in Sources */,
 				043367D12C198C6800B12C7A /* CalendarController.swift in Sources */,
 				043367B82C176E1E00B12C7A /* CalendarInfo.swift in Sources */,
 				043367CE2C198C6800B12C7A /* InfinitePagerView.swift in Sources */,
+				04FB211D2C256DE600E6E75A /* MedicalRecordDetailView.swift in Sources */,
 				043367C02C18134F00B12C7A /* CalendarInfoHeader.swift in Sources */,
 				043367D32C198F9D00B12C7A /* CalendarInfoDetail.swift in Sources */,
+				04FB21192C254B3800E6E75A /* MedicalRecord.swift in Sources */,
 				04FB21042C2275EA00E6E75A /* AddCalendarInfoView.swift in Sources */,
 				043367C62C1981C900B12C7A /* CustomTabBar.swift in Sources */,
 				04DDC52A2C15F1AD00A97BAA /* HomeView.swift in Sources */,
 				04CB62A42C1C00D1001981A7 /* CalendarInfoViewModel.swift in Sources */,
 				043367CD2C198C6800B12C7A /* Struct.swift in Sources */,
 				04DDC51E2C12FBBE00A97BAA /* ContentView.swift in Sources */,
+				04FB21172C25498C00E6E75A /* MedicalRecordView.swift in Sources */,
 				043367B02C171DC400B12C7A /* CalendarInfoView.swift in Sources */,
 				04CB62A72C1C12E9001981A7 /* Person.swift in Sources */,
 				04DDC51C2C12FBBE00A97BAA /* CareSyncApp.swift in Sources */,
 				04CB62B12C1F3129001981A7 /* Global.swift in Sources */,
+				04FB211B2C25631D00E6E75A /* MedicalRecordViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,8 +470,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -480,8 +500,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
