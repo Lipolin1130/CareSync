@@ -19,20 +19,38 @@ struct MedicalRecordCard: View {
             MedicalRecordDetailView(medicalRecordViewModel: medicalRecordViewModel,
                                     selectIndex: selectIndex)
         } label: {
-            VStack(alignment: .leading, spacing: 5) {
-                Text("\(medicalRecord.yearMonthDay.year)")
-                    .font(.caption)
+            VStack(alignment: .leading, spacing: 8) {
+                
+                HStack {
+                    Text("\(medicalRecord.yearMonthDay.year)")
+                        .font(.caption)
+                    
+                    Spacer()
+                    
+                    Text(medicalRecord.person.name)
+                        .padding(3)
+                        .font(.subheadline)
+                        .background(.white)
+                        .bold()
+                        .foregroundStyle(medicalRecord.person.color)
+                        .cornerRadius(5)
+                }
                 
                 Text(medicalRecord.yearMonthDay.toWeekString())
                     .font(.title3)
                     .fontWeight(.bold)
                 
                 Text(medicalRecord.hospitalName)
+                    .font(.subheadline)
                 
-                Text(medicalRecord.person.name)
+                if medicalRecord.appointment {
+                    Text("Appointment: \(medicalRecord.appointmentDay?.toWeekString() ?? "")")
+                        .font(.subheadline)
+                        .italic()
+                }
             }
             .padding(10)
-            .frame(width: 300 ,height: 150, alignment: .topLeading)
+            .frame(width: 300 ,height: 125, alignment: .topLeading)
             .foregroundColor(.white)
             .background(medicalRecord.person.color.opacity(0.5))
             .cornerRadius(20)
@@ -42,5 +60,5 @@ struct MedicalRecordCard: View {
 
 #Preview {
     MedicalRecordCard(medicalRecordViewModel: MedicalRecordViewModel(),
-                      selectIndex: 0)
+                      selectIndex: 1)
 }

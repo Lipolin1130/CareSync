@@ -28,7 +28,7 @@ struct MedicalRecordDetailView: View {
 
                 GroupBox {
                     
-                } label: {
+                } label: { 
                     //Person
                     Label("Person", systemImage: "building.columns")
                 }

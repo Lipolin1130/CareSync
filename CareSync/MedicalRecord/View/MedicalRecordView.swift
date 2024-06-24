@@ -9,9 +9,10 @@ import SwiftUI
 
 struct MedicalRecordView: View {
     @ObservedObject var medicalRecordViewModel: MedicalRecordViewModel
+    @Binding var persons: [Person]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 15) {
                     ForEach(medicalRecordViewModel.sortedMedicalRecords.indices, id: \.self) { index in
@@ -19,13 +20,16 @@ struct MedicalRecordView: View {
                     }
                 }
             }
-        }
-        .toolbar {
-            ToolbarItem {
-                Button {
-                    //TODO: jump to MedicalRecordDetailView
-                } label: {
-                    Image(systemName: "plus")
+            .navigationTitle("MedicalRecord")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        //TODO: jump to MedicalRecordDetailView
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
                 }
             }
         }
@@ -33,5 +37,8 @@ struct MedicalRecordView: View {
 }
 
 #Preview {
-    MedicalRecordView(medicalRecordViewModel: MedicalRecordViewModel())
+    NavigationStack {
+        MedicalRecordView(medicalRecordViewModel: MedicalRecordViewModel(),
+                          persons: .constant(getPersons()))
+    }
 }

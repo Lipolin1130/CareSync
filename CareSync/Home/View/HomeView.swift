@@ -20,33 +20,42 @@ struct HomeView: View {
     }
     
     var body: some View {
-        ZStack {
-            TabView (selection: $selectedTab) {
-                CalendarInfoView(calendarInfoViewModel: calendarInfoViewModel,
-                                 persons: $persons)
-                                .tag(0)
-                
-                MedicalRecordView(medicalRecordViewModel: medicalRecordViewModel)
-                    .tag(1)
-                
-                Text("Third Page")
-                    .tag(2)
-                
-                Text("Fourth Page")
-                    .tag(3)
-                
-                Text("Fifth Page")
-                    .tag(4)
-            }
+        TabView (selection: $selectedTab) {
+            CalendarInfoView(calendarInfoViewModel: calendarInfoViewModel,
+                             persons: $persons)
+                .tag(0)
+                .tabItem {
+                    Label("Calendar", systemImage: "calendar.badge.checkmark")
+                }
             
-            VStack {
-                Spacer()
-                CustomTabBar(selectedTab: $selectedTab, addCalendarInfoSheet: $addCalendarInfoSheet)
-            }
-            .ignoresSafeArea(.all, edges: .bottom)
+            MedicalRecordView(medicalRecordViewModel: medicalRecordViewModel,
+                              persons: $persons)
+                .tag(1)
+                .tabItem {
+                    Label("Dashboard", systemImage: "list.bullet.clipboard")
+                }
+            
+            Text("Third Page")
+                .tag(2)
+                .tabItem {
+                    Label("Add", systemImage: "plus.circle.fill")
+                }
+            
+            Text("Fourth Page")
+                .tag(3)
+                .tabItem {
+                    Label("Pills", systemImage: "pills.fill")
+                }
+            
+            Text("Fifth Page")
+                .tag(4)
+                .tabItem {
+                    Label("Daily", systemImage: "waveform.path.ecg")
+                }
         }
         .onChange(of: selectedTab) { oldValue, newValue in
             if newValue == 2 {
+                self.addCalendarInfoSheet = true
                 calendarInfoViewModel.focusDate = YearMonthDay.current
                 selectedTab = oldValue
             }

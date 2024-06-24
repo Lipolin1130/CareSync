@@ -17,8 +17,9 @@ class MedicalRecord: ObservableObject, Identifiable {
     @Published var symptomDescription: String?
     @Published var doctorOrder: String?
     @Published var appointment: Bool
+    @Published var appointmentDay: YearMonthDay?
     
-    init(person: Person, yearMonthDay: YearMonthDay, hospitalName: String, hospitalLocation: String, symptomDescription: String, doctorOrder: String, appointment: Bool) {
+    init(person: Person, yearMonthDay: YearMonthDay, hospitalName: String, hospitalLocation: String? = nil, symptomDescription: String? = nil, doctorOrder: String? = nil, appointment: Bool, appointmentDay: YearMonthDay? = nil) {
         self.person = person
         self.yearMonthDay = yearMonthDay
         self.hospitalName = hospitalName
@@ -26,6 +27,7 @@ class MedicalRecord: ObservableObject, Identifiable {
         self.symptomDescription = symptomDescription
         self.doctorOrder = doctorOrder
         self.appointment = appointment
+        self.appointmentDay = appointmentDay
     }
     
     init(person: Person) {
