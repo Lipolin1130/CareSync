@@ -7,7 +7,7 @@
 import SwiftUI
 
 class CalendarInfo: ObservableObject ,Identifiable {
-    var id = UUID().uuidString
+    let id = UUID().uuidString
     @Published var taskTitle: String
     @Published var person: Person?
     @Published var notify: Bool

@@ -10,15 +10,14 @@ import SwiftUI
 struct CalendarInfoView: View {
     @ObservedObject var calendarInfoViewModel: CalendarInfoViewModel
     @ObservedObject var calendarControll: CalendarController = CalendarController()
-    @Binding var persons: [Person]
     
     var body: some View {
         GeometryReader { reader in
             VStack {
                 CalendarInfoHeader(calendarInfoViewModel: calendarInfoViewModel,
                                    calendarControll: calendarControll,
-                                   pickerSelect: $calendarInfoViewModel.pickerSelect,
-                                   persons: persons,
+                                   personSelect: $calendarInfoViewModel.personSelect,
+                                   persons: calendarInfoViewModel.persons,
                                    onSelectChange: calendarInfoViewModel.updatePickerSelection)
                 
                 CalendarView(calendarControll, header: { week in
@@ -116,7 +115,6 @@ extension View {
 }
 
 #Preview {
-    CalendarInfoView(calendarInfoViewModel: CalendarInfoViewModel(persons: getPersons()),
-                     persons: .constant(getPersons()))
+    CalendarInfoView(calendarInfoViewModel: CalendarInfoViewModel(persons: getPersons()))
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 class Person: ObservableObject, Identifiable {
-    var id = UUID().uuidString
+    let id = UUID().uuidString
     var name: String
     @Published var color: Color
     

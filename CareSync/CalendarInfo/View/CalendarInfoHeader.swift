@@ -10,7 +10,7 @@ import SwiftUI
 struct CalendarInfoHeader: View {
     @ObservedObject var calendarInfoViewModel: CalendarInfoViewModel
     @ObservedObject var calendarControll: CalendarController
-    @Binding var pickerSelect: Int
+    @Binding var personSelect: Int
     let persons: [Person]
     var onSelectChange: (Int) -> Void
     
@@ -28,7 +28,7 @@ struct CalendarInfoHeader: View {
             
             Spacer()
             
-            Picker(selection: $pickerSelect) {
+            Picker(selection: $personSelect) {
                 Text(allPerson.name).tag(0)
                 ForEach(persons.indices, id: \.self) {index in
                     Text(persons[index].name).tag(index + 1)
@@ -44,7 +44,7 @@ struct CalendarInfoHeader: View {
                     .stroke(lineWidth: 1)
                     .foregroundColor(calendarInfoViewModel.selectedPerson.color)
             }
-            .onChange(of: pickerSelect) { _, newValue in
+            .onChange(of: personSelect) { _, newValue in
                 onSelectChange(newValue)
             }
         }
@@ -55,7 +55,7 @@ struct CalendarInfoHeader: View {
 #Preview {
     CalendarInfoHeader(calendarInfoViewModel: CalendarInfoViewModel(persons: getPersons()),
                        calendarControll: CalendarController(),
-                       pickerSelect: .constant(2),
+                       personSelect: .constant(2),
                        persons: getPersons(), 
                        onSelectChange: {_ in })
 }

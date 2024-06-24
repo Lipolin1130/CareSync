@@ -10,7 +10,7 @@ import SwiftUI
 class CalendarInfoViewModel: ObservableObject {
     @Published var informations: [YearMonthDay: [CalendarInfo]] = getInformation()
     @Published var filteredInformation: [YearMonthDay: [CalendarInfo]] = [:]
-    @Published var pickerSelect: Int = 0
+    @Published var personSelect: Int = 0
     @Published var focusDate: YearMonthDay = YearMonthDay.current
     @Published var infoDetailSheet: Bool = false
     
@@ -22,7 +22,7 @@ class CalendarInfoViewModel: ObservableObject {
     }
     
     var selectedPerson: Person {
-        return pickerSelect == 0 ? allPerson : persons[pickerSelect - 1]
+        return personSelect == 0 ? allPerson : persons[personSelect - 1]
     }
     
     func filterInformation(for personName: String) {
@@ -43,7 +43,7 @@ class CalendarInfoViewModel: ObservableObject {
     }
     
     func updatePickerSelection(to newIndex: Int) {
-        pickerSelect = newIndex
+        personSelect = newIndex
         filterInformation(for: selectedPerson.name)
     }
     

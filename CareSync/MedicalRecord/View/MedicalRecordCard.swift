@@ -9,15 +9,16 @@ import SwiftUI
 
 struct MedicalRecordCard: View {
     @ObservedObject var medicalRecordViewModel: MedicalRecordViewModel
-    let selectIndex: Int
-    var medicalRecord: MedicalRecord {
-        medicalRecordViewModel.sortedMedicalRecords[selectIndex]
-    }
+//    let selectIndex: Int
+    @ObservedObject var medicalRecord: MedicalRecord
+//    var medicalRecord: MedicalRecord {
+//        medicalRecordViewModel.filteredRecords.sorted(by: {$0.yearMonthDay.toDate() > $1.yearMonthDay.toDate()})[selectIndex]
+//    }
     
     var body: some View {
         NavigationLink {
             MedicalRecordDetailView(medicalRecordViewModel: medicalRecordViewModel,
-                                    selectIndex: selectIndex)
+                                    medicalRecord: medicalRecord)
         } label: {
             VStack(alignment: .leading, spacing: 8) {
                 
@@ -59,6 +60,6 @@ struct MedicalRecordCard: View {
 }
 
 #Preview {
-    MedicalRecordCard(medicalRecordViewModel: MedicalRecordViewModel(),
-                      selectIndex: 1)
+    MedicalRecordCard(medicalRecordViewModel: MedicalRecordViewModel(persons: getPersons()),
+                      medicalRecord: getMedicalRecords()[0])
 }

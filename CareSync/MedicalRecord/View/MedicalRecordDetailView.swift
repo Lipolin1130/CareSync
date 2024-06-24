@@ -9,12 +9,8 @@ import SwiftUI
 
 struct MedicalRecordDetailView: View {
     @ObservedObject var medicalRecordViewModel: MedicalRecordViewModel
+    @ObservedObject var medicalRecord: MedicalRecord
     @State var editButtonPress: Bool = false
-    let selectIndex: Int
-    
-    var medicalRecord: MedicalRecord {
-        medicalRecordViewModel.sortedMedicalRecords[selectIndex]
-    }
     
     var body: some View {
             
@@ -73,7 +69,6 @@ struct MedicalRecordDetailView: View {
 
 #Preview {
     NavigationStack {
-        MedicalRecordDetailView(medicalRecordViewModel: MedicalRecordViewModel(),
-                                selectIndex: 0)
+        MedicalRecordDetailView(medicalRecordViewModel: MedicalRecordViewModel(persons: getPersons()),                      medicalRecord: getMedicalRecords()[0])
     }
 }

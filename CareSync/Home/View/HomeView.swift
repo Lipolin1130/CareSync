@@ -16,20 +16,18 @@ struct HomeView: View {
     
     init() {
         _calendarInfoViewModel = StateObject(wrappedValue: CalendarInfoViewModel(persons: getPersons()))
-        _medicalRecordViewModel = StateObject(wrappedValue: MedicalRecordViewModel())
+        _medicalRecordViewModel = StateObject(wrappedValue: MedicalRecordViewModel(persons: getPersons()))
     }
     
     var body: some View {
         TabView (selection: $selectedTab) {
-            CalendarInfoView(calendarInfoViewModel: calendarInfoViewModel,
-                             persons: $persons)
+            CalendarInfoView(calendarInfoViewModel: calendarInfoViewModel)
                 .tag(0)
                 .tabItem {
                     Label("Calendar", systemImage: "calendar.badge.checkmark")
                 }
             
-            MedicalRecordView(medicalRecordViewModel: medicalRecordViewModel,
-                              persons: $persons)
+            MedicalRecordView(medicalRecordViewModel: medicalRecordViewModel)
                 .tag(1)
                 .tabItem {
                     Label("Dashboard", systemImage: "list.bullet.clipboard")
