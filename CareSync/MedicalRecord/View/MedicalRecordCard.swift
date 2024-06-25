@@ -9,11 +9,7 @@ import SwiftUI
 
 struct MedicalRecordCard: View {
     @ObservedObject var medicalRecordViewModel: MedicalRecordViewModel
-//    let selectIndex: Int
     @ObservedObject var medicalRecord: MedicalRecord
-//    var medicalRecord: MedicalRecord {
-//        medicalRecordViewModel.filteredRecords.sorted(by: {$0.yearMonthDay.toDate() > $1.yearMonthDay.toDate()})[selectIndex]
-//    }
     
     var body: some View {
         NavigationLink {

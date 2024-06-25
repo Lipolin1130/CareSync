@@ -30,7 +30,7 @@ struct HomeView: View {
             MedicalRecordView(medicalRecordViewModel: medicalRecordViewModel)
                 .tag(1)
                 .tabItem {
-                    Label("Dashboard", systemImage: "list.bullet.clipboard")
+                    Label("Dashboard", systemImage: "heart.text.square")
                 }
             
             Text("Third Page")
