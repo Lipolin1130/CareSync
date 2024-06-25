@@ -15,7 +15,7 @@ struct MedicalRecordView: View {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 15) {
                     ForEach(medicalRecordViewModel.filteredRecords.sorted(by: {
-                        $0.yearMonthDay.toDate() > $1.yearMonthDay.toDate()})) {record in
+                        $0.date > $1.date})) {record in
                             MedicalRecordCard(medicalRecordViewModel: medicalRecordViewModel, medicalRecord: record)
                         }
                 }

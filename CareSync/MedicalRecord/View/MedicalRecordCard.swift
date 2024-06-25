@@ -19,7 +19,7 @@ struct MedicalRecordCard: View {
             VStack(alignment: .leading, spacing: 8) {
                 
                 HStack {
-                    Text("\(medicalRecord.yearMonthDay.year)")
+                    Text("\(medicalRecord.date.year)")
                         .font(.caption)
                     
                     Spacer()
@@ -33,15 +33,21 @@ struct MedicalRecordCard: View {
                         .cornerRadius(5)
                 }
                 
-                Text(medicalRecord.yearMonthDay.toWeekString())
-                    .font(.title3)
-                    .fontWeight(.bold)
+                HStack {
+                    Text("\(medicalRecord.date.toYearMonthDay().toWeekString())")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        
+                    Text("\(medicalRecord.date, style: .time)")
+                        .padding(.leading, 10)
+                        .font(.headline)
+                }
                 
                 Text(medicalRecord.hospitalName)
                     .font(.subheadline)
                 
                 if medicalRecord.appointment {
-                    Text("Appointment: \(medicalRecord.appointmentDay?.toWeekString() ?? "")")
+                    Text("Appointment: \(medicalRecord.appointmentDay!.toYearMonthDay().toWeekString())")
                         .font(.subheadline)
                         .italic()
                 }

@@ -24,7 +24,7 @@ struct CalendarInfoDetail: View {
                         
                         HStack(alignment: .center) {
                             
-                            Text(item.getHourMinute())
+                            Text(item.time, style: .time)
                                 .font(.caption2)
                             
                             RoundedRectangle(cornerRadius: 5)
