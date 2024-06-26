@@ -42,7 +42,7 @@ struct HomeView: View {
             Text("Fourth Page")
                 .tag(3)
                 .tabItem {
-                    Label("Pills", systemImage: "pills.fill")
+                    Label("Medicine", systemImage: "pills.fill")
                 }
             
             Text("Fifth Page")

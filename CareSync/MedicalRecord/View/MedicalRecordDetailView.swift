@@ -114,7 +114,7 @@ struct MedicalRecordDetailView: View {
                         if editButtonPress {
                             TextEditor(text: $medicalRecord.doctorOrder)
                                 .padding([.trailing, .bottom], 15)
-                                .frame(minHeight: 100, alignment: .leading)
+                                .frame(minHeight: 150, alignment: .leading)
                             
                         } else {
                             Text("\(medicalRecord.doctorOrder)")
