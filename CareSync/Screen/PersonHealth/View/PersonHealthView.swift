@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PersonDashboardView: View {
+struct PersonHealthView: View {
     @Binding var persons: [Person]
     
     var body: some View {
@@ -21,5 +21,5 @@ struct PersonDashboardView: View {
 }
 
 #Preview {
-    PersonDashboardView(persons: .constant(getPersons()))
+    PersonHealthView(persons: .constant(getPersons()))
 }

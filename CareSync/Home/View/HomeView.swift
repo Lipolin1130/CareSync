@@ -39,13 +39,13 @@ struct HomeView: View {
                     Label("Add", systemImage: "plus.circle.fill")
                 }
             
-            Text("Fourth Page")
+            MedicineInfoView()
                 .tag(3)
                 .tabItem {
                     Label("Medicine", systemImage: "pills.fill")
                 }
             
-            Text("Fifth Page")
+            PersonHealthView(persons: $persons)
                 .tag(4)
                 .tabItem {
                     Label("Daily", systemImage: "waveform.path.ecg")
