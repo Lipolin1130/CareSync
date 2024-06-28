@@ -41,6 +41,11 @@ class MedicineInfoViewModel: ObservableObject {
         return calendar.isDate(currentDay, inSameDayAs: date)
     }
     
+    func checkIsToday(date: Date) -> Bool {
+        let calendar = Calendar.current
+        return calendar.isDateInToday(date)
+    }
+    
     func extractDate(date: Date, format: String) -> String {
         let formatter = DateFormatter()
         
@@ -50,10 +55,10 @@ class MedicineInfoViewModel: ObservableObject {
     }
     
     func filterDose() {
-        print("Current day: \(currentDay)")
         let allDoses = medicineNotify.flatMap { $0.medicationDose }
-        print("All doses: \(allDoses.map { $0.time })")
         filterMedicationDose = allDoses.filter { isToday(date: $0.time) }
-        print("Filtered doses: \(filterMedicationDose?.map { $0.time } ?? [])")
+            .sorted {dose1, dose2 in
+                return dose1.time < dose2.time
+            }
     }
 }

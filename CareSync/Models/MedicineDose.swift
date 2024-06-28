@@ -9,11 +9,11 @@ import Foundation
 
 class MedicationDose: Identifiable, ObservableObject {
     let id = UUID().uuidString
-    var time: Date
-    var complete: Bool
-    var notify: Bool
-    var medicineName: String
-    var person: Person
+    @Published var time: Date
+    @Published var complete: Bool
+    @Published var notify: Bool
+    @Published var medicineName: String
+    @Published var person: Person
     
     init(time: Date, complete: Bool, notify: Bool, medicineName: String, person: Person) {
         self.time = time

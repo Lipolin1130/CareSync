@@ -27,9 +27,6 @@ struct MedicineInfoList: View {
                     .offset(y: 100)
             }
         }
-        .onAppear {
-            print(medicineInfoViewModel.filterMedicationDose)
-        }
     }
 }
 

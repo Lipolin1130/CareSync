@@ -25,7 +25,7 @@ struct MedicineInfoWeek: View {
                         Circle()
                             .fill(.white)
                             .frame(width: 8, height: 8)
-                            .opacity(medicineInfoViewModel.isToday(date: day) ? 1 : 0)
+                            .opacity(medicineInfoViewModel.checkIsToday(date: day) ? 1 : 0)
                     }
                     .foregroundStyle(medicineInfoViewModel.isToday(date: day) ? .primary : .tertiary)
                     .foregroundStyle(medicineInfoViewModel.isToday(date: day) ? .white : .black)
