@@ -13,10 +13,12 @@ struct HomeView: View {
     @State var persons: [Person] = getPersons()
     @StateObject var calendarInfoViewModel: CalendarInfoViewModel
     @StateObject var medicalRecordViewModel: MedicalRecordViewModel
+    @StateObject var medicineInfoViewModel: MedicineInfoViewModel
     
     init() {
         _calendarInfoViewModel = StateObject(wrappedValue: CalendarInfoViewModel(persons: getPersons()))
         _medicalRecordViewModel = StateObject(wrappedValue: MedicalRecordViewModel(persons: getPersons()))
+        _medicineInfoViewModel = StateObject(wrappedValue: MedicineInfoViewModel())
     }
     
     var body: some View {
@@ -39,7 +41,7 @@ struct HomeView: View {
                     Label("Add", systemImage: "plus.circle.fill")
                 }
             
-            MedicineInfoView()
+            MedicineInfoView(medicineInfoViewModel: medicineInfoViewModel)
                 .tag(3)
                 .tabItem {
                     Label("Medicine", systemImage: "pills.fill")

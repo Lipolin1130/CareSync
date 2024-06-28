@@ -13,7 +13,6 @@ class Global {
     static let CENTER_PAGE = 100 / 2
 }
 
-
 public enum Orientation {
     case horizontal
     case vertical

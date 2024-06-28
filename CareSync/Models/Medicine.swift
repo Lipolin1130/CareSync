@@ -7,19 +7,19 @@
 
 import Foundation
 
-class Medicine: ObservableObject, Identifiable {
-    let id =  UUID().uuidString
-    var person: Person
-    var startDate: Date
-    var endDate: Date
-    var notify: Bool
-    var frequency: String // TODO: change it
+class Medicine: Identifiable {
+    let id = UUID().uuidString
+    var name: String
+    var appearance: String //外觀
+    var instructions: String // 使用方法
+    var sideEffect: String //副作用
+    var precautions: String // 注意事項
     
-    init(person: Person, startDate: Date, endDate: Date, notify: Bool, frequency: String) {
-        self.person = person
-        self.startDate = startDate
-        self.endDate = endDate
-        self.notify = notify
-        self.frequency = frequency
+    init(name: String, appearance: String, instructions: String, sideEffect: String, precautions: String) {
+        self.name = name
+        self.appearance = appearance
+        self.instructions = instructions
+        self.sideEffect = sideEffect
+        self.precautions = precautions
     }
 }

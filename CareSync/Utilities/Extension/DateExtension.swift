@@ -24,6 +24,10 @@ extension Date {
     func toYearMonthDay() -> YearMonthDay {
         YearMonthDay(year: year, month: month, day: day)
     }
+    
+    func adding(day: Int) -> Date {
+        return Calendar.current.date(byAdding: .day, value: day, to: self)!
+    }
 }
 
 extension Binding where Value == Date? {

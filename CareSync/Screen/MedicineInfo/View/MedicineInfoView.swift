@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct MedicineInfoView: View {
+    @ObservedObject var medicineInfoViewModel: MedicineInfoViewModel
     var body: some View {
-        Text("Medicine View")
+        ScrollView(.vertical, showsIndicators: false) {
+            LazyVStack(spacing: 15, pinnedViews: [.sectionHeaders]) {
+                Section {
+                    MedicineInfoWeek(medicineInfoViewModel: medicineInfoViewModel)
+                } header: {
+                    MedicineInfoHeader()
+                }
+                
+                // TODO: TasksView()
+            }
+        }
+        .ignoresSafeArea(.container, edges: .top)
     }
 }
 
 #Preview {
-    MedicineInfoView()
+    MedicineInfoView(medicineInfoViewModel: MedicineInfoViewModel())
 }
