@@ -43,6 +43,7 @@ struct MedicineInfoWeek: View {
                     .onTapGesture {
                         withAnimation {
                             medicineInfoViewModel.currentDay = day
+                            medicineInfoViewModel.filterDose()
                         }
                     }
                 }

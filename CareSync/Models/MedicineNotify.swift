@@ -66,7 +66,7 @@ class MedicineNotify: ObservableObject, Identifiable {
                     components.timeZone = TimeZone.current
                     
                     if let doseTime = calendar.date(from: components) {
-                        doses.append(MedicationDose(time: doseTime))
+                        doses.append(MedicationDose(time: doseTime, person: person, medicineName: medicine.name))
                     }
                 }
             }

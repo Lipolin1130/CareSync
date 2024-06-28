@@ -8,12 +8,14 @@
 import Foundation
 
 class MedicineInfoViewModel: ObservableObject {
-    @Published var MedicineNotify: [MedicineNotify] = MockData.createMedicineNotifyData()
+    @Published var medicineNotify: [MedicineNotify] = MockData.createMedicineNotifyData()
     @Published var currentDay: Date = Date()
     @Published var currentWeek: [Date] = []
+    @Published var filterMedicationDose: [MedicationDose]?
     
     init() {
         fetchCurrentWeek()
+        filterDose()
     }
     
     func fetchCurrentWeek() {
@@ -45,5 +47,13 @@ class MedicineInfoViewModel: ObservableObject {
         formatter.dateFormat = format
         
         return formatter.string(from: date)
+    }
+    
+    func filterDose() {
+        print("Current day: \(currentDay)")
+        let allDoses = medicineNotify.flatMap { $0.medicationDose }
+        print("All doses: \(allDoses.map { $0.time })")
+        filterMedicationDose = allDoses.filter { isToday(date: $0.time) }
+        print("Filtered doses: \(filterMedicationDose?.map { $0.time } ?? [])")
     }
 }

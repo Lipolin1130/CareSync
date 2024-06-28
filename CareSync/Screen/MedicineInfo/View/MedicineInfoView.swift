@@ -18,7 +18,7 @@ struct MedicineInfoView: View {
                     MedicineInfoHeader()
                 }
                 
-                // TODO: TasksView()
+                MedicineInfoList(medicineInfoViewModel: medicineInfoViewModel)
             }
         }
         .ignoresSafeArea(.container, edges: .top)
