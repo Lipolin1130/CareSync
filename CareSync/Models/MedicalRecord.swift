@@ -39,8 +39,8 @@ class MedicalRecord: ObservableObject, Identifiable {
     init(person: Person) {
         self.person = person
         self.date = Date()
-        self.hospitalName = "Hospital"
-        self.hospitalLocation = "Location"
+        self.hospitalName = ""
+        self.hospitalLocation = ""
         self.symptomDescription = ""
         self.doctorOrder = ""
         self.appointment = false

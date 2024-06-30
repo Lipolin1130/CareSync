@@ -73,7 +73,15 @@ struct MedicineInfoAddView: View {
                     NavigationLink {
                         MultiSelectPicker(items: MealTime.allCases, selections: $medicineInfoViewModel.addMedicineInfo.eatTime)
                     } label: {
-                        Text("Medicine Time")
+                        HStack {
+                            Text("Medicine Time")
+                            
+                            Spacer()
+                            
+                            Text("\(medicineInfoViewModel.eatTimeDescription)")
+                                .opacity(0.6)
+                                .font(.footnote)
+                        }
                     }
                 } header: {
                     HStack {

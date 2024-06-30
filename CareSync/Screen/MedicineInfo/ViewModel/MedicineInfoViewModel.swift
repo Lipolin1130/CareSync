@@ -17,6 +17,10 @@ class MedicineInfoViewModel: ObservableObject {
     
     var persons: [Person]
     
+    var eatTimeDescription: String {
+        addMedicineInfo.eatTime.map { $0.time }.joined(separator: ", ")
+    }
+    
     init(persons: [Person]) {
         self.persons = persons
         fetchCurrentWeek()

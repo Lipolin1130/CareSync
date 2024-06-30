@@ -10,11 +10,10 @@ import Foundation
 class MedicalRecordViewModel: ObservableObject {
     @Published var medicalRecords: [MedicalRecord] = getMedicalRecords()
     @Published var filteredRecords: [MedicalRecord] = []
-    @Published var newMedicalRecord: MedicalRecord = MedicalRecord(person: getPersons()[0])
+    @Published var medicalRecordAdd: MedicalRecord = MedicalRecord(person: getPersons()[0])
     @Published var personSelect: Int = 0
     
     var persons: [Person]
-    
     
     var selectedPerson: Person {
         return personSelect == 0 ? allPerson : persons[personSelect - 1]
@@ -38,14 +37,38 @@ class MedicalRecordViewModel: ObservableObject {
         filterInformation(for: selectedPerson.name)
     }
     
+    func printAddMedicalRecord() {
+        print("Medical Record:")
+        print("ID: \(medicalRecordAdd.id)")
+        print("Person: \(medicalRecordAdd.person.name)")
+        print("Date: \(medicalRecordAdd.date)")
+        print("Hospital Name: \(medicalRecordAdd.hospitalName)")
+        print("Hospital Location: \(medicalRecordAdd.hospitalLocation)")
+        print("Symptom Description: \(medicalRecordAdd.symptomDescription)")
+        print("Doctor Order: \(medicalRecordAdd.doctorOrder)")
+        print("Appointment: \(medicalRecordAdd.appointment)")
+        if let appointmentDay = medicalRecordAdd.appointmentDay {
+            print("Appointment Day: \(appointmentDay)")
+        } else {
+            print("Appointment Day: N/A")
+        }
+    }
+    
+    func addMedicalRecords() {
+        printAddMedicalRecord()
+        medicalRecords.append(medicalRecordAdd)
+        filterInformation(for: selectedPerson.name)
+        medicalRecordAdd = MedicalRecord(person: getPersons()[0])
+    }
+    
     //MARK: AI translate function
     
-//    func aiIntegrate(description: String) -> JSONEncoder {
-//        // Post method
-//    }
+    //    func aiIntegrate(description: String) -> JSONEncoder {
+    //        // Post method
+    //    }
     
     func parseJson(response :JSONEncoder) {
-//        newMedicalRecord.doctorOrder 醫囑
-//        newMedicalRecord.symptomDescription = 症狀描述
+        //        newMedicalRecord.doctorOrder 醫囑
+        //        newMedicalRecord.symptomDescription = 症狀描述
     }
 }

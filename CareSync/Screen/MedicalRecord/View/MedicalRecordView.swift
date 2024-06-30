@@ -24,8 +24,8 @@ struct MedicalRecordView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
-                        Button {
-                            //TODO: jump to MedicalRecordDetailView
+                        NavigationLink {
+                            MedicalRecordAddView(medicalRecordViewModel: medicalRecordViewModel)
                         } label: {
                             Image(systemName: "plus")
                         }
