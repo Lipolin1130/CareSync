@@ -199,7 +199,7 @@ class MockData {
         
         var medicineNotifyData: [MedicineNotify] = []
         
-        for i in 0..<10 {
+        for i in 0..<20 {
             let medicine = medicines[i % medicines.count]
             let person = persons[i % persons.count]
             let startDate = Calendar.current.date(byAdding: .day, value: i, to: Date()) ?? Date()

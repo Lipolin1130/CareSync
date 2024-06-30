@@ -28,6 +28,16 @@ class MedicineNotify: ObservableObject, Identifiable {
         self.medicationDose = computeMedicationDose()
     }
     
+    init() {
+        self.medicine = Medicine()
+        self.person = getPersons()[0]
+        self.startDate = Date()
+        self.duration = 3
+        self.intervalDays = 1
+        self.eatTime = []
+        self.medicationDose = []
+    }
+    
     
     private func computeMedicationDose() -> [MedicationDose] {
         var doses: [MedicationDose] = []

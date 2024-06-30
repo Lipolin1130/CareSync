@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MedicineInfoHeader: View {
+    @ObservedObject var medicineInfoViewModel: MedicineInfoViewModel
     var body: some View {
         HStack(spacing: 10) {
             VStack(alignment: .leading, spacing: 10) {
@@ -17,7 +18,15 @@ struct MedicineInfoHeader: View {
                 Text("Today")
                     .font(.largeTitle.bold())
             }
-            .hLeading()
+            
+            Spacer()
+            
+            Button {
+                medicineInfoViewModel.addMedicineInfoSheet.toggle()
+            } label: {
+                Image(systemName: "plus")
+                    .font(.largeTitle)
+            }
         }
         .padding()
         .padding(.top, getSafeArea().top)
@@ -26,5 +35,5 @@ struct MedicineInfoHeader: View {
 }
 
 #Preview {
-    MedicineInfoHeader()
+    MedicineInfoHeader(medicineInfoViewModel: MedicineInfoViewModel(persons: getPersons()))
 }

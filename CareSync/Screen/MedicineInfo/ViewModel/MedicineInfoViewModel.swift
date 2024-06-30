@@ -12,8 +12,13 @@ class MedicineInfoViewModel: ObservableObject {
     @Published var currentDay: Date = Date()
     @Published var currentWeek: [Date] = []
     @Published var filterMedicationDose: [MedicationDose]?
+    @Published var addMedicineInfoSheet: Bool = false
+    @Published var addMedicineInfo: MedicineNotify = MedicineNotify()
     
-    init() {
+    var persons: [Person]
+    
+    init(persons: [Person]) {
+        self.persons = persons
         fetchCurrentWeek()
         filterDose()
     }

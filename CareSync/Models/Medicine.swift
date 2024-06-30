@@ -22,4 +22,12 @@ class Medicine: Identifiable {
         self.sideEffect = sideEffect
         self.precautions = precautions
     }
+    
+    init() {
+        self.name = ""
+        self.appearance = ""
+        self.instructions = ""
+        self.sideEffect = ""
+        self.precautions = ""
+    }
 }

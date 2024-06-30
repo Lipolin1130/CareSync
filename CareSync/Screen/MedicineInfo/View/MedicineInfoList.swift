@@ -31,7 +31,7 @@ struct MedicineInfoList: View {
 }
 
 #Preview {
-    MedicineInfoList(medicineInfoViewModel: MedicineInfoViewModel())
+    MedicineInfoList(medicineInfoViewModel: MedicineInfoViewModel(persons: getPersons()))
 }
 
 

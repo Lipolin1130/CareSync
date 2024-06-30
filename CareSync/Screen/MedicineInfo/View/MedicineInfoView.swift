@@ -15,16 +15,19 @@ struct MedicineInfoView: View {
                 Section {
                     MedicineInfoWeek(medicineInfoViewModel: medicineInfoViewModel)
                 } header: {
-                    MedicineInfoHeader()
+                    MedicineInfoHeader(medicineInfoViewModel: medicineInfoViewModel)
                 }
                 
                 MedicineInfoList(medicineInfoViewModel: medicineInfoViewModel)
             }
         }
         .ignoresSafeArea(.container, edges: .top)
+        .sheet(isPresented: $medicineInfoViewModel.addMedicineInfoSheet) {
+            MedicineInfoAddView(medicineInfoViewModel: medicineInfoViewModel)
+        }
     }
 }
 
 #Preview {
-    MedicineInfoView(medicineInfoViewModel: MedicineInfoViewModel())
+    MedicineInfoView(medicineInfoViewModel: MedicineInfoViewModel(persons: getPersons()))
 }

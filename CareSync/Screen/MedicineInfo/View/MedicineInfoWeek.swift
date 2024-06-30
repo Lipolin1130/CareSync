@@ -54,5 +54,5 @@ struct MedicineInfoWeek: View {
 }
 
 #Preview {
-    MedicineInfoWeek(medicineInfoViewModel: MedicineInfoViewModel())
+    MedicineInfoWeek(medicineInfoViewModel: MedicineInfoViewModel(persons: getPersons()))
 }

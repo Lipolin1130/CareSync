@@ -18,7 +18,7 @@ struct HomeView: View {
     init() {
         _calendarInfoViewModel = StateObject(wrappedValue: CalendarInfoViewModel(persons: getPersons()))
         _medicalRecordViewModel = StateObject(wrappedValue: MedicalRecordViewModel(persons: getPersons()))
-        _medicineInfoViewModel = StateObject(wrappedValue: MedicineInfoViewModel())
+        _medicineInfoViewModel = StateObject(wrappedValue: MedicineInfoViewModel(persons: getPersons()))
     }
     
     var body: some View {
@@ -53,6 +53,7 @@ struct HomeView: View {
                     Label("Daily", systemImage: "waveform.path.ecg")
                 }
         }
+        
         .onChange(of: selectedTab) { oldValue, newValue in
             if newValue == 2 {
                 self.addCalendarInfoSheet = true
