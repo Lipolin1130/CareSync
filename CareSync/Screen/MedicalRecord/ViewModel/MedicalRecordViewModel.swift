@@ -10,6 +10,7 @@ import Foundation
 class MedicalRecordViewModel: ObservableObject {
     @Published var medicalRecords: [MedicalRecord] = getMedicalRecords()
     @Published var filteredRecords: [MedicalRecord] = []
+    @Published var newMedicalRecord: MedicalRecord = MedicalRecord(person: getPersons()[0])
     @Published var personSelect: Int = 0
     
     var persons: [Person]
@@ -35,5 +36,16 @@ class MedicalRecordViewModel: ObservableObject {
     func updateSelection(to newIndex: Int) {
         personSelect = newIndex
         filterInformation(for: selectedPerson.name)
+    }
+    
+    //MARK: AI translate function
+    
+//    func aiIntegrate(description: String) -> JSONEncoder {
+//        // Post method
+//    }
+    
+    func parseJson(response :JSONEncoder) {
+//        newMedicalRecord.doctorOrder 醫囑
+//        newMedicalRecord.symptomDescription = 症狀描述
     }
 }

@@ -66,4 +66,41 @@ class MedicineInfoViewModel: ObservableObject {
                 return dose1.time < dose2.time
             }
     }
+    
+    func printAddMedicineInfo() {
+        addMedicineInfo.medicationDose = addMedicineInfo.computeMedicationDose()
+        let medicine = addMedicineInfo.medicine
+        let person = addMedicineInfo.person
+        let startDate = extractDate(date: addMedicineInfo.startDate, format: "yyyy-MM-dd")
+        let duration = addMedicineInfo.duration
+        let intervalDays = addMedicineInfo.intervalDays
+        let eatTimeDescriptions = addMedicineInfo.eatTime.map { $0.description }.joined(separator: ", ")
+        let medicationDoses = addMedicineInfo.medicationDose.map { extractDate(date: $0.time, format: "yyyy-MM-dd HH:mm") }.joined(separator: ", ")
+        
+        print("Medicine Info:")
+        print("  Name: \(medicine.name)")
+        print("  Appearance: \(medicine.appearance)")
+        print("  Instructions: \(medicine.instructions)")
+        print("  Precautions: \(medicine.precautions)")
+        print("  Side Effect: \(medicine.sideEffect)")
+        print("Person Info:")
+        print("  Name: \(person.name)")
+        print("  Color: \(person.color.description)")
+        print("Schedule Info:")
+        print("  Start Date: \(startDate)")
+        print("  Duration: \(duration) days")
+        print("  Interval Days: \(intervalDays)")
+        print("  Eat Times: \(eatTimeDescriptions)")
+        print("Medication Doses:")
+        print("  Doses: \(medicationDoses)")
+    }
+    
+    func addNewMedicineNotify() {
+        addMedicineInfo.medicationDose = addMedicineInfo.computeMedicationDose()
+        medicineNotify.append(addMedicineInfo)
+        addMedicineInfoSheet.toggle()
+        addMedicineInfo = MedicineNotify()
+        filterDose()
+    }
+    
 }

@@ -10,7 +10,6 @@ import SwiftUI
 struct MedicineInfoAddView: View {
     @ObservedObject var medicineInfoViewModel: MedicineInfoViewModel
     @State var personSelect: Int = 0
-    @State var multiSelectTime: [Int] = []
     
     var body: some View {
         NavigationStack {
@@ -71,6 +70,11 @@ struct MedicineInfoAddView: View {
                     }
                     .pickerStyle(.menu)
                     
+                    NavigationLink {
+                        MultiSelectPicker(items: MealTime.allCases, selections: $medicineInfoViewModel.addMedicineInfo.eatTime)
+                    } label: {
+                        Text("Medicine Time")
+                    }
                 } header: {
                     HStack {
                         
@@ -87,6 +91,14 @@ struct MedicineInfoAddView: View {
                 } footer: {
                     Text("StartTime is you get the medicine time ")
                 }
+                
+                Section {
+                    Toggle(isOn: $medicineInfoViewModel.addMedicineInfo.notify) {
+                        Text("Notify")
+                    }
+                } header: {
+                    Text("Notify")
+                }
             }
             .headerProminence(.increased)
             .navigationTitle("Add Medicine")
@@ -94,8 +106,7 @@ struct MedicineInfoAddView: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                        //TODO: Add MedicineNotify data
-                        medicineInfoViewModel.addMedicineInfoSheet.toggle()
+                        medicineInfoViewModel.addNewMedicineNotify()
                     } label: {
                         Text("Done")
                     }

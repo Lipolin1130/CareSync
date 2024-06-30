@@ -12,15 +12,17 @@ class MedicineNotify: ObservableObject, Identifiable {
     @Published var medicine: Medicine
     @Published var person: Person
     @Published var startDate: Date
+    @Published var notify: Bool
     @Published var duration: Int // how many days you need to eat medicine
     @Published var intervalDays: Int // interval in days between each dose
     @Published var eatTime: [MealTime] // times to take the medicine decided by MealTime
     @Published var medicationDose: [MedicationDose]
     
-    init(medicine: Medicine, person: Person, startDate: Date, duration: Int, intervalDays: Int, eatTime: [MealTime]) {
+    init(medicine: Medicine, person: Person, startDate: Date, notify: Bool, duration: Int, intervalDays: Int, eatTime: [MealTime]) {
         self.medicine = medicine
         self.person = person
         self.startDate = startDate
+        self.notify = notify
         self.duration = duration
         self.intervalDays = intervalDays
         self.eatTime = eatTime
@@ -32,6 +34,7 @@ class MedicineNotify: ObservableObject, Identifiable {
         self.medicine = Medicine()
         self.person = getPersons()[0]
         self.startDate = Date()
+        self.notify = false
         self.duration = 3
         self.intervalDays = 1
         self.eatTime = []
@@ -39,7 +42,7 @@ class MedicineNotify: ObservableObject, Identifiable {
     }
     
     
-    private func computeMedicationDose() -> [MedicationDose] {
+    func computeMedicationDose() -> [MedicationDose] {
         var doses: [MedicationDose] = []
         let calendar = Calendar.current
         let dateFormatter = DateFormatter()

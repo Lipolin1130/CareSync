@@ -203,12 +203,13 @@ class MockData {
             let medicine = medicines[i % medicines.count]
             let person = persons[i % persons.count]
             let startDate = Calendar.current.date(byAdding: .day, value: i, to: Date()) ?? Date()
+            let notify = false
             let duration = Int.random(in: 5...10)
             let intervalDays = Int.random(in: 1...2) // Random interval between doses in days
             let eatTime = MealTime.allCases.shuffled().prefix(Int.random(in: 1...3)).map { $0 }
             
-            let notify = MedicineNotify(medicine: medicine, person: person, startDate: startDate, duration: duration, intervalDays: intervalDays, eatTime: eatTime)
-            medicineNotifyData.append(notify)
+            let newNotify = MedicineNotify(medicine: medicine, person: person, startDate: startDate, notify: notify, duration: duration, intervalDays: intervalDays, eatTime: eatTime)
+            medicineNotifyData.append(newNotify)
         }
         
         return medicineNotifyData
