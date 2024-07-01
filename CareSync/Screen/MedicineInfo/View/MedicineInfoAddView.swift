@@ -10,6 +10,9 @@ import SwiftUI
 struct MedicineInfoAddView: View {
     @ObservedObject var medicineInfoViewModel: MedicineInfoViewModel
     @State var personSelect: Int = 0
+    @State var easyMedicineToggle: Bool = true
+    @State var scannerSheet: Bool = false
+    @State var scannerText: String = ""
     
     var body: some View {
         NavigationStack {
@@ -30,22 +33,35 @@ struct MedicineInfoAddView: View {
                 }
                 
                 Section {
+                    Toggle(isOn: $easyMedicineToggle) {
+                        Text(easyMedicineToggle ? "Simple Medicine" : "Detail Medicine")
+                    }
+                    
                     TextField("Medicine Name", text: $medicineInfoViewModel.addMedicineInfo.medicine.name)
-                    TextField("(Optional) Appearance", text: $medicineInfoViewModel.addMedicineInfo.medicine.appearance)
-                    TextField("(Optional) Instructions", text: $medicineInfoViewModel.addMedicineInfo.medicine.instructions)
-                    TextField("(Optional) Precautions", text: $medicineInfoViewModel.addMedicineInfo.medicine.precautions)
-                    TextField("(Optional) SideEffect", text: $medicineInfoViewModel.addMedicineInfo.medicine.sideEffect)
+                    
+                    if !easyMedicineToggle {
+                        TextField("(Optional) Appearance", text: $medicineInfoViewModel.addMedicineInfo.medicine.appearance)
+                        TextField("(Optional) Instructions", text: $medicineInfoViewModel.addMedicineInfo.medicine.instructions)
+                        TextField("(Optional) Precautions", text: $medicineInfoViewModel.addMedicineInfo.medicine.precautions)
+                        TextField("(Optional) SideEffect", text: $medicineInfoViewModel.addMedicineInfo.medicine.sideEffect)
+                    }
+                    
                 } header: {
                     HStack {
                         Text("Medicine Information")
                         
-                        Spacer()
-                        
-                        Button {
+                        if !easyMedicineToggle {
                             
-                        } label: {
-                            Image(systemName: "camera.viewfinder")
-                                .font(.title2)
+                            Spacer()
+                            
+                            Button {
+                                withAnimation(.spring(.smooth, blendDuration: 1)){
+                                    scannerSheet.toggle()
+                                }
+                            } label: {
+                                Image(systemName: "camera.viewfinder")
+                                    .font(.title2)
+                            }
                         }
                     }
                 } footer: {
@@ -128,7 +144,19 @@ struct MedicineInfoAddView: View {
                     }
                 }
             }
+            .sheet(isPresented: $scannerSheet) {
+                self.makeScannerView()
+            }
         }
+    }
+    
+    private func makeScannerView() -> ScannerView {
+        ScannerView(completion: { textPerPage in
+            if let outputText = textPerPage?.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines) {
+                self.scannerText = outputText
+            }
+            self.scannerSheet = false
+        })
     }
 }
 
