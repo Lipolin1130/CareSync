@@ -11,12 +11,12 @@ struct MedicineInfoHeader: View {
     @ObservedObject var medicineInfoViewModel: MedicineInfoViewModel
     var body: some View {
         HStack(spacing: 10) {
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text(Date().formatted(date: .abbreviated, time: .omitted))
                     .foregroundStyle(.gray)
                 
                 Text("Today")
-                    .font(.largeTitle.bold())
+                    .font(.title.bold())
             }
             
             Spacer()
@@ -25,7 +25,7 @@ struct MedicineInfoHeader: View {
                 medicineInfoViewModel.addMedicineInfoSheet.toggle()
             } label: {
                 Image(systemName: "plus")
-                    .font(.largeTitle)
+                    .font(.title)
             }
         }
         .padding()

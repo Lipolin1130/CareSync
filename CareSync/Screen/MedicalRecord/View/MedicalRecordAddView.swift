@@ -40,6 +40,7 @@ struct MedicalRecordAddView: View {
                 TextField("Name", text: $medicalRecordViewModel.medicalRecordAdd.hospitalName)
                 
                 TextField("(Optional) Location", text: $medicalRecordViewModel.medicalRecordAdd.hospitalLocation)
+                
             } header: {
                 
                 HStack {
@@ -61,9 +62,10 @@ struct MedicalRecordAddView: View {
                     if medicalRecordViewModel.medicalRecordAdd.symptomDescription.isEmpty {
                         VStack {
                             Text("(Optional) Symtom Description")
+                                .foregroundStyle(.gray)
                                 .padding(.top, 10)
                                 .padding(.leading, 6)
-                                .opacity(0.6)
+                                .opacity(0.5)
                             Spacer()
                         }
                     }
@@ -76,12 +78,12 @@ struct MedicalRecordAddView: View {
                     if medicalRecordViewModel.medicalRecordAdd.doctorOrder.isEmpty {
                         VStack {
                             Text("(Optional) Doctor Order")
+                                .foregroundStyle(.gray)
                                 .padding(.top, 10)
                                 .padding(.leading, 6)
-                                .opacity(0.6)
+                                .opacity(0.5)
                             Spacer()
                         }
-                        
                     }
                     TextEditor(text: $medicalRecordViewModel.medicalRecordAdd.doctorOrder).frame(minHeight: 80)
                     

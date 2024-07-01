@@ -13,10 +13,17 @@ struct MedicineInfoList: View {
         LazyVStack(spacing: 20) {
             if let doses = medicineInfoViewModel.filterMedicationDose {
                 if doses.isEmpty {
-                    Text("No tasks found!!")
-                        .font(.system(size: 16))
-                        .fontWeight(.light)
-                        .offset(y: 100)
+                    VStack(spacing: 20) {
+                        Image(systemName: "checkmark.seal.fill")
+                            .font(.system(size: 70))
+                            .foregroundStyle(.green)
+                        
+                        Text("Today Has No Medicine!!")
+                            .font(.title3)
+                            .fontWeight(.black)
+                    }
+                    .offset(y: 100)
+                    
                 } else {
                     ForEach(doses) {dose in
                         MedicineInfoCard(medicationDose: dose)

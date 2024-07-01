@@ -22,17 +22,18 @@ struct HomeView: View {
     }
     
     var body: some View {
+
         TabView (selection: $selectedTab) {
             CalendarInfoView(calendarInfoViewModel: calendarInfoViewModel)
                 .tag(0)
                 .tabItem {
-                    Label("Calendar", systemImage: "calendar.badge.checkmark")
+                    Label("Calendar", systemImage: "calendar")
                 }
             
             MedicalRecordView(medicalRecordViewModel: medicalRecordViewModel)
                 .tag(1)
                 .tabItem {
-                    Label("Dashboard", systemImage: "heart.text.square")
+                    Label("Dashboard", systemImage: "stethoscope")
                 }
             
             Text("Third Page")
@@ -44,16 +45,16 @@ struct HomeView: View {
             MedicineInfoView(medicineInfoViewModel: medicineInfoViewModel)
                 .tag(3)
                 .tabItem {
-                    Label("Medicine", systemImage: "pills.fill")
+                    Label("Medicine", systemImage: "pills")
+                        .environment(\.symbolVariants, .none)
                 }
             
             PersonHealthView(persons: $persons)
                 .tag(4)
                 .tabItem {
-                    Label("Daily", systemImage: "waveform.path.ecg")
+                    Label("Daily", systemImage: "pencil.and.list.clipboard")
                 }
         }
-        
         .onChange(of: selectedTab) { oldValue, newValue in
             if newValue == 2 {
                 self.addCalendarInfoSheet = true

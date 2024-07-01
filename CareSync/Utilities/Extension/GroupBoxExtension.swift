@@ -9,22 +9,35 @@ import SwiftUI
 import Foundation
 
 struct MedicalRecordGroupBoxStyle: GroupBoxStyle {
+    
+    var centerOrLeading: Bool
+    
     func makeBody(configuration: Configuration) -> some View {
-        VStack(alignment: .leading, spacing: 5) {
-            configuration.label
-                .bold()
-                .fontDesign(.monospaced)
+        VStack(alignment: centerOrLeading ? .center : .leading, spacing: 10) {
+            if centerOrLeading {
+                HStack {
+                    configuration.label
+                        .bold()
+                    Spacer()
+                }
+            } else {
+                configuration.label
+                    .bold()
+            }
             
             configuration.content
-                .padding(.leading, 30)
+                .padding(.leading, centerOrLeading ? 0 : 30)
         }
         .padding([.leading, .top], 20)
         .frame(minHeight: 120, alignment: .top)
-        .frame(width: 320, alignment: .leading)
+        .frame(width: 320, alignment: centerOrLeading ? .center : .leading)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+        
     }
 }
 
 extension GroupBoxStyle where Self == MedicalRecordGroupBoxStyle {
-    static var medicalRecord: MedicalRecordGroupBoxStyle { .init() }
+    static func medicalRecord(centerOrLeading: Bool ) -> MedicalRecordGroupBoxStyle {
+        MedicalRecordGroupBoxStyle(centerOrLeading: centerOrLeading)
+    }
 }

@@ -30,7 +30,7 @@ struct MedicalRecordCard: View {
                         .background(.white)
                         .bold()
                         .foregroundStyle(medicalRecord.person.color)
-                        .cornerRadius(5)
+                        .cornerRadius(8)
                 }
                 
                 HStack {
@@ -53,10 +53,10 @@ struct MedicalRecordCard: View {
                 }
             }
             .padding(10)
-            .frame(width: 300 ,height: 125, alignment: .topLeading)
-            .foregroundColor(.white)
+            .frame(width: 350 ,height: 125, alignment: .topLeading)
+            .foregroundStyle(.white)
             .background(medicalRecord.person.color.opacity(0.5))
-            .cornerRadius(20)
+            .cornerRadius(10)
         }
     }
 }

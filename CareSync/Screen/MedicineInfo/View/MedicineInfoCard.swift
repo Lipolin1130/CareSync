@@ -33,7 +33,7 @@ struct MedicineInfoCard: View {
                 HStack(alignment: .top, spacing: 10) {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("\(medicationDose.medicineName)")
-                            .font(.title2.bold())
+                            .font(.title3.bold())
                         if !medicationDose.complete {
                             Text("\(medicationDose.person.name)")
                                 .foregroundStyle(.secondary)

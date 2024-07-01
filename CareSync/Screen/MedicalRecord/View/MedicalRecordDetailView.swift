@@ -44,7 +44,6 @@ struct MedicalRecordDetailView: View {
                             }
                             .padding(.trailing, 20)
                         }
-                        
                     } label: {
                         Label("Date", systemImage: "calendar")
                     }
@@ -106,7 +105,7 @@ struct MedicalRecordDetailView: View {
                         }
                         
                     } label: {
-                        Label("symptomDescription", systemImage: "list.clipboard.fill")
+                        Label("SymptomDescription", systemImage: "list.clipboard.fill")
                             .foregroundStyle(.orange)
                     }
                     
@@ -120,7 +119,7 @@ struct MedicalRecordDetailView: View {
                             Text("\(medicalRecord.doctorOrder)")
                         }
                     } label: {
-                        Label("doctorOrder", systemImage: "heart.text.square.fill")
+                        Label("DoctorOrder", systemImage: "heart.text.square.fill")
                             .foregroundStyle(.green)
                     }
                     
@@ -137,7 +136,6 @@ struct MedicalRecordDetailView: View {
                                 .padding(.trailing, 20)
                             }
                         }
-                       
                     } label: {
                         HStack {
                             
@@ -162,7 +160,7 @@ struct MedicalRecordDetailView: View {
                         }
                     }
                 }
-                .groupBoxStyle(.medicalRecord)
+                .groupBoxStyle(.medicalRecord(centerOrLeading: editButtonPress))
                 .padding(.vertical, 40)
             }
             .toolbar {
