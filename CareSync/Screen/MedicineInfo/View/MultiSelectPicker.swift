@@ -18,11 +18,13 @@ struct MultiSelectPicker: View {
                     HStack {
                         Text(item.description)
                             .foregroundStyle(.black)
+                        
+                        Spacer()
+                        
                         Text(item.time)
                             .font(.caption)
                             .foregroundStyle(.gray)
-                        
-                        Spacer()
+                            .padding(.trailing, selections.contains(item) ? 0 : 26)
                         
                         if selections.contains(item) {
                             Image(systemName: "checkmark")

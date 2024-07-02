@@ -19,7 +19,7 @@ struct MedicalRecordCard: View {
             VStack(alignment: .leading, spacing: 8) {
                 
                 HStack {
-                    Text("\(medicalRecord.date.year)")
+                    Text(String(medicalRecord.date.year))
                         .font(.caption)
                     
                     Spacer()

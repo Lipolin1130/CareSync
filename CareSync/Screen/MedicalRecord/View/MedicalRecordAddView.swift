@@ -94,7 +94,7 @@ struct MedicalRecordAddView: View {
             } header: {
                 HStack {
                     
-                    Text("symptom")
+                    Text("Symptom")
                     
                     Spacer()
                     

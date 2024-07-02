@@ -115,9 +115,9 @@ enum MealTime: String, CaseIterable, Identifiable {
     var description: String {
         switch self {
         case .breakfastBefore:
-            return "Breakfast Before"
+            return "Before Breakfast"
         case .breakfastAfter:
-            return "Breakfast After"
+            return "After Breakfast"
         case .lunchBefore:
             return "Before Lunch"
         case .lunchAfter:

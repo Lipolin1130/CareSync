@@ -34,7 +34,7 @@ struct MedicineInfoAddView: View {
                 
                 Section {
                     Toggle(isOn: $easyMedicineToggle) {
-                        Text(easyMedicineToggle ? "Simple Medicine" : "Detail Medicine")
+                        Text("Simple Medicine")
                     }
                     
                     TextField("Medicine Name", text: $medicineInfoViewModel.addMedicineInfo.medicine.name)

@@ -48,7 +48,21 @@ struct MedicalRecordAddAISheetView: View {
                 
                 if audioRecorder.audioFileURL != nil {
                     VStack(spacing: 15) {
-                        HStack {
+                        Button {
+                            //TODO: send audio to server
+                            
+                            // END OF:
+                            // audioRecorder.deleteRecording()
+                        } label: {
+                            Label("Summarize", systemImage: "sparkles")
+                                .fontWeight(.bold)
+                                .padding(15)
+                                .foregroundStyle(.white)
+                                .background(LinearGradient(gradient: Gradient(colors: [.purple, .blue]), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/))
+                                .cornerRadius(10)
+                        }
+                        
+                        HStack(spacing: 25) {
                             if audioRecorder.isPlaying {
                                 Button {
                                     audioRecorder.stopPlaying()
@@ -79,9 +93,7 @@ struct MedicalRecordAddAISheetView: View {
                                 }
                             }
                             
-
                             Button {
-                                //TODO: audio Recorder haved record
                                 audioRecorder.deleteRecording()
                                 onDecreasedCircle()
                                 onIncreaseCircle()
@@ -98,20 +110,6 @@ struct MedicalRecordAddAISheetView: View {
                                 }
                             }
                         }
-                       
-                        Button {
-                            //TODO: send audio to server
-                            
-                            //END OF:
-                            audioRecorder.deleteRecording()
-                        } label: {
-                            Label("Summarize", systemImage: "sparkles")
-                                .fontWeight(.bold)
-                                .padding()
-                                .foregroundStyle(.white)
-                                .background(LinearGradient(gradient: Gradient(colors: [.purple, .blue]), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/))
-                                .cornerRadius(10)
-                        }
                     }
                 } else {
                     ZStack {
@@ -126,8 +124,6 @@ struct MedicalRecordAddAISheetView: View {
                     .opacity(opacityRecord)
                     .onTapGesture {
                         onIncreaseCircle()
-                        
-                        //TODO: start recording
                         audioRecorder.startRecording()
                     }
                 }
@@ -188,7 +184,6 @@ struct MedicalRecordAddAISheetView: View {
                         .onTapGesture {
                             onDecreasedCircle()
                             
-                            //TODO: stop recording
                             audioRecorder.stopRecording()
                         }
                     }
@@ -268,21 +263,3 @@ struct MedicalRecordAddAISheetView: View {
                                 audioRecorder: AudioRecorder(),
                                 medicalAISheet: .constant(false))
 }
-//
-//VStack {
-//
-//    VStack {
-//        Button {
-//            if audioRecorder.recording {
-//                audioRecorder.stopRecording()
-//            } else {
-//                audioRecorder.startRecording()
-//            }
-//        } label: {
-//            Image(systemName: "mic.fill.badge.plus")
-//                .font(.largeTitle)
-//                .foregroundStyle(audioRecorder.recording ? .red : .green)
-//        }
-//    }
-//}
-//.padding()
