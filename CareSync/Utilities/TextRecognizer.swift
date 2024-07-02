@@ -32,7 +32,8 @@ final class TextRecognizer {
             
             let textPerPage = imagesAndRequests.map{ image, request-> String in
                 
-                request.recognitionLanguages = ["zh-Hant"]
+                request.recognitionLanguages = ["zh-Hant", "en-US"]
+                request.usesLanguageCorrection = true
                 
                 let handler = VNImageRequestHandler(cgImage: image, options: [:])
                 

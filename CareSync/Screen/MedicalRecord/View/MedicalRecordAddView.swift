@@ -11,10 +11,11 @@ struct MedicalRecordAddView: View {
     @ObservedObject var medicalRecordViewModel: MedicalRecordViewModel
     @State var personSelect: Int = 0
     @Environment(\.presentationMode) var presentationMode
+    @State var medicalAISheet: Bool = false
+    @StateObject var audioRecorder = AudioRecorder()
     
     var body: some View {
         Form {
-            
             Section {
                 DatePicker("Date", selection: $medicalRecordViewModel.medicalRecordAdd.date)
             } header: {
@@ -98,7 +99,8 @@ struct MedicalRecordAddView: View {
                     Spacer()
                     
                     Button {
-                        //TODO: Open AI translate
+                        
+                        medicalAISheet.toggle()
                     } label: {
                         
                         Text("AI Help")
@@ -137,6 +139,13 @@ struct MedicalRecordAddView: View {
                     Text("Save")
                 }
             }
+        }
+        .sheet(isPresented: $medicalAISheet) {
+            MedicalRecordAddAISheetView(medicalRecordViewModel: medicalRecordViewModel, 
+                                        audioRecorder: audioRecorder,
+                                        medicalAISheet: $medicalAISheet)
+            .presentationDetents([.height(250)])
+            .presentationDragIndicator(.hidden)
         }
     }
 }
