@@ -106,5 +106,4 @@ class MedicineInfoViewModel: ObservableObject {
         addMedicineInfo = MedicineNotify()
         filterDose()
     }
-    
 }

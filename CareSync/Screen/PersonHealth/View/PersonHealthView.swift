@@ -9,17 +9,42 @@ import SwiftUI
 
 struct PersonHealthView: View {
     @Binding var persons: [Person]
+    @State var personSelect: Int = 0
     
     var body: some View {
-        VStack {
-            ForEach(persons) {person in
-                Text(person.name)
-                    .foregroundColor(person.color)
+        NavigationStack {
+            ScrollView(showsIndicators: false) {
+                VStack {
+                    Picker("Choose Member", selection: $personSelect) {
+                        ForEach(persons.indices, id: \.self) {index in
+                            Text(persons[index].name).tag(index)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    
+                    Image(persons[personSelect].imageName)
+                        .resizable()
+                        .frame(width: 200, height: 200)
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
+                }
+                .padding(.horizontal)
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        //TODO: edit Personal age
+                    } label: {
+                        Image(systemName: "gearshape.fill")
+                    }
+                }
             }
         }
     }
 }
 
 #Preview {
-    PersonHealthView(persons: .constant(getPersons()))
+    NavigationStack {
+        PersonHealthView(persons: .constant(getPersons()))
+    }
 }

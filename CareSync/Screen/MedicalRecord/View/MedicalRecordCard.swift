@@ -47,7 +47,7 @@ struct MedicalRecordCard: View {
                     .font(.subheadline)
                 
                 if medicalRecord.appointment {
-                    Text("Appointment: \(medicalRecord.appointmentDay!.toYearMonthDay().toWeekString())")
+                    Text("Appointment: \(medicalRecord.appointmentDay?.toYearMonthDay().toWeekString() ?? "")")
                         .font(.subheadline)
                         .italic()
                 }

@@ -28,6 +28,7 @@
 		04CB62A72C1C12E9001981A7 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB62A62C1C12E9001981A7 /* Person.swift */; };
 		04CB62A92C1D7439001981A7 /* PersonHealthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB62A82C1D7439001981A7 /* PersonHealthView.swift */; };
 		04CB62B12C1F3129001981A7 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB62B02C1F3129001981A7 /* Global.swift */; };
+		04DCDA222C359242002694CE /* BackendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DCDA212C359242002694CE /* BackendService.swift */; };
 		04DDC51C2C12FBBE00A97BAA /* CareSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DDC51B2C12FBBE00A97BAA /* CareSyncApp.swift */; };
 		04DDC51E2C12FBBE00A97BAA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DDC51D2C12FBBE00A97BAA /* ContentView.swift */; };
 		04DDC5202C12FBC200A97BAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DDC51F2C12FBC200A97BAA /* Assets.xcassets */; };
@@ -78,6 +79,7 @@
 		04CB62A62C1C12E9001981A7 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		04CB62A82C1D7439001981A7 /* PersonHealthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonHealthView.swift; sourceTree = "<group>"; };
 		04CB62B02C1F3129001981A7 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		04DCDA212C359242002694CE /* BackendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendService.swift; sourceTree = "<group>"; };
 		04DDC5182C12FBBE00A97BAA /* CareSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CareSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DDC51B2C12FBBE00A97BAA /* CareSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareSyncApp.swift; sourceTree = "<group>"; };
 		04DDC51D2C12FBBE00A97BAA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			children = (
 				04FF0C882C330B980077E6EE /* TextRecognizer.swift */,
 				04FF0C8E2C332CC70077E6EE /* AudioRecorder.swift */,
+				04DCDA212C359242002694CE /* BackendService.swift */,
 				04EB7BDA2C2EA9B10094D226 /* Enum */,
 				04CB62AE2C1F2DB9001981A7 /* Calendar */,
 				043367D42C199F4600B12C7A /* fakeData.swift */,
@@ -464,6 +467,7 @@
 				04CB62A42C1C00D1001981A7 /* CalendarInfoViewModel.swift in Sources */,
 				04EB7BE52C3153680094D226 /* MedicalRecordAddView.swift in Sources */,
 				04AC7C8A2C2BE5A20012B301 /* MedicineInfoViewModel.swift in Sources */,
+				04DCDA222C359242002694CE /* BackendService.swift in Sources */,
 				04FF0C872C33098A0077E6EE /* ScannerView.swift in Sources */,
 				043367CD2C198C6800B12C7A /* WeekEnum.swift in Sources */,
 				04FF0C8D2C33218F0077E6EE /* MedicalRecordAddAISheetView.swift in Sources */,

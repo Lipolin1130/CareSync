@@ -54,10 +54,10 @@ func getInformation() -> [YearMonthDay: [CalendarInfo]] {
 
 func getPersons() -> [Person] {
     let persons: [Person] = [
-        Person(name: "testName"),
-        Person(name: "mother", color: Color.pink),
-        Person(name: "grandMother", color: Color.cyan),
-        Person(name: "grandFather", color: Color.indigo),
+        MockPersonData.testName.person,
+        MockPersonData.mother.person,
+        MockPersonData.grandMother.person,
+        MockPersonData.grandFather.person
     ]
     return persons
 }
@@ -79,7 +79,19 @@ func getMedicalRecords() -> [MedicalRecord] {
     return medicalRecords
 }
 
-let allPerson: Person = Person(name: "All")
+let allPerson: Person = Person(
+    name: "All",
+    gender: true,
+    imageName: "",
+    height: 0.0,
+    weight: 0.0,
+    bloodType: "",
+    birthDate: Date(),
+    medicalHistory: [],
+    medicalFamily: [],
+    allergy: [],
+    drugAllergy: ""
+)
 
 enum MockPersonData {
     case testName
@@ -90,20 +102,71 @@ enum MockPersonData {
     var person: Person {
         switch self {
         case .testName:
-            return Person(name: "testName")
+            return Person(
+                name: "TestName",
+                gender: true,
+                imageName: "TestName",
+                height: 175.0,
+                weight: 70.0,
+                bloodType: "O",
+                birthDate: Calendar.current.date(from: DateComponents(year: 1990, month: 1, day: 1))!,
+                medicalHistory: ["Hypertension"],
+                medicalFamily: ["Diabetes"],
+                allergy: ["Pollen"],
+                drugAllergy: "Penicillin"
+            )
         case .mother:
-            return Person(name: "mother", color: .red)
+            return Person(
+                name: "Mother",
+                color: .red,
+                gender: false,
+                imageName: "Mother",
+                height: 160.0,
+                weight: 60.0,
+                bloodType: "A",
+                birthDate: Calendar.current.date(from: DateComponents(year: 1965, month: 5, day: 15))!,
+                medicalHistory: ["Asthma"],
+                medicalFamily: ["Hypertension"],
+                allergy: ["Dust"],
+                drugAllergy: "None"
+            )
         case .grandMother:
-            return Person(name: "grandMother", color: .cyan)
+            return Person(
+                name: "GrandMother",
+                color: .cyan,
+                gender: false,
+                imageName: "GrandMother",
+                height: 155.0,
+                weight: 55.0,
+                bloodType: "B",
+                birthDate: Calendar.current.date(from: DateComponents(year: 1940, month: 3, day: 10))!,
+                medicalHistory: ["Arthritis"],
+                medicalFamily: ["Heart Disease"],
+                allergy: ["Nuts"],
+                drugAllergy: "Aspirin"
+            )
         case .grandFather:
-            return Person(name: "grandFather", color: .indigo)
+            return Person(
+                name: "GrandFather",
+                color: .indigo,
+                gender: true,
+                imageName: "GrandFather",
+                height: 170.0,
+                weight: 75.0,
+                bloodType: "AB",
+                birthDate: Calendar.current.date(from: DateComponents(year: 1935, month: 7, day: 20))!,
+                medicalHistory: ["Diabetes"],
+                medicalFamily: ["Cancer"],
+                allergy: ["Shellfish"],
+                drugAllergy: "Ibuprofen"
+            )
         }
     }
 }
 
 enum MealTime: String, CaseIterable, Identifiable {
-    case breakfastBefore = "Breakfast Before"
-    case breakfastAfter = "Breakfast After"
+    case breakfastBefore = "Before Breakfast"
+    case breakfastAfter = "After Breakfast"
     case lunchBefore = "Before Lunch"
     case lunchAfter = "After Lunch"
     case dinnerBefore = "Before Dinner"

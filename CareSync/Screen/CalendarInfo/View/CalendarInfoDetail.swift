@@ -26,6 +26,7 @@ struct CalendarInfoDetail: View {
                             
                             Text(item.time, style: .time)
                                 .font(.caption2)
+                                .frame(width: 55, alignment: .trailing)
                             
                             RoundedRectangle(cornerRadius: 5)
                                 .frame(width: 3, height: 25)
