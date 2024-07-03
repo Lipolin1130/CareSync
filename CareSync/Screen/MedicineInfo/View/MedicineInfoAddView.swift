@@ -154,6 +154,7 @@ struct MedicineInfoAddView: View {
         ScannerView(completion: { textPerPage in
             if let outputText = textPerPage?.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines) {
                 self.scannerText = outputText
+                print(self.scannerText)
             }
             self.scannerSheet = false
         })

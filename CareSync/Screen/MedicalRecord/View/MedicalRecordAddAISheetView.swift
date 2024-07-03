@@ -47,7 +47,7 @@ struct MedicalRecordAddAISheetView: View {
                 //MARK: - Record Button
                 
                 if audioRecorder.audioFileURL != nil {
-                    VStack(spacing: 15) {
+                    VStack {
                         Button {
                             //TODO: send audio to server
                             
@@ -61,6 +61,7 @@ struct MedicalRecordAddAISheetView: View {
                                 .background(LinearGradient(gradient: Gradient(colors: [.purple, .blue]), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/))
                                 .cornerRadius(10)
                         }
+                        .padding(.bottom, 30)
                         
                         HStack(spacing: 25) {
                             if audioRecorder.isPlaying {
@@ -126,6 +127,7 @@ struct MedicalRecordAddAISheetView: View {
                         onIncreaseCircle()
                         audioRecorder.startRecording()
                     }
+                    .padding(.bottom, 20)
                 }
             }
             .frame(height: 250)
