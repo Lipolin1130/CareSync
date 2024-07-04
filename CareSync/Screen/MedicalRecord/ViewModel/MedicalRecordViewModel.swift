@@ -60,15 +60,4 @@ class MedicalRecordViewModel: ObservableObject {
         filterInformation(for: selectedPerson.name)
         medicalRecordAdd = MedicalRecord(person: getPersons()[0])
     }
-    
-    //MARK: AI translate function
-    
-    //    func aiIntegrate(description: String) -> JSONEncoder {
-    //        // Post method
-    //    }
-    
-    func parseJson(response :JSONEncoder) {
-        //        newMedicalRecord.doctorOrder 醫囑
-        //        newMedicalRecord.symptomDescription = 症狀描述
-    }
 }

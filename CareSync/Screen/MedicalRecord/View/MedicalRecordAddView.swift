@@ -70,6 +70,7 @@ struct MedicalRecordAddView: View {
                             Spacer()
                         }
                     }
+                    
                     TextEditor(text: $medicalRecordViewModel.medicalRecordAdd.symptomDescription).frame(minHeight: 80)
                     
                     Spacer()
@@ -86,6 +87,7 @@ struct MedicalRecordAddView: View {
                             Spacer()
                         }
                     }
+                    
                     TextEditor(text: $medicalRecordViewModel.medicalRecordAdd.doctorOrder).frame(minHeight: 80)
                     
                     Spacer()

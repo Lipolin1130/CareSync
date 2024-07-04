@@ -183,9 +183,7 @@ struct MedicineInfoAddView: View {
                             self.medicineInfoViewModel.addMedicineInfo.medicine = response.medicine
                             self.medicineInfoViewModel.addMedicineInfo.duration = response.duration
                             
-                            if response.intervalDays != 0 {
-                                self.medicineInfoViewModel.addMedicineInfo.intervalDays = response.intervalDays
-                            }
+                            self.medicineInfoViewModel.addMedicineInfo.intervalDays = response.intervalDays
                             self.medicineInfoViewModel.addMedicineInfo.eatTime = response.eatTime
                             self.medicineInfoViewModel.addMedicineInfo.objectWillChange.send()
                             

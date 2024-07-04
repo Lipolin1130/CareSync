@@ -10,19 +10,20 @@ import SwiftUI
 struct MedicalRecordAddAISheetView: View {
     @ObservedObject var medicalRecordViewModel: MedicalRecordViewModel
     @ObservedObject var audioRecorder: AudioRecorder
-    @State var backendService: BackendService = BackendService()
+    @StateObject var backendService: BackendService = BackendService()
     @Binding var medicalAISheet: Bool
     
-    @State var opacityRecord: CGFloat = 1.0
-    @State var opacityStop: CGFloat = 0.0
-    @State var opacityWave1: CGFloat = 0.0
-    @State var opacityWave2: CGFloat = 0.0
-    @State var timerWave: Timer?
-    @State var circleSize: CGFloat = 0.0
-    @State var seconds: Int = 0
-    @State var minutes: Int = 0
-    @State var timeString = "00:00"
-    @State var timerRecord: Timer?
+    @State private var opacityRecord: CGFloat = 1.0
+    @State private var opacityStop: CGFloat = 0.0
+    @State private var opacityWave1: CGFloat = 0.0
+    @State private var opacityWave2: CGFloat = 0.0
+    @State private var timerWave: Timer?
+    @State private var circleSize: CGFloat = 0.0
+    @State private var seconds: Int = 0
+    @State private var minutes: Int = 0
+    @State private var timeString = "00:00"
+    @State private var timerRecord: Timer?
+    @State private var isLoading: Bool = false
     
     var body: some View {
         
@@ -51,9 +52,10 @@ struct MedicalRecordAddAISheetView: View {
                     VStack {
                         Button {
                             //TODO: send audio to server
+                            uploadFile()
                             
                             // END OF:
-                            // audioRecorder.deleteRecording()
+                            audioRecorder.deleteRecording()
                         } label: {
                             Label("Summarize", systemImage: "sparkles")
                                 .fontWeight(.bold)
@@ -114,21 +116,27 @@ struct MedicalRecordAddAISheetView: View {
                         }
                     }
                 } else {
-                    ZStack {
-                        Circle()
-                            .fill(Color.red)
-                            .frame(width: 50, height: 50)
+                    VStack {
+                        Button("Test") { //MARK: Test
+                            uploadTestFile()
+                        }
                         
-                        Image(systemName: "mic.fill")
-                            .foregroundStyle(.white)
-                            .font(.system(size: 20))
+                        ZStack {
+                            Circle()
+                                .fill(Color.red)
+                                .frame(width: 50, height: 50)
+                            
+                            Image(systemName: "mic.fill")
+                                .foregroundStyle(.white)
+                                .font(.system(size: 20))
+                        }
+                        .opacity(opacityRecord)
+                        .onTapGesture {
+                            onIncreaseCircle()
+                            audioRecorder.startRecording()
+                        }
+                        .padding(.bottom, 20)
                     }
-                    .opacity(opacityRecord)
-                    .onTapGesture {
-                        onIncreaseCircle()
-                        audioRecorder.startRecording()
-                    }
-                    .padding(.bottom, 20)
                 }
             }
             .frame(height: 250)
@@ -192,6 +200,10 @@ struct MedicalRecordAddAISheetView: View {
                     }
                     .frame(height: 250)
                 }
+            }
+            
+            if isLoading {
+                CustomProgressView()
             }
         }
     }
@@ -261,18 +273,55 @@ struct MedicalRecordAddAISheetView: View {
     }
     
     private func uploadFile() {
-        //TODO: use backendService
         if let fileUrl = audioRecorder.audioFileURL {
+            
+            self.isLoading = true
             self.backendService.getRecordSummary(fileURL: fileUrl) { result in
                 switch result {
                 case .success(let response):
                     print("Record Summary Success: \(response)")
+                    
+                    DispatchQueue.main.async {
+                        self.medicalRecordViewModel.medicalRecordAdd.symptomDescription = response.symptom ?? ""
+                        self.medicalRecordViewModel.medicalRecordAdd.doctorOrder = response.precautions ?? ""
+                        self.medicalRecordViewModel.objectWillChange.send()
+                        self.isLoading = false
+                        self.medicalAISheet.toggle()
+                    }
+                    
                 case .failure(let error):
                     print("Record Summary Error: \(error.localizedDescription)")
                 }
             }
         } else {
-            print("No found file")
+            print("No file found")
+        }
+    }
+    
+    private func uploadTestFile() {
+        if let testFileURL = audioRecorder.getTestFileURL() {
+            audioRecorder.audioFileURL = testFileURL
+            self.isLoading = true
+            self.backendService.getRecordSummary(fileURL: testFileURL) { result in
+                switch result {
+                case .success(let response):
+                    print("Record Summary Success: \(response)")
+                    
+                    DispatchQueue.main.async {
+                        self.medicalRecordViewModel.medicalRecordAdd.symptomDescription = response.symptom ?? ""
+                        self.medicalRecordViewModel.medicalRecordAdd.doctorOrder = response.precautions ?? ""
+                        self.medicalRecordViewModel.objectWillChange.send()
+                        self.isLoading = false
+                        self.medicalAISheet.toggle()
+                    }
+                case .failure(let error):
+                    print("Record Summary Error: \(error.localizedDescription)")
+                    self.isLoading = false
+                }
+            }
+            
+        } else {
+            print("Test file not found")
         }
     }
 }

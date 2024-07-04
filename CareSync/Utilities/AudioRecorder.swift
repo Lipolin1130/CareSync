@@ -14,6 +14,7 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioPlayerDelegate {
     let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
     var audioRecorder: AVAudioRecorder!
     var audioPlayer: AVAudioPlayer!
+    
     @Published var recording = false {
         didSet {
             objectWillChange.send(self)
@@ -101,5 +102,42 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         isPlaying = false
     }
+    
+    func playTestFile() {
+        guard let assets = NSDataAsset(name: "testFile") else {
+            print("Test audio file not found.")
+            return
+        }
+        
+        let temporaryDirectory = FileManager.default.temporaryDirectory
+        let temporaryFileURL = temporaryDirectory.appendingPathComponent("testFile.m4a")
+        
+        do {
+            try assets.data.write(to: temporaryFileURL)
+            audioPlayer = try AVAudioPlayer(contentsOf: temporaryFileURL)
+            audioPlayer.delegate = self
+            audioPlayer.play()
+            isPlaying = true
+        } catch {
+            print("Couldn't play test file")
+        }
+    }
+    
+    func getTestFileURL() -> URL? {
+        guard let asset = NSDataAsset(name: "testFile") else {
+            print("Test audio file not found.")
+            return nil
+        }
+        
+        let temporaryDirectory = FileManager.default.temporaryDirectory
+        let temporaryFileURL = temporaryDirectory.appendingPathComponent("testFile.m4a")
+        
+        do {
+            try asset.data.write(to: temporaryFileURL)
+            return temporaryFileURL
+        } catch {
+            print("Couldn't create test file URL")
+            return nil
+        }
+    }
 }
-

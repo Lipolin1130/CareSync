@@ -85,16 +85,28 @@ class BackendService: NSObject, ObservableObject {
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("audio/m4a", forHTTPHeaderField: "Content-Type")
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+//        request.setValue("audio/m4a", forHTTPHeaderField: "Content-Type")
 
+        let fileData: Data
         do {
-            let fileData = try Data(contentsOf: fileURL)
-            let requestBody = getAudioSummaryRequest(audio: fileData)
-            request.httpBody = try JSONEncoder().encode(requestBody)
+            fileData = try Data(contentsOf: fileURL)
         } catch {
             completion(.failure(APIError.invalidFile))
             return
         }
+
+        var body = Data()
+
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"audio\"; filename=\"\(fileURL.lastPathComponent)\"\r\n")
+        body.append("Content-Type: audio/m4a\r\n\r\n")
+        body.append(fileData)
+        body.append("\r\n")
+        body.append("--\(boundary)--\r\n")
+
+        request.httpBody = body
 
         let task = session.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -108,6 +120,10 @@ class BackendService: NSObject, ObservableObject {
             }
             
             do {
+                if let json = try? JSONSerialization.jsonObject(with: data, options: []) {
+                    print("Server response JSON: \(json)")
+                }
+                
                 let jsonResponse = try JSONDecoder().decode(getAudioSummaryResponse.self, from: data)
                 completion(.success(jsonResponse))
                 print(jsonResponse)
@@ -116,6 +132,14 @@ class BackendService: NSObject, ObservableObject {
             }
         }
         task.resume()
+    }
+}
+
+extension Data {
+    mutating func append(_ string: String) {
+        if let data = string.data(using: .utf8) {
+            append(data)
+        }
     }
 }
 
@@ -157,5 +181,5 @@ struct getAudioSummaryRequest: Encodable {
 
 struct getAudioSummaryResponse: Decodable {
     let symptom: String?
-    let precautions: [String?]
+    let precautions: String?
 }
