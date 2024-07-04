@@ -10,6 +10,7 @@ import SwiftUI
 struct MedicalRecordAddAISheetView: View {
     @ObservedObject var medicalRecordViewModel: MedicalRecordViewModel
     @ObservedObject var audioRecorder: AudioRecorder
+    @State var backendService: BackendService = BackendService()
     @Binding var medicalAISheet: Bool
     
     @State var opacityRecord: CGFloat = 1.0
@@ -256,6 +257,22 @@ struct MedicalRecordAddAISheetView: View {
                     timer.invalidate()
                 }
             }
+        }
+    }
+    
+    private func uploadFile() {
+        //TODO: use backendService
+        if let fileUrl = audioRecorder.audioFileURL {
+            self.backendService.getRecordSummary(fileURL: fileUrl) { result in
+                switch result {
+                case .success(let response):
+                    print("Record Summary Success: \(response)")
+                case .failure(let error):
+                    print("Record Summary Error: \(error.localizedDescription)")
+                }
+            }
+        } else {
+            print("No found file")
         }
     }
 }

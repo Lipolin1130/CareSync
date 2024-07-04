@@ -7,48 +7,13 @@
 
 import Foundation
 
-
-struct getMedicineInfoRequest: Encodable {
-    let prescription: String
-}
-
-struct getMedicineInfoResponse: Decodable {
-    let medicine_info: getMedicineInfoMedicineDetailResponse
-    let take_medicine_info: getMedicineInfoTakeMedicineDetailResponse
-}
-
-struct getMedicineInfoMedicineDetailResponse: Decodable {
-    let medicine_name: String?
-    let appearance: String?
-    let instruction: String?
-    let precaution: String?
-    let side_effect: String?
-}
-
-struct getMedicineInfoTakeMedicineDetailResponse: Decodable {
-    let start_date: String?
-    let intreval_days: Int?
-    let duration: Int?
-    let medicine_time: [String?]
-}
-
-struct getAudioSummaryRequest: Encodable {
-    let audio: Data
-}
-
-struct getAudioSummaryResponse: Decodable {
-    let symptom: String?
-    let precautions: [String?]
-}
-
-
-class BackendService: ObservableObject {
-    //TODO: Here
+class BackendService: NSObject, ObservableObject {
+    
     private let baseURL = "https://caresync-backend.bearbig.dev" // 替換為你的 API 基礎 URL
     private let session = URLSession.shared
 
     // Method to handle String request
-    func getMedicineInfo(prescription: String, completion: @escaping (Result<getMedicineInfoResponse, Error>) -> Void) {
+    func getMedicineInfo(prescription: String, completion: @escaping (Result<MedicineNotify, Error>) -> Void) {
         let path = "ai-assistance/medicine-info/"
         guard let url = URL(string: "\(baseURL)/\(path)") else {
             completion(.failure(APIError.invalidURL))
@@ -79,8 +44,30 @@ class BackendService: ObservableObject {
 
             do {
                 let jsonResponse = try JSONDecoder().decode(getMedicineInfoResponse.self, from: data)
-                completion(.success(jsonResponse))
+                let medicineInfo = jsonResponse.medicine_info
+                let takeMedicineInfo = jsonResponse.take_medicine_info
                 print(jsonResponse)
+                
+                let medicine = Medicine(name: medicineInfo.medicine_name ?? "",
+                                        appearance: medicineInfo.appearance ?? "",
+                                        instructions: medicineInfo.instruction ?? "",
+                                        sideEffect: medicineInfo.side_effect ?? "",
+                                        precautions: medicineInfo.precaution ?? "")
+                
+                let eatTimes = takeMedicineInfo.medicine_time.compactMap {timeString -> MealTime? in
+                    return MealTime(rawValue: timeString ?? "")
+                }
+                print("eatTimes: \(eatTimes)")
+                
+                let medicineNotify = MedicineNotify(medicine: medicine,
+                                                    person: getPersons()[0],
+                                                    startDate: Date(),
+                                                    notify: false,
+                                                    duration: takeMedicineInfo.duration ?? 3,
+                                                    intervalDays: takeMedicineInfo.intreval_days ?? 1,
+                                                    eatTime: eatTimes)
+                
+                completion(.success(medicineNotify))
             } catch {
                 completion(.failure(error))
             }
@@ -90,7 +77,7 @@ class BackendService: ObservableObject {
 
     // Method to handle .m4a file request
     func getRecordSummary(fileURL: URL, completion: @escaping (Result<getAudioSummaryResponse, Error>) -> Void) {
-        var path = "ai-assistance/medical-process-summary/"
+        let path = "ai-assistance/medical-process-summary/"
         guard let url = URL(string: "\(baseURL)/\(path)") else {
             completion(.failure(APIError.invalidURL))
             return
@@ -140,3 +127,35 @@ enum APIError: Error {
     case invalidFile
 }
 
+struct getMedicineInfoRequest: Encodable {
+    let prescription: String
+}
+
+struct getMedicineInfoResponse: Decodable {
+    let medicine_info: getMedicineInfoMedicineDetailResponse
+    let take_medicine_info: getMedicineInfoTakeMedicineDetailResponse
+}
+
+struct getMedicineInfoMedicineDetailResponse: Decodable {
+    let medicine_name: String?
+    let appearance: String?
+    let instruction: String?
+    let precaution: String?
+    let side_effect: String?
+}
+
+struct getMedicineInfoTakeMedicineDetailResponse: Decodable {
+    let start_date: String?
+    let intreval_days: Int?
+    let duration: Int?
+    let medicine_time: [String?]
+}
+
+struct getAudioSummaryRequest: Encodable {
+    let audio: Data
+}
+
+struct getAudioSummaryResponse: Decodable {
+    let symptom: String?
+    let precautions: [String?]
+}

@@ -9,11 +9,11 @@ import Foundation
 
 class Medicine: Identifiable {
     let id = UUID().uuidString
-    var name: String
-    var appearance: String // 外觀
-    var instructions: String // 使用方法
-    var sideEffect: String // 副作用
-    var precautions: String // 注意事項
+    @Published var name: String
+    @Published var appearance: String // 外觀
+    @Published var instructions: String // 使用方法
+    @Published var sideEffect: String // 副作用
+    @Published var precautions: String // 注意事項
     
     init(name: String, appearance: String, instructions: String, sideEffect: String, precautions: String) {
         self.name = name

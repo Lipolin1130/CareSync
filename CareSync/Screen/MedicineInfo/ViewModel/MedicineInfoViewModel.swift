@@ -72,7 +72,7 @@ class MedicineInfoViewModel: ObservableObject {
     }
     
     func printAddMedicineInfo() {
-        addMedicineInfo.medicationDose = addMedicineInfo.computeMedicationDose()
+//        addMedicineInfo.medicationDose = addMedicineInfo.computeMedicationDose()
         let medicine = addMedicineInfo.medicine
         let person = addMedicineInfo.person
         let startDate = extractDate(date: addMedicineInfo.startDate, format: "yyyy-MM-dd")
@@ -100,6 +100,7 @@ class MedicineInfoViewModel: ObservableObject {
     }
     
     func addNewMedicineNotify() {
+        printAddMedicineInfo()
         addMedicineInfo.medicationDose = addMedicineInfo.computeMedicationDose()
         medicineNotify.append(addMedicineInfo)
         addMedicineInfoSheet.toggle()

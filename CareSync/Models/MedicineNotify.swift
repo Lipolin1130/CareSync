@@ -27,7 +27,9 @@ class MedicineNotify: ObservableObject, Identifiable {
         self.intervalDays = intervalDays
         self.eatTime = eatTime
         self.medicationDose = []
-        self.medicationDose = computeMedicationDose()
+        if !eatTime.isEmpty {
+            self.medicationDose = computeMedicationDose()
+        }
     }
     
     init() {
@@ -40,7 +42,6 @@ class MedicineNotify: ObservableObject, Identifiable {
         self.eatTime = []
         self.medicationDose = []
     }
-    
     
     func computeMedicationDose() -> [MedicationDose] {
         var doses: [MedicationDose] = []
