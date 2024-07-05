@@ -61,6 +61,8 @@ class CalendarInfoViewModel: ObservableObject {
     }
     
     func addInfo(yearMonthDay: YearMonthDay, information: CalendarInfo) {
+//        print(yearMonthDay.date?.toString())
+//        printThing(information: information)
         if informations[yearMonthDay] != nil {
             informations[yearMonthDay]?.append(information)
         } else {
@@ -68,5 +70,14 @@ class CalendarInfoViewModel: ObservableObject {
         }
         
         filterInformation(for: selectedPerson.name)
+        
+//        print("add info")
+    }
+    func printThing(information: CalendarInfo) {
+        print("\n\n")
+        print(information.person?.name)
+        print(information.taskTitle)
+        print(information.time)
+        print(information.notify)
     }
 }

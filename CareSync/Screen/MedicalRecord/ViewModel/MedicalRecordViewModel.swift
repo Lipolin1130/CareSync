@@ -55,8 +55,20 @@ class MedicalRecordViewModel: ObservableObject {
     }
     
     func addMedicalRecords() {
-        printAddMedicalRecord()
+//        printAddMedicalRecord()
+//        print()
         medicalRecords.append(medicalRecordAdd)
+        
+        if medicalRecordAdd.appointment {
+            let medicalRecordAddNew = MedicalRecord(person: medicalRecordAdd.person,
+                                                    date: medicalRecordAdd.appointmentDay!,
+                                                    hospitalName: medicalRecordAdd.hospitalName,
+                                                    hospitalLocation: medicalRecordAdd.hospitalLocation,
+                                                    symptomDescription: "",
+                                                    doctorOrder: "",
+                                                    appointment: false)
+            medicalRecords.append(medicalRecordAddNew)
+        }
         filterInformation(for: selectedPerson.name)
         medicalRecordAdd = MedicalRecord(person: getPersons()[0])
     }

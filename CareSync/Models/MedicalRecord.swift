@@ -36,6 +36,21 @@ class MedicalRecord: ObservableObject, Identifiable {
         }
     }
     
+    init(person: Person, date: Date, hospitalName: String, hospitalLocation: String, symptomDescription: String, doctorOrder: String, appointment: Bool, appointmentDay: YearMonthDay? = nil) {
+        self.person = person
+        self.date = date
+        self.hospitalName = hospitalName
+        self.hospitalLocation = hospitalLocation
+        self.symptomDescription = symptomDescription
+        self.doctorOrder = doctorOrder
+        self.appointment = appointment
+        if let appointmentDay = appointmentDay {
+            self.appointmentDay = CalendarInfo.settingTime(yearMonthDay: appointmentDay,
+                                                           hour: Int.random(in: 0...23),
+                                                           minute: Int.random(in: 0...59))
+        }
+    }
+    
     init(person: Person) {
         self.person = person
         self.date = Date()

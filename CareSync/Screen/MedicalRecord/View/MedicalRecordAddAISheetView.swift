@@ -39,17 +39,17 @@ struct MedicalRecordAddAISheetView: View {
                             .font(.title)
                             .foregroundStyle(.gray)
                     }
-                    .padding(.bottom, 60)
+                    .padding(.bottom, 30)
                     
                     Spacer()
                 }
+                .frame(maxWidth: .infinity, maxHeight: 70)
                 .padding()
                 
-                Spacer()
                 
                 //MARK: - Record Button
                 
-                if audioRecorder.audioFileURL != nil {
+                if audioRecorder.audioFileURL == nil {
                     VStack {
                         Button {
                             //TODO: send audio to server
@@ -146,8 +146,9 @@ struct MedicalRecordAddAISheetView: View {
                             audioRecorder.startRecording()
                         }
                     }
-                    .padding(.bottom, 20)
                 }
+                
+                Spacer()
             }
             .frame(height: 250)
             
@@ -167,6 +168,8 @@ struct MedicalRecordAddAISheetView: View {
                     //MARK: - Main View
                     
                     VStack {
+                        Spacer()
+                        
                         Image(systemName: "mic.fill")
                             .foregroundStyle(.white)
                             .font(.system(size: 30))
@@ -177,8 +180,6 @@ struct MedicalRecordAddAISheetView: View {
                             .foregroundStyle(.white)
                             .font(.title)
                             .fontWeight(.bold)
-                        
-                        Spacer()
                         
                         //MARK: - Stop Button
                         
@@ -207,6 +208,9 @@ struct MedicalRecordAddAISheetView: View {
                             
                             audioRecorder.stopRecording()
                         }
+                        .padding(.bottom, 20)
+                        
+                        Spacer()
                     }
                     .frame(height: 250)
                 }

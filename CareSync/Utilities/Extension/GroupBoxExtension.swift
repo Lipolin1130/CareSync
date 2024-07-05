@@ -49,7 +49,7 @@ struct PersonHealthGroupBoxStyle: GroupBoxStyle {
                 .font(.subheadline)
         }
         .background(.white)
-        .padding(.horizontal, 10)
+//        .padding(.horizontal, 10)
     }
 }
 

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MedicalRecordView: View {
     @ObservedObject var medicalRecordViewModel: MedicalRecordViewModel
+    @ObservedObject var calendarInfoViewModel: CalendarInfoViewModel
     
     var body: some View {
         NavigationStack {
@@ -25,7 +26,8 @@ struct MedicalRecordView: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         NavigationLink {
-                            MedicalRecordAddView(medicalRecordViewModel: medicalRecordViewModel)
+                            MedicalRecordAddView(calendarInfoViewModel: calendarInfoViewModel,
+                                                 medicalRecordViewModel: medicalRecordViewModel)
                         } label: {
                             Image(systemName: "plus")
                         }
@@ -61,6 +63,7 @@ struct MedicalRecordView: View {
 
 #Preview {
     NavigationStack {
-        MedicalRecordView(medicalRecordViewModel: MedicalRecordViewModel(persons: getPersons()))
+        MedicalRecordView(medicalRecordViewModel: MedicalRecordViewModel(persons: getPersons()), 
+                          calendarInfoViewModel: CalendarInfoViewModel(persons: getPersons()))
     }
 }

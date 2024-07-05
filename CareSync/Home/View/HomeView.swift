@@ -22,7 +22,6 @@ struct HomeView: View {
     }
     
     var body: some View {
-
         TabView (selection: $selectedTab) {
             CalendarInfoView(calendarInfoViewModel: calendarInfoViewModel)
                 .tag(0)
@@ -30,7 +29,8 @@ struct HomeView: View {
                     Label("Calendar", systemImage: "calendar")
                 }
             
-            MedicalRecordView(medicalRecordViewModel: medicalRecordViewModel)
+            MedicalRecordView(medicalRecordViewModel: medicalRecordViewModel,
+                              calendarInfoViewModel: calendarInfoViewModel)
                 .tag(1)
                 .tabItem {
                     Label("Dashboard", systemImage: "stethoscope")
@@ -57,18 +57,18 @@ struct HomeView: View {
         }
         .onChange(of: selectedTab) { oldValue, newValue in
             if newValue == 2 {
-                self.addCalendarInfoSheet = true
-                calendarInfoViewModel.focusDate = YearMonthDay.current
+                medicineInfoViewModel.addMedicineInfoSheet.toggle()
                 selectedTab = oldValue
             }
         }
-        .sheet(isPresented: $addCalendarInfoSheet) {
-            AddCalendarInfoView(calendarInfoViewModel: calendarInfoViewModel,
-                                addCalendarInfoSheet: $addCalendarInfoSheet)
+        .sheet(isPresented: $medicineInfoViewModel.addMedicineInfoSheet) {
+            MedicineInfoAddView(medicineInfoViewModel: medicineInfoViewModel)
         }
     }
 }
 
 #Preview {
-    HomeView()
+    NavigationStack {
+        HomeView()
+    }
 }

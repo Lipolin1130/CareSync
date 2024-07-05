@@ -35,6 +35,7 @@ struct PersonHealthView: View {
                     }
                 }
             }
+            .navigationTitle("My Family")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

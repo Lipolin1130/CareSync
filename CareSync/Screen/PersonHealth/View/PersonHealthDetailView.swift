@@ -13,28 +13,12 @@ struct PersonHealthDetailView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Image(person.imageName)
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-                
-                Text(person.name)
-                    .font(.title)
-                    .fontWeight(.bold)
-                
                 List {
                     Section {
                         HStack(alignment: .center) {
                             Text("Date of Birth")
                             Spacer()
-                            VStack(alignment: .trailing) {
-                                Text(person.birthDate.toString())
-                                    .font(.subheadline)
-                                Text("Age: \(person.age, specifier: "%.0f")")
-                                    .foregroundStyle(.gray)
-                                    .font(.caption2)
-                            }
+                            Text(person.birthDate.toString())
                         }
                         
                         SectionView(title: "Blood Type", describe: person.bloodType)
@@ -47,11 +31,36 @@ struct PersonHealthDetailView: View {
                                 .foregroundStyle(person.color)
                                 .frame(width: 20, height: 20)
                         }
+                    } header: {
+                        HStack{
+                            Spacer()
+                            VStack(alignment: .center) {
+                                Image(person.imageName)
+                                    .resizable()
+                                    .frame(width: 100, height: 100)
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipShape(Circle())
+                                
+                                Text(person.name)
+                                    .font(.title)
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(person.color)
+                                
+                                Text("Age: \(person.age, specifier: "%.0f")")
+                                    .foregroundStyle(.gray)
+                                    .font(.caption)
+                                
+                            }
+                            .textCase(.none)
+                            
+                            Spacer()
+                        }
+                        .padding(.bottom, 10)
                     }
                     
                     Section {
                         GroupBox {
-                            VStack(alignment: .center, spacing: 15) {
+                            VStack(alignment: .center, spacing: 5) {
                                 HStack {
                                     Text("\(person.height, specifier: "%.2f") cm")
                                     
@@ -59,15 +68,21 @@ struct PersonHealthDetailView: View {
                                     
                                     Text("\(person.weight, specifier: "%.2f") kg")
                                 }
-                                .padding(.horizontal, 10)
+                                .padding(.horizontal, 30)
+                                .padding(.bottom, 10)
                                 
-                                Group {
+                                HStack {
+                                    
                                     Text("BMI: \(person.bmi, specifier: "%.2f")")
+                                    
+                                    Spacer()
                                     
                                     Text(person.bmiDescription)
                                 }
+                                .padding(.horizontal, 30)
+                                .padding(.bottom, 10)
                                 .fontWeight(.semibold)
-                                .font(.title3)
+                                .font(.headline)
                                 .foregroundStyle(person.bmiColor)
                             }
                         } label: {
@@ -194,8 +209,6 @@ struct SectionView: View {
 
 #Preview {
     NavigationStack {
-        NavigationStack {
-            PersonHealthDetailView(person: getPersons()[0])
-        }
+        PersonHealthDetailView(person: getPersons()[0])
     }
 }

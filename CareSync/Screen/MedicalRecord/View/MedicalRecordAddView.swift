@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MedicalRecordAddView: View {
+    @ObservedObject var calendarInfoViewModel: CalendarInfoViewModel
     @ObservedObject var medicalRecordViewModel: MedicalRecordViewModel
     @State var personSelect: Int = 0
     @Environment(\.presentationMode) var presentationMode
@@ -129,7 +130,37 @@ struct MedicalRecordAddView: View {
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button {
+                    if medicalRecordViewModel.medicalRecordAdd.appointment && medicalRecordViewModel.medicalRecordAdd.appointmentDay == nil {
+                        medicalRecordViewModel.medicalRecordAdd.appointmentDay = medicalRecordViewModel.medicalRecordAdd.date.adding(day: 7)
+                    }
+                    
+                    calendarInfoViewModel.addInfo(
+                        yearMonthDay: medicalRecordViewModel.medicalRecordAdd.date.toYearMonthDay(),
+                        information: CalendarInfo(
+                            taskTitle: medicalRecordViewModel.medicalRecordAdd.person.name + "看診",
+                            person: medicalRecordViewModel.medicalRecordAdd.person,
+                            notify: false,
+                            time: medicalRecordViewModel.medicalRecordAdd.date))
+                    
+                    if medicalRecordViewModel.medicalRecordAdd.appointment {
+                        if let appointmentDay = medicalRecordViewModel.medicalRecordAdd.appointmentDay {
+//                            print("Appointment Day: \(appointmentDay.toYearMonthDay())")
+                            calendarInfoViewModel.addInfo(
+                                yearMonthDay: appointmentDay.toYearMonthDay(),
+                                information: CalendarInfo(
+                                    taskTitle: medicalRecordViewModel.medicalRecordAdd.person.name + "回診",
+                                    person: medicalRecordViewModel.medicalRecordAdd.person,
+                                    notify: true,
+                                    time: appointmentDay))
+                        } else {
+                            print("Appointment Day is nil")
+                        }
+                        
+                    } else {
+                        print("not appointment")
+                    }
                     medicalRecordViewModel.addMedicalRecords()
+                    
                     self.presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("Save")
@@ -151,6 +182,7 @@ struct MedicalRecordAddView: View {
 
 #Preview {
     NavigationStack {
-        MedicalRecordAddView(medicalRecordViewModel: MedicalRecordViewModel(persons: getPersons()))
+        MedicalRecordAddView(calendarInfoViewModel: CalendarInfoViewModel(persons: getPersons()),
+                             medicalRecordViewModel: MedicalRecordViewModel(persons: getPersons()))
     }
 }

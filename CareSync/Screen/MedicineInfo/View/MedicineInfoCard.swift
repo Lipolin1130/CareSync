@@ -75,5 +75,7 @@ struct MedicineInfoCard: View {
 }
 
 #Preview {
-    MedicineInfoCard(medicationDose: MedicationDose(time: Date(), person: MockPersonData.mother.person, medicineName: MockMedicineData.aspirin.medicine.name ))
+    MedicineInfoCard(medicationDose: MedicationDose(time: Date(), 
+                     person: MockPersonData.mother.person,
+                     medicineName: MockMedicineData.aspirin.medicine.name))
 }
