@@ -28,6 +28,12 @@ extension Date {
     func adding(day: Int) -> Date {
         return Calendar.current.date(byAdding: .day, value: day, to: self)!
     }
+    
+    func toString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        return dateFormatter.string(for: self) ?? ""
+    }
 }
 
 extension Binding where Value == Date? {

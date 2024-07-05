@@ -43,19 +43,7 @@ struct MedicalRecordAddView: View {
                 TextField("(Optional) Location", text: $medicalRecordViewModel.medicalRecordAdd.hospitalLocation)
                 
             } header: {
-                
-                HStack {
-                    Text("Hospital")
-                    
-                    Spacer()
-                    
-                    Button {
-                        //TODO: Map View Selection
-                    } label: {
-                        Image(systemName: "map")
-                            .font(.title3)
-                    }
-                }
+                Text("Hospital")
             }
             
             Section {
@@ -101,7 +89,13 @@ struct MedicalRecordAddView: View {
                     Spacer()
                     
                     Button {
-                        
+                        hideKeyboard()
+                    } label: {
+                        Image(systemName: "keyboard.chevron.compact.down")
+                    }
+                    .padding(.trailing)
+                    
+                    Button {
                         medicalAISheet.toggle()
                     } label: {
                         
@@ -143,11 +137,14 @@ struct MedicalRecordAddView: View {
             }
         }
         .sheet(isPresented: $medicalAISheet) {
-            MedicalRecordAddAISheetView(medicalRecordViewModel: medicalRecordViewModel, 
+            MedicalRecordAddAISheetView(medicalRecordViewModel: medicalRecordViewModel,
                                         audioRecorder: audioRecorder,
                                         medicalAISheet: $medicalAISheet)
             .presentationDetents([.height(250)])
             .presentationDragIndicator(.hidden)
+        }
+        .onAppear {
+            medicalRecordViewModel.medicalRecordAdd = MedicalRecord(person: getPersons()[0])
         }
     }
 }

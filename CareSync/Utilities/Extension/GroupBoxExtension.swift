@@ -36,6 +36,29 @@ struct MedicalRecordGroupBoxStyle: GroupBoxStyle {
     }
 }
 
+struct PersonHealthGroupBoxStyle: GroupBoxStyle {
+    
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment: .leading) {
+            
+            configuration.label
+                .bold()
+            
+            configuration.content
+                .padding(.top, 5)
+                .font(.subheadline)
+        }
+        .background(.white)
+        .padding(.horizontal, 10)
+    }
+}
+
+extension GroupBoxStyle where Self == PersonHealthGroupBoxStyle {
+    static func personHealth() -> PersonHealthGroupBoxStyle {
+        PersonHealthGroupBoxStyle()
+    }
+}
+
 extension GroupBoxStyle where Self == MedicalRecordGroupBoxStyle {
     static func medicalRecord(centerOrLeading: Bool ) -> MedicalRecordGroupBoxStyle {
         MedicalRecordGroupBoxStyle(centerOrLeading: centerOrLeading)

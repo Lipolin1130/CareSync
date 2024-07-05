@@ -20,9 +20,9 @@ class Person: ObservableObject, Identifiable {
     var medicalHistory: [String] // 疾病史
     var medicalFamily: [String] // 家族史
     var allergy: [String] // 一般過敏
-    var drugAllergy: String // 藥物過敏
+    var drugAllergy: [String] // 藥物過敏
     
-    init(name: String, color: Color = Color.primary, gender: Bool, imageName: String, height: Double, weight: Double, bloodType: String, birthDate: Date, medicalHistory: [String], medicalFamily: [String], allergy: [String], drugAllergy: String) {
+    init(name: String, color: Color = Color.primary, gender: Bool, imageName: String, height: Double, weight: Double, bloodType: String, birthDate: Date, medicalHistory: [String], medicalFamily: [String], allergy: [String], drugAllergy: [String]) {
         self.name = name
         self.color = color
         self.gender = gender
@@ -66,6 +66,23 @@ class Person: ObservableObject, Identifiable {
             return "Obesity II"
         default:
             return "Obesity III"
+        }
+    }
+    
+    var bmiColor: Color {
+        switch bmi {
+        case ..<18.5:
+            return Color.green
+        case 18.5..<24.9:
+            return Color.blue
+        case 25..<29.9:
+            return Color.yellow
+        case 30..<34.9:
+            return Color.orange
+        case 35..<39.9:
+            return Color.red
+        default:
+            return Color.purple
         }
     }
 }

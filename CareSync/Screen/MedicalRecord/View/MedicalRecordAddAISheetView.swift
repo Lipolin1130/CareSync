@@ -12,6 +12,7 @@ struct MedicalRecordAddAISheetView: View {
     @ObservedObject var audioRecorder: AudioRecorder
     @StateObject var backendService: BackendService = BackendService()
     @Binding var medicalAISheet: Bool
+    @Environment(\.presentationMode) var presentationMode
     
     @State private var opacityRecord: CGFloat = 1.0
     @State private var opacityStop: CGFloat = 0.0
@@ -116,8 +117,17 @@ struct MedicalRecordAddAISheetView: View {
                         }
                     }
                 } else {
-                    VStack {
-                        Button("Test") { //MARK: Test
+                    HStack(spacing: 30) {
+                        
+                        ZStack {
+                            Circle()
+                                .fill(.gray)
+                                .frame(width: 50, height: 50)
+                            Image(systemName: "hammer.fill")
+                                .foregroundStyle(.white)
+                                .font(.system(size: 20))
+                        }
+                        .onTapGesture {
                             uploadTestFile()
                         }
                         
@@ -135,8 +145,8 @@ struct MedicalRecordAddAISheetView: View {
                             onIncreaseCircle()
                             audioRecorder.startRecording()
                         }
-                        .padding(.bottom, 20)
                     }
+                    .padding(.bottom, 20)
                 }
             }
             .frame(height: 250)

@@ -90,7 +90,7 @@ let allPerson: Person = Person(
     medicalHistory: [],
     medicalFamily: [],
     allergy: [],
-    drugAllergy: ""
+    drugAllergy: [""]
 )
 
 enum MockPersonData {
@@ -113,7 +113,7 @@ enum MockPersonData {
                 medicalHistory: ["Hypertension"],
                 medicalFamily: ["Diabetes"],
                 allergy: ["Pollen"],
-                drugAllergy: "Penicillin"
+                drugAllergy: ["Penicillin"]
             )
         case .mother:
             return Person(
@@ -128,7 +128,7 @@ enum MockPersonData {
                 medicalHistory: ["Asthma"],
                 medicalFamily: ["Hypertension"],
                 allergy: ["Dust"],
-                drugAllergy: "None"
+                drugAllergy: ["None"]
             )
         case .grandMother:
             return Person(
@@ -143,7 +143,7 @@ enum MockPersonData {
                 medicalHistory: ["Arthritis"],
                 medicalFamily: ["Heart Disease"],
                 allergy: ["Nuts"],
-                drugAllergy: "Aspirin"
+                drugAllergy: ["Aspirin"]
             )
         case .grandFather:
             return Person(
@@ -158,7 +158,7 @@ enum MockPersonData {
                 medicalHistory: ["Diabetes"],
                 medicalFamily: ["Cancer"],
                 allergy: ["Shellfish"],
-                drugAllergy: "Ibuprofen"
+                drugAllergy: ["Ibuprofen"]
             )
         }
     }
