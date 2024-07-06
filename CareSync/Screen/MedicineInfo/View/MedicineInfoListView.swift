@@ -13,14 +13,21 @@ struct MedicineInfoListView: View {
     let person: Person
     
     var body: some View {
-        VStack {
-            ForEach(medicineInfoViewModel.medicineNotify.filter {$0.person.name == person.name }) {medicineNotify in
-                MedicineInfoListCard(medicineNotify: medicineNotify,
-                                     selectMedicineNotify: $selectMedicineNotify)
-                .padding(.top, 10)
+        ZStack {
+            person.color.opacity(0.2)
+            
+            ScrollView(showsIndicators: false) {
+                VStack {
+                    ForEach(medicineInfoViewModel.medicineNotify.filter { $0.person.name == person.name }
+                        .sorted(by: {$0.startDate > $1.startDate })) {medicineNotify in
+                            
+                            MedicineInfoListCard(medicineNotify: medicineNotify,
+                                                 selectMedicineNotify: $selectMedicineNotify)
+                            .padding(.top, 10)
+                        }
+                }
             }
         }
-        .padding(.horizontal, 10)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button {

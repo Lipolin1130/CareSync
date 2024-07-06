@@ -7,7 +7,23 @@
 
 import SwiftUI
 
-class Person: ObservableObject, Identifiable {
+class Person: ObservableObject, Identifiable, Equatable {
+    static func == (lhs: Person, rhs: Person) -> Bool {
+            return lhs.id == rhs.id &&
+                   lhs.name == rhs.name &&
+                   lhs.color == rhs.color &&
+                   lhs.gender == rhs.gender &&
+                   lhs.imageName == rhs.imageName &&
+                   lhs.height == rhs.height &&
+                   lhs.weight == rhs.weight &&
+                   lhs.bloodType == rhs.bloodType &&
+                   lhs.birthDate == rhs.birthDate &&
+                   lhs.medicalHistory == rhs.medicalHistory &&
+                   lhs.medicalFamily == rhs.medicalFamily &&
+                   lhs.allergy == rhs.allergy &&
+                   lhs.drugAllergy == rhs.drugAllergy
+    }
+    
     let id = UUID().uuidString
     var name: String
     @Published var color: Color

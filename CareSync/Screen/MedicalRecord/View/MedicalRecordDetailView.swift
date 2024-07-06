@@ -9,19 +9,24 @@ import SwiftUI
 
 struct MedicalRecordDetailView: View {
     @ObservedObject var medicalRecordViewModel: MedicalRecordViewModel
+    @ObservedObject var medicineInfoViewModel: MedicineInfoViewModel
     @ObservedObject var medicalRecord: MedicalRecord
     @State var editButtonPress: Bool = false
     @State var selectPerson: Int
     
-    init(medicalRecordViewModel: MedicalRecordViewModel, medicalRecord: MedicalRecord) {
-        self.medicalRecordViewModel = medicalRecordViewModel
-        self.medicalRecord = medicalRecord
+    init(medicalRecordViewModel: MedicalRecordViewModel, 
+         medicalRecord: MedicalRecord,
+         medicineInfoViewModel: MedicineInfoViewModel) {
         
-        if let index = medicalRecordViewModel.persons.firstIndex (where: { $0.id == medicalRecord.person.id }) {
-            self._selectPerson = State(initialValue: index)
-        } else {
-            self._selectPerson = State(initialValue: 0)
-        }
+            self.medicineInfoViewModel = medicineInfoViewModel
+            self.medicalRecordViewModel = medicalRecordViewModel
+            self.medicalRecord = medicalRecord
+            
+            if let index = medicalRecordViewModel.persons.firstIndex (where: { $0.id == medicalRecord.person.id }) {
+                self._selectPerson = State(initialValue: index)
+            } else {
+                self._selectPerson = State(initialValue: 0)
+            }
     }
     
     var body: some View {
@@ -124,6 +129,74 @@ struct MedicalRecordDetailView: View {
                     }
                     
                     GroupBox {
+                        if medicalRecord.medicineCreate {
+                            if editButtonPress {
+                                NavigationLink {
+                                    MedicineInfoListView(medicineInfoViewModel: medicineInfoViewModel,
+                                                         selectMedicineNotify: $medicalRecord.medicineNotify,
+                                                         person: medicalRecord.person)
+                                } label: {
+                                    
+                                    if let medicineNotify = medicalRecord.medicineNotify {
+                                        HStack(spacing: 30) {
+                                            Text("\(medicineNotify.medicine.name)")
+                                            Text("\(medicineNotify.startDate.toString())")
+                                        }
+                                        .padding(.trailing, 10)
+                                    } else {
+                                        Text("Choose Medicine")
+                                    }
+                                }
+                                .padding()
+                                .foregroundStyle(.black)
+                                .background(.gray.opacity(0.3))
+                                .cornerRadius(10)
+                                
+                            } else {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    if let medicalRecordNotify = medicalRecord.medicineNotify {
+                                        HStack {
+                                            Text(medicalRecordNotify.medicine.name)
+                                                .bold()
+                                            
+                                            Spacer()
+                                            
+                                            Text("\(medicalRecordNotify.completeDoses) / \(medicalRecordNotify.medicationDose.count)")
+                                        }
+                                        .padding(.trailing, 20)
+                                        
+                                        HStack(spacing: 20){
+                                            Text(medicalRecordNotify.startDate.toString())
+                                            
+                                            Image(systemName: "arrow.right")
+                                            
+                                            Text(medicalRecordNotify.startDate.adding(
+                                                day: medicalRecordNotify.duration).toString())
+                                        }
+                                        .font(.callout)
+                                        
+                                        Text(medicalRecordNotify.eatTimeDescription)
+                                            .foregroundStyle(.gray)
+                                        
+                                    }
+                                }
+                                .padding(.bottom, 5)
+                            }
+                        }
+                    } label: {
+                        Label("Medicine", systemImage: "pills")
+                        
+                        if editButtonPress {
+                            
+                            Spacer()
+                            
+                            Toggle("", isOn: $medicalRecord.medicineCreate)
+                                .tint(.black)
+                                .scaleEffect(0.8)
+                        }
+                    }
+                    
+                    GroupBox {
                         if medicalRecord.appointment {
                             if editButtonPress {
                                 DatePicker("", selection: $medicalRecord.appointmentDay.toNonOptional())
@@ -138,7 +211,6 @@ struct MedicalRecordDetailView: View {
                         }
                     } label: {
                         HStack {
-                            
                             Label("Appointment", systemImage: "calendar.badge.clock")
                                 .foregroundStyle(.purple)
                             
@@ -158,6 +230,15 @@ struct MedicalRecordDetailView: View {
                         } else {
                             medicalRecord.appointmentDay = nil
                         }
+                    }
+                    .onChange(of: medicalRecord.medicineCreate) {oldValue, newValue in
+                        if !newValue {
+                            medicalRecord.medicineNotify = nil
+                        }
+                    }
+                    .onChange(of: medicalRecord.person) { _, _ in
+                        medicalRecord.medicineCreate = false
+                        medicalRecord.medicineNotify = nil
                     }
                 }
                 .groupBoxStyle(.medicalRecord(centerOrLeading: editButtonPress))
@@ -179,6 +260,9 @@ struct MedicalRecordDetailView: View {
 
 #Preview {
     NavigationStack {
-        MedicalRecordDetailView(medicalRecordViewModel: MedicalRecordViewModel(persons: getPersons()),                      medicalRecord: getMedicalRecords()[0])
+        MedicalRecordDetailView(medicalRecordViewModel: MedicalRecordViewModel(persons: getPersons()),
+//                                medicineInfoViewModel: MedicineInfoViewModel(persons: getPersons()),
+                                medicalRecord: getMedicalRecords()[0], 
+                                medicineInfoViewModel: MedicineInfoViewModel(persons: getPersons()))
     }
 }

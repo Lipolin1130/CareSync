@@ -9,12 +9,14 @@ import SwiftUI
 
 struct MedicalRecordCard: View {
     @ObservedObject var medicalRecordViewModel: MedicalRecordViewModel
+    @ObservedObject var medicineInfoViewModel: MedicineInfoViewModel
     @ObservedObject var medicalRecord: MedicalRecord
     
     var body: some View {
         NavigationLink {
             MedicalRecordDetailView(medicalRecordViewModel: medicalRecordViewModel,
-                                    medicalRecord: medicalRecord)
+                                    medicalRecord: medicalRecord,
+                                    medicineInfoViewModel: medicineInfoViewModel)
         } label: {
             VStack(alignment: .leading, spacing: 8) {
                 
@@ -63,5 +65,6 @@ struct MedicalRecordCard: View {
 
 #Preview {
     MedicalRecordCard(medicalRecordViewModel: MedicalRecordViewModel(persons: getPersons()),
+                      medicineInfoViewModel: MedicineInfoViewModel(persons: getPersons()),
                       medicalRecord: getMedicalRecords()[0])
 }

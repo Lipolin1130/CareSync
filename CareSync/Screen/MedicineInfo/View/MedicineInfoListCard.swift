@@ -18,9 +18,8 @@ struct MedicineInfoListCard: View {
             self.selectMedicineNotify = medicineNotify
             self.presentationMode.wrappedValue.dismiss()
         } label: {
-            VStack(alignment: .center, spacing: 5) {
+            VStack(alignment: .center, spacing: 10) {
                 HStack {
-                    
                     Image(systemName: "pills")
                     
                     Text(medicineNotify.medicine.name)
@@ -35,7 +34,7 @@ struct MedicineInfoListCard: View {
                 .foregroundStyle(.black)
                 
                 RoundedRectangle(cornerRadius: 3)
-                    .frame(width: 310, height: 1)
+                    .frame(width: 290, height: 1)
                     .foregroundStyle(medicineNotify.person.color)
                     .padding(.bottom, 5)
                 
@@ -47,6 +46,7 @@ struct MedicineInfoListCard: View {
                     
                     Image(systemName: "arrow.right")
                         .foregroundStyle(.black)
+                    
                     Spacer()
                     
                     Text("\(medicineNotify.startDate.adding(day: medicineNotify.duration).toString())")
@@ -54,20 +54,22 @@ struct MedicineInfoListCard: View {
                 }
                 .font(.headline)
                 .italic()
+                
                 HStack {
                     Text(medicineNotify.eatTimeDescription)
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.black)
                         .font(.callout)
                     
                     Spacer()
                 }
             }
         }
-        .padding(.horizontal, 20)
-        .frame(width: 320, height: 100)
+        .padding(.horizontal, 10)
+        .frame(width: 300, height: 150)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(medicineNotify.person.color)
+                .inset(by: 2)
+                .stroke(medicineNotify.person.color, lineWidth: 2)
         )
     }
 }

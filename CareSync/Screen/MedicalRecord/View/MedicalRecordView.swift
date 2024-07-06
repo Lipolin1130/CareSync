@@ -18,7 +18,9 @@ struct MedicalRecordView: View {
                 VStack(alignment: .leading, spacing: 15) {
                     ForEach(medicalRecordViewModel.filteredRecords.sorted(by: {
                         $0.date > $1.date})) {record in
-                            MedicalRecordCard(medicalRecordViewModel: medicalRecordViewModel, medicalRecord: record)
+                            MedicalRecordCard(medicalRecordViewModel: medicalRecordViewModel,
+                                              medicineInfoViewModel: medicineInfoViewModel,
+                                              medicalRecord: record)
                         }
                 }
                 .padding(.vertical, 40)
