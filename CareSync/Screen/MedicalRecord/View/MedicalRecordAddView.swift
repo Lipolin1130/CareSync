@@ -44,7 +44,7 @@ struct MedicalRecordAddView: View {
                 
                 TextField("Name", text: $medicalRecordViewModel.medicalRecordAdd.hospitalName)
                 
-                TextField("(Optional) Location", text: $medicalRecordViewModel.medicalRecordAdd.hospitalLocation)
+                TextField("Location  (Optional)", text: $medicalRecordViewModel.medicalRecordAdd.hospitalLocation)
                 
             } header: {
                 Text("Hospital")
@@ -54,7 +54,7 @@ struct MedicalRecordAddView: View {
                 ZStack(alignment: .leading) {
                     if medicalRecordViewModel.medicalRecordAdd.symptomDescription.isEmpty {
                         VStack {
-                            Text("(Optional) Symtom Description")
+                            Text("Symtom Description  (Optional)")
                                 .foregroundStyle(.gray)
                                 .padding(.top, 10)
                                 .padding(.leading, 6)
@@ -71,7 +71,7 @@ struct MedicalRecordAddView: View {
                 ZStack(alignment: .leading) {
                     if medicalRecordViewModel.medicalRecordAdd.doctorOrder.isEmpty {
                         VStack {
-                            Text("(Optional) Doctor Order")
+                            Text("Doctor Order  (Optional)")
                                 .foregroundStyle(.gray)
                                 .padding(.top, 10)
                                 .padding(.leading, 6)
@@ -188,8 +188,8 @@ struct MedicalRecordAddView: View {
                     } else {
                         print("not appointment")
                     }
-                    medicalRecordViewModel.addMedicalRecords()
                     
+                    medicalRecordViewModel.addMedicalRecords()
                     self.presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("Save")

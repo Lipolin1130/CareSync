@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @State var selectedTab: Int = 0
-    @State var addCalendarInfoSheet: Bool = false
+    @State var addMedicalRecordInfoSheet: Bool = false
     @State var persons: [Person] = getPersons()
     @StateObject var calendarInfoViewModel: CalendarInfoViewModel
     @StateObject var medicalRecordViewModel: MedicalRecordViewModel
@@ -32,10 +32,10 @@ struct HomeView: View {
             MedicalRecordView(medicalRecordViewModel: medicalRecordViewModel,
                               calendarInfoViewModel: calendarInfoViewModel,
                               medicineInfoViewModel: medicineInfoViewModel)
-                .tag(1)
-                .tabItem {
-                    Label("Dashboard", systemImage: "stethoscope")
-                }
+            .tag(1)
+            .tabItem {
+                Label("Record", systemImage: "stethoscope")
+            }
             
             Text("Third Page")
                 .tag(2)
@@ -53,17 +53,23 @@ struct HomeView: View {
             PersonHealthView(persons: $persons)
                 .tag(4)
                 .tabItem {
-                    Label("Daily", systemImage: "pencil.and.list.clipboard")
+                    Label("Group", systemImage: "pencil.and.list.clipboard")
                 }
         }
         .onChange(of: selectedTab) { oldValue, newValue in
             if newValue == 2 {
-                medicineInfoViewModel.addMedicineInfoSheet.toggle()
+                //                medicineInfoViewModel.addMedicineInfoSheet.toggle()
+                self.addMedicalRecordInfoSheet.toggle()
                 selectedTab = oldValue
             }
         }
-        .sheet(isPresented: $medicineInfoViewModel.addMedicineInfoSheet) {
-            MedicineInfoAddView(medicineInfoViewModel: medicineInfoViewModel)
+        .sheet(isPresented: $addMedicalRecordInfoSheet) {
+            //            MedicineInfoAddView(medicineInfoViewModel: medicineInfoViewModel)
+            NavigationStack {
+                MedicalRecordAddView(calendarInfoViewModel: calendarInfoViewModel,
+                                     medicalRecordViewModel: medicalRecordViewModel,
+                                     medicineInfoViewModel: medicineInfoViewModel)
+            }
         }
     }
 }

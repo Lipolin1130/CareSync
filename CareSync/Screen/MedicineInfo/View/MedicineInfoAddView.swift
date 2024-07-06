@@ -44,10 +44,10 @@ struct MedicineInfoAddView: View {
                         TextField("Medicine Name", text: $medicineInfoViewModel.addMedicineInfo.medicine.name)
                         
                         if !easyMedicineToggle {
-                            TextField("(Optional) Appearance", text: $medicineInfoViewModel.addMedicineInfo.medicine.appearance)
-                            TextField("(Optional) Instructions", text: $medicineInfoViewModel.addMedicineInfo.medicine.instructions)
-                            TextField("(Optional) Precautions", text: $medicineInfoViewModel.addMedicineInfo.medicine.precautions)
-                            TextField("(Optional) SideEffect", text: $medicineInfoViewModel.addMedicineInfo.medicine.sideEffect)
+                            TextField("Appearance  (Optional)", text: $medicineInfoViewModel.addMedicineInfo.medicine.appearance)
+                            TextField("Instructions  (Optional)", text: $medicineInfoViewModel.addMedicineInfo.medicine.instructions)
+                            TextField("Precautions  (Optional)", text: $medicineInfoViewModel.addMedicineInfo.medicine.precautions)
+                            TextField("SideEffect  (Optional)", text: $medicineInfoViewModel.addMedicineInfo.medicine.sideEffect)
                         }
                         
                     } header: {

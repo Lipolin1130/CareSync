@@ -103,7 +103,8 @@ enum MockPersonData {
         switch self {
         case .testName:
             return Person(
-                name: "TestName",
+                name: "John",
+                color: .secondary,
                 gender: true,
                 imageName: "TestName",
                 height: 175.0,
@@ -147,10 +148,10 @@ enum MockPersonData {
             )
         case .grandFather:
             return Person(
-                name: "GrandFather",
+                name: "Aunt",
                 color: .indigo,
                 gender: true,
-                imageName: "GrandFather",
+                imageName: "Aunt",
                 height: 170.0,
                 weight: 75.0,
                 bloodType: "AB",
@@ -268,7 +269,7 @@ class MockData {
         
         var medicineNotifyData: [MedicineNotify] = []
         
-        for i in 0..<20 {
+        for i in 0..<10 {
             let medicine = medicines[i % medicines.count]
             let person = persons[i % persons.count]
             let startDate = Calendar.current.date(byAdding: .day, value: i, to: Date()) ?? Date()

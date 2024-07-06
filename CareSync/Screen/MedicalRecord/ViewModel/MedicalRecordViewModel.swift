@@ -55,8 +55,6 @@ class MedicalRecordViewModel: ObservableObject {
     }
     
     func addMedicalRecords() {
-//        printAddMedicalRecord()
-//        print()
         medicalRecords.append(medicalRecordAdd)
         
         if medicalRecordAdd.appointment {
