@@ -10,10 +10,12 @@ import SwiftUI
 struct MedicalRecordAddView: View {
     @ObservedObject var calendarInfoViewModel: CalendarInfoViewModel
     @ObservedObject var medicalRecordViewModel: MedicalRecordViewModel
+    @ObservedObject var medicineInfoViewModel: MedicineInfoViewModel
     @State var personSelect: Int = 0
     @Environment(\.presentationMode) var presentationMode
     @State var medicalAISheet: Bool = false
     @StateObject var audioRecorder = AudioRecorder()
+    @State private var isInitialized = false
     
     var body: some View {
         Form {
@@ -22,6 +24,7 @@ struct MedicalRecordAddView: View {
             } header: {
                 Text("Date")
             }
+            
             Section {
                 Picker("Choose Member", selection: $personSelect) {
                     ForEach(medicalRecordViewModel.persons.indices, id: \.self) {index in
@@ -112,7 +115,28 @@ struct MedicalRecordAddView: View {
             }
             
             Section {
+                Toggle("medicine", isOn: $medicalRecordViewModel.medicalRecordAdd.medicineCreate)
                 
+                if medicalRecordViewModel.medicalRecordAdd.medicineCreate {
+                    NavigationLink {
+                        MedicineInfoListView(
+                            medicineInfoViewModel: medicineInfoViewModel,
+                            selectMedicineNotify: $medicalRecordViewModel.medicalRecordAdd.medicineNotify,
+                            person: medicalRecordViewModel.medicalRecordAdd.person)
+                    } label: {
+                        if let medicineNotify = medicalRecordViewModel.medicalRecordAdd.medicineNotify {
+                            HStack {
+                                Text("\(medicineNotify.medicine.name)")
+                                
+                                Spacer()
+                                
+                                Text("\(medicineNotify.startDate.toString())")
+                            }
+                        } else {
+                            Text("Choose Medicine")
+                        }
+                    }
+                }
             } header: {
                 Text("Medicine")
             }
@@ -180,7 +204,10 @@ struct MedicalRecordAddView: View {
             .presentationDragIndicator(.hidden)
         }
         .onAppear {
-            medicalRecordViewModel.medicalRecordAdd = MedicalRecord(person: getPersons()[0])
+            if !isInitialized {
+                medicalRecordViewModel.medicalRecordAdd = MedicalRecord(person: getPersons()[0])
+                isInitialized = true
+            }
         }
     }
 }
@@ -188,6 +215,7 @@ struct MedicalRecordAddView: View {
 #Preview {
     NavigationStack {
         MedicalRecordAddView(calendarInfoViewModel: CalendarInfoViewModel(persons: getPersons()),
-                             medicalRecordViewModel: MedicalRecordViewModel(persons: getPersons()))
+                             medicalRecordViewModel: MedicalRecordViewModel(persons: getPersons()),
+                             medicineInfoViewModel: MedicineInfoViewModel(persons: getPersons()))
     }
 }

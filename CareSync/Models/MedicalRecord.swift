@@ -18,6 +18,8 @@ class MedicalRecord: ObservableObject, Identifiable {
     @Published var doctorOrder: String
     @Published var appointment: Bool
     @Published var appointmentDay: Date?
+    @Published var medicineCreate: Bool
+    @Published var medicineNotify: MedicineNotify?
     
     init(person: Person, yearMonthDay: YearMonthDay, hospitalName: String, hospitalLocation: String, symptomDescription: String, doctorOrder: String, appointment: Bool, appointmentDay: YearMonthDay? = nil) {
         self.person = person
@@ -34,6 +36,7 @@ class MedicalRecord: ObservableObject, Identifiable {
                                                            hour: Int.random(in: 0...23),
                                                            minute: Int.random(in: 0...59))
         }
+        self.medicineCreate = false
     }
     
     init(person: Person, date: Date, hospitalName: String, hospitalLocation: String, symptomDescription: String, doctorOrder: String, appointment: Bool, appointmentDay: YearMonthDay? = nil) {
@@ -49,6 +52,7 @@ class MedicalRecord: ObservableObject, Identifiable {
                                                            hour: Int.random(in: 0...23),
                                                            minute: Int.random(in: 0...59))
         }
+        self.medicineCreate = false
     }
     
     init(person: Person) {
@@ -59,5 +63,6 @@ class MedicalRecord: ObservableObject, Identifiable {
         self.symptomDescription = ""
         self.doctorOrder = ""
         self.appointment = false
+        self.medicineCreate = false
     }
 }

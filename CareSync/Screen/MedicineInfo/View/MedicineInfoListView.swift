@@ -9,9 +9,9 @@ import SwiftUI
 
 struct MedicineInfoListView: View {
     @ObservedObject var medicineInfoViewModel: MedicineInfoViewModel
-    @Environment(\.presentationMode) var presentationMode
-    @Binding var selectMedicineNotify: MedicineNotify
+    @Binding var selectMedicineNotify: MedicineNotify?
     let person: Person
+    
     var body: some View {
         VStack {
             ForEach(medicineInfoViewModel.medicineNotify.filter {$0.person.name == person.name }) {medicineNotify in
@@ -21,12 +21,27 @@ struct MedicineInfoListView: View {
             }
         }
         .padding(.horizontal, 10)
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                Button {
+                    medicineInfoViewModel.addMedicineInfoSheet.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
+        }
+        .navigationTitle("Medicine List")
+        .sheet(isPresented: $medicineInfoViewModel.addMedicineInfoSheet) {
+            MedicineInfoAddView(medicineInfoViewModel: medicineInfoViewModel)
+        }
     }
 }
 
 #Preview {
-    MedicineInfoListView(medicineInfoViewModel: MedicineInfoViewModel(persons: getPersons()),
-                         selectMedicineNotify: .constant(MedicineInfoViewModel(
-                            persons: getPersons()).medicineNotify[0]),
-                         person: getPersons()[0])
+    NavigationStack {
+        MedicineInfoListView(medicineInfoViewModel: MedicineInfoViewModel(persons: getPersons()),
+                             selectMedicineNotify: .constant(MedicineInfoViewModel(
+                                persons: getPersons()).medicineNotify[0]),
+                             person: getPersons()[0])
+    }
 }

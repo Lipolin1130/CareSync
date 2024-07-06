@@ -30,7 +30,8 @@ struct HomeView: View {
                 }
             
             MedicalRecordView(medicalRecordViewModel: medicalRecordViewModel,
-                              calendarInfoViewModel: calendarInfoViewModel)
+                              calendarInfoViewModel: calendarInfoViewModel,
+                              medicineInfoViewModel: medicineInfoViewModel)
                 .tag(1)
                 .tabItem {
                     Label("Dashboard", systemImage: "stethoscope")

@@ -10,54 +10,61 @@ import SwiftUI
 struct MedicineInfoListCard: View {
     var medicineNotify: MedicineNotify
     @Environment(\.presentationMode) var presentationMode
-    @Binding var selectMedicineNotify: MedicineNotify
+    @Binding var selectMedicineNotify: MedicineNotify?
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            HStack {
+        
+        Button {
+            self.selectMedicineNotify = medicineNotify
+            self.presentationMode.wrappedValue.dismiss()
+        } label: {
+            VStack(alignment: .center, spacing: 5) {
+                HStack {
+                    
+                    Image(systemName: "pills")
+                    
+                    Text(medicineNotify.medicine.name)
+                        .font(.title3)
+                        .fontWeight(.bold)
+                    
+                    Spacer()
+                    
+                    Text("Total: \(medicineNotify.completeDoses) / \(medicineNotify.medicationDose.count)")
+                        .font(.callout)
+                }
+                .foregroundStyle(.black)
                 
-                Image(systemName: "pills")
+                RoundedRectangle(cornerRadius: 3)
+                    .frame(width: 310, height: 1)
+                    .foregroundStyle(medicineNotify.person.color)
+                    .padding(.bottom, 5)
                 
-                Text(medicineNotify.medicine.name)
-                    .font(.title3)
-                    .fontWeight(.bold)
-                
-                Spacer()
-                
-                Text("Total: \(medicineNotify.completeDoses) / \(medicineNotify.medicationDose.count)")
-                    .font(.callout)
+                HStack {
+                    Text("\(medicineNotify.startDate.toString())")
+                        .foregroundStyle(.red)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "arrow.right")
+                        .foregroundStyle(.black)
+                    Spacer()
+                    
+                    Text("\(medicineNotify.startDate.adding(day: medicineNotify.duration).toString())")
+                        .foregroundStyle(.black)
+                }
+                .font(.headline)
+                .italic()
+                HStack {
+                    Text(medicineNotify.eatTimeDescription)
+                        .foregroundStyle(.gray)
+                        .font(.callout)
+                    
+                    Spacer()
+                }
             }
-            
-            RoundedRectangle(cornerRadius: 3)
-                .frame(width: .infinity, height: 1)
-                .foregroundStyle(medicineNotify.person.color)
-                .padding(.bottom, 5)
-            
-            HStack {
-                Text("\(medicineNotify.startDate.toString())")
-                    .foregroundStyle(.red)
-                
-                Spacer()
-                
-                Image(systemName: "arrow.right")
-                
-                Spacer()
-                
-                Text("\(medicineNotify.startDate.adding(day: medicineNotify.duration).toString())")
-            }
-            .font(.headline)
-            .italic()
-            
-            Text(medicineNotify.eatTimeDescription)
-                .foregroundStyle(.gray)
-                .font(.callout)
         }
         .padding(.horizontal, 20)
         .frame(width: 320, height: 100)
-        .onTapGesture {
-            self.selectMedicineNotify = medicineNotify
-            self.presentationMode.wrappedValue.dismiss()
-        }
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .stroke(medicineNotify.person.color)
