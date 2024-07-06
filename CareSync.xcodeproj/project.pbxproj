@@ -18,6 +18,8 @@
 		043367D32C198F9D00B12C7A /* CalendarInfoDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043367D22C198F9D00B12C7A /* CalendarInfoDetail.swift */; };
 		043367D52C199F4600B12C7A /* fakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043367D42C199F4600B12C7A /* fakeData.swift */; };
 		043547F82C3667AD0096DF06 /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043547F72C3667AD0096DF06 /* CustomProgressView.swift */; };
+		04A2DDB92C391E2600630A9B /* MedicineInfoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A2DDB82C391E2600630A9B /* MedicineInfoListView.swift */; };
+		04A2DDBB2C39213B00630A9B /* MedicineInfoListCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A2DDBA2C39213B00630A9B /* MedicineInfoListCard.swift */; };
 		04AC7C782C2B2BB80012B301 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC7C772C2B2BB80012B301 /* DateExtension.swift */; };
 		04AC7C7A2C2B2C6C0012B301 /* GroupBoxExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC7C792C2B2C6C0012B301 /* GroupBoxExtension.swift */; };
 		04AC7C7C2C2BDE460012B301 /* Medicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC7C7B2C2BDE460012B301 /* Medicine.swift */; };
@@ -71,6 +73,8 @@
 		043367D22C198F9D00B12C7A /* CalendarInfoDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfoDetail.swift; sourceTree = "<group>"; };
 		043367D42C199F4600B12C7A /* fakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fakeData.swift; sourceTree = "<group>"; };
 		043547F72C3667AD0096DF06 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
+		04A2DDB82C391E2600630A9B /* MedicineInfoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineInfoListView.swift; sourceTree = "<group>"; };
+		04A2DDBA2C39213B00630A9B /* MedicineInfoListCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineInfoListCard.swift; sourceTree = "<group>"; };
 		04AC7C772C2B2BB80012B301 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		04AC7C792C2B2C6C0012B301 /* GroupBoxExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBoxExtension.swift; sourceTree = "<group>"; };
 		04AC7C7B2C2BDE460012B301 /* Medicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medicine.swift; sourceTree = "<group>"; };
@@ -179,6 +183,8 @@
 				04EB7BDD2C2EE75B0094D226 /* MedicineInfoCard.swift */,
 				04EB7BE12C31369A0094D226 /* MultiSelectPicker.swift */,
 				04FF0C862C33098A0077E6EE /* ScannerView.swift */,
+				04A2DDB82C391E2600630A9B /* MedicineInfoListView.swift */,
+				04A2DDBA2C39213B00630A9B /* MedicineInfoListCard.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -456,6 +462,7 @@
 				043367D12C198C6800B12C7A /* CalendarController.swift in Sources */,
 				04EB7BD32C2E5B630094D226 /* MedicineInfoHeader.swift in Sources */,
 				043367B82C176E1E00B12C7A /* CalendarInfo.swift in Sources */,
+				04A2DDBB2C39213B00630A9B /* MedicineInfoListCard.swift in Sources */,
 				042BEE802C37B20A006D2E81 /* PersonHealthView.swift in Sources */,
 				043547F82C3667AD0096DF06 /* CustomProgressView.swift in Sources */,
 				04FF0C8F2C332CC70077E6EE /* AudioRecorder.swift in Sources */,
@@ -467,6 +474,7 @@
 				04EB7BE02C2F9CCE0094D226 /* MedicineInfoAddView.swift in Sources */,
 				043367D32C198F9D00B12C7A /* CalendarInfoDetail.swift in Sources */,
 				04EB7BD92C2EA9820094D226 /* MedicationDose.swift in Sources */,
+				04A2DDB92C391E2600630A9B /* MedicineInfoListView.swift in Sources */,
 				04FB21192C254B3800E6E75A /* MedicalRecord.swift in Sources */,
 				04AC7C8D2C2BE7160012B301 /* HomeViewModel.swift in Sources */,
 				04EB7BDC2C2EAA710094D226 /* MedicineInfoList.swift in Sources */,

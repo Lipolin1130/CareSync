@@ -39,7 +39,7 @@ final class TextRecognizer {
                 
                 do{
                     try handler.perform([request])
-                    guard let observations = request.results as? [VNRecognizedTextObservation] else {
+                    guard let observations = request.results else {
                         print("No recognized text observations")
                         return ""
                     }

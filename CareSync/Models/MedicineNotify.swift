@@ -18,6 +18,17 @@ class MedicineNotify: ObservableObject, Identifiable {
     @Published var eatTime: [MealTime] // times to take the medicine decided by MealTime
     @Published var medicationDose: [MedicationDose]
     
+    var eatTimeDescription: String {
+        eatTime
+            .sorted{ $0.timeAsDate < $1.timeAsDate }
+            .map { $0.time }
+            .joined(separator: ", ")
+    }
+    
+    var completeDoses: Int {
+        medicationDose.filter { $0.complete }.count
+    }
+    
     init(medicine: Medicine, person: Person, startDate: Date, notify: Bool, duration: Int, intervalDays: Int, eatTime: [MealTime]) {
         self.medicine = medicine
         self.person = person

@@ -73,11 +73,11 @@ class CalendarInfoViewModel: ObservableObject {
         
 //        print("add info")
     }
-    func printThing(information: CalendarInfo) {
-        print("\n\n")
-        print(information.person?.name)
-        print(information.taskTitle)
-        print(information.time)
-        print(information.notify)
-    }
+//    func printThing(information: CalendarInfo) {
+//        print("\n\n")
+//        print(information.person?.name)
+//        print(information.taskTitle)
+//        print(information.time)
+//        print(information.notify)
+//    }
 }

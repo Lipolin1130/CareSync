@@ -213,6 +213,12 @@ enum MealTime: String, CaseIterable, Identifiable {
             return "10:00 PM"
         }
     }
+    
+    var timeAsDate: Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return formatter.date(from: self.time) ?? Date()
+    }
 }
 
 

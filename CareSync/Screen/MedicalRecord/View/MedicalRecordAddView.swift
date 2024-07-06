@@ -112,6 +112,12 @@ struct MedicalRecordAddView: View {
             }
             
             Section {
+                
+            } header: {
+                Text("Medicine")
+            }
+            
+            Section {
                 Toggle(isOn: $medicalRecordViewModel.medicalRecordAdd.appointment) {
                     Text("Appointment")
                 }
@@ -144,7 +150,6 @@ struct MedicalRecordAddView: View {
                     
                     if medicalRecordViewModel.medicalRecordAdd.appointment {
                         if let appointmentDay = medicalRecordViewModel.medicalRecordAdd.appointmentDay {
-//                            print("Appointment Day: \(appointmentDay.toYearMonthDay())")
                             calendarInfoViewModel.addInfo(
                                 yearMonthDay: appointmentDay.toYearMonthDay(),
                                 information: CalendarInfo(
