@@ -49,7 +49,7 @@ struct MedicalRecordAddAISheetView: View {
                 
                 //MARK: - Record Button
                 
-                if audioRecorder.audioFileURL == nil {
+                if audioRecorder.audioFileURL != nil {
                     VStack {
                         Button {
                             //TODO: send audio to server
