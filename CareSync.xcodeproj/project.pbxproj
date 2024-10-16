@@ -153,7 +153,6 @@
 				04FF0C882C330B980077E6EE /* TextRecognizer.swift */,
 				04FF0C8E2C332CC70077E6EE /* AudioRecorder.swift */,
 				04DCDA212C359242002694CE /* BackendService.swift */,
-				04EB7BDA2C2EA9B10094D226 /* Enum */,
 				04CB62AE2C1F2DB9001981A7 /* Calendar */,
 				043367D42C199F4600B12C7A /* fakeData.swift */,
 				043367C82C198C6700B12C7A /* WeekEnum.swift */,
@@ -271,13 +270,6 @@
 				04DDC5222C12FBC200A97BAA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		04EB7BDA2C2EA9B10094D226 /* Enum */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Enum;
 			sourceTree = "<group>";
 		};
 		04FB210B2C25479E00E6E75A /* CalendarInfo */ = {
