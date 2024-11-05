@@ -9,7 +9,7 @@ import Foundation
 
 class BackendService: NSObject, ObservableObject {
     
-    private let baseURL = "https://caresync-backend.bearbig.dev" // 替換為你的 API 基礎 URL
+    private let baseURL = "https://caresync.yukila.com" // 替換為你的 API 基礎 URL
     private let session = URLSession.shared
 
     // Method to handle String request
